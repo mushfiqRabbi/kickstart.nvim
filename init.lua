@@ -53,6 +53,11 @@ vim.opt.expandtab = true
 vim.g['rooter_cd_cmd'] = 'lcd'
 vim.opt.scrolloff = 7
 
+vim.o.shell = 'pwsh.exe'
+vim.o.shellcmdflag = '-command'
+vim.o.shellquote = '"'
+vim.o.shellxquote = ''
+
 vim.keymap.set('n', '<C-s>', ':update<CR>', { noremap = true, silent = true })
 vim.keymap.set('v', '<C-s>', '<C-c>:update<CR>', { noremap = true, silent = true })
 vim.keymap.set('i', '<C-s>', '<C-o>:update<CR>', { noremap = true, silent = true })
@@ -329,6 +334,14 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- See `:help telescope` and `:help telescope.setup()`
 require('telescope').setup {
   defaults = {
+
+    layout_strategy = 'horizontal',
+    layout_config = {
+      height = 0.9,
+      width = 0.85,
+      preview_width = 0.6,
+    },
+
     mappings = {
       n = {
         ['<C-c>'] = require('telescope.actions').close,
@@ -358,6 +371,7 @@ require('telescope').setup {
 
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
+pcall(require('telescope').load_extension, 'yank_history')
 
 -- See `:help telescope.builtin`
 vim.keymap.set('n', '<leader>fo', require('telescope.builtin').oldfiles, { desc = '[F]ind recently [O]pened files' })
@@ -377,6 +391,7 @@ vim.keymap.set('n', '<leader>fw', require('telescope.builtin').grep_string, { de
 vim.keymap.set('n', '<leader>lg', require('telescope.builtin').live_grep, { desc = '[L]ive [G]rep' })
 vim.keymap.set('n', '<leader>fd', require('telescope.builtin').diagnostics, { desc = '[F]ind [D]iagnostics' })
 vim.keymap.set('n', '<leader>fr', require('telescope.builtin').resume, { desc = '[F]ind [R]esume' })
+vim.keymap.set('n', '<leader>fy', ':Telescope yank_history<CR>', { desc = '[F]ind [Y]ank history' })
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
@@ -580,15 +595,15 @@ local lspkind = require 'lspkind'
 cmp.setup {
   formatting = {
     format = lspkind.cmp_format {
-      mode = 'symbol', -- show only symbol annotations
+      mode = 'symbol_text', -- show only symbol annotations
       maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
       ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
 
       -- The function below will be called before any actual modifications from lspkind
       -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
-      before = function(entry, vim_item)
-        return vim_item
-      end,
+      -- before = function(entry, vim_item)
+      --   return vim_item
+      -- end,
     },
   },
   snippet = {
@@ -641,13 +656,19 @@ cmp.setup {
 }
 
 cmp.setup.cmdline({ '/', '?' }, {
+  completion = {
+    completeopt = 'menu,menuone,noinsert,noselect',
+  },
   mapping = cmp.mapping.preset.cmdline(),
   sources = {
     { name = 'buffer' },
   },
 })
 cmp.setup.cmdline(':', {
-  mapping = cmp.mapping.preset.cmdline(),
+  completion = {
+    completeopt = 'menu,menuone,noinsert,noselect',
+  },
+  mapping = cmp.mapping.preset.cmdline {},
   sources = cmp.config.sources({
     { name = 'path' },
   }, {
