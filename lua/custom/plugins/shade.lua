@@ -1,6 +1,6 @@
 return {
-  'sunjon/shade.nvim',
-  config = function()
-    require('shade').setup()
-  end,
+  -- 'sunjon/shade.nvim',
+  -- config = function()
+  --   require('shade').setup()
+  -- end,
 }
