@@ -52,6 +52,7 @@ vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 vim.g['rooter_cd_cmd'] = 'lcd'
 vim.opt.scrolloff = 7
+vim.o.cursorline = true
 
 vim.o.shell = 'pwsh.exe'
 vim.o.shellcmdflag = '-command'
@@ -338,7 +339,7 @@ require('telescope').setup {
     layout_strategy = 'horizontal',
     layout_config = {
       height = 0.9,
-      width = 0.85,
+      width = 0.9,
       preview_width = 0.6,
     },
 
@@ -372,6 +373,7 @@ require('telescope').setup {
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
 pcall(require('telescope').load_extension, 'yank_history')
+pcall(require('telescope').load_extension, 'projects')
 
 -- See `:help telescope.builtin`
 vim.keymap.set('n', '<leader>fo', require('telescope.builtin').oldfiles, { desc = '[F]ind recently [O]pened files' })
@@ -392,6 +394,7 @@ vim.keymap.set('n', '<leader>lg', require('telescope.builtin').live_grep, { desc
 vim.keymap.set('n', '<leader>fd', require('telescope.builtin').diagnostics, { desc = '[F]ind [D]iagnostics' })
 vim.keymap.set('n', '<leader>fr', require('telescope.builtin').resume, { desc = '[F]ind [R]esume' })
 vim.keymap.set('n', '<leader>fy', ':Telescope yank_history<CR>', { desc = '[F]ind [Y]ank history' })
+vim.keymap.set('n', '<leader>fp', ':Telescope projects<CR>', { desc = '[F]ind [P]roject' })
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
