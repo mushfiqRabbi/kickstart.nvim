@@ -10,7 +10,9 @@ return {
         ["<C-s>"] = false,
       }
     })
-    vim.keymap.set({ 'n', 'v' }, '<leader>oo', ':lua require("oil").open(vim.loop.cwd())<CR>',
+    vim.keymap.set({ 'n', 'v' }, '<leader>o', ':Oil<CR>',
+      { noremap = true, silent = true })
+    vim.keymap.set({ 'n', 'v' }, '<leader>O', ':lua require("oil").open(vim.loop.cwd())<CR>',
       { noremap = true, silent = true })
   end,
 }
