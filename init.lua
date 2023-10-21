@@ -73,6 +73,14 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'CursorHoldI', 'FocusGai
   pattern = { '*' },
 })
 
+
+vim.cmd [[
+    " let g:VM_maps = {}
+    " let g:VM_maps['Find Under'] = '<C-m>'
+    " let g:VM_maps['Find Subword Under'] = '<C-m>'
+    let g:VM_mouse_mappings = 1
+    ]]
+
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
