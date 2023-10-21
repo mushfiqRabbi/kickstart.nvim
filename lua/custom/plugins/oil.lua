@@ -5,6 +5,6 @@ return {
   dependencies = { 'nvim-tree/nvim-web-devicons' },
   config = function()
     require('oil').setup()
-    vim.keymap.set({ 'n', 'v' }, '<leader>oo', ':Oil<cr>', { noremap = true, silent = true })
+    vim.keymap.set({ 'n', 'v' }, '<leader>oo', ':lua require("oil").open(vim.loop.cwd())<CR>', { noremap = true, silent = true })
   end,
 }

@@ -353,7 +353,8 @@ require('telescope').setup {
 
           require('telescope.actions').close(prompt_bufnr)
           -- Depending on what you want put `cd`, `lcd`, `tcd`
-          vim.cmd(string.format('Oil %s', dir))
+          vim.cmd(string.format('lua MiniFiles.open(%s)', dir))
+          -- MiniFiles.open(dir, false)
         end,
       },
       i = {
@@ -365,6 +366,7 @@ require('telescope').setup {
           require('telescope.actions').close(prompt_bufnr)
           -- Depending on what you want put `cd`, `lcd`, `tcd`
           vim.cmd(string.format('Oil %s', dir))
+          -- MiniFiles.open(dir, false)
         end,
       },
     },
@@ -375,6 +377,7 @@ require('telescope').setup {
 pcall(require('telescope').load_extension, 'fzf')
 pcall(require('telescope').load_extension, 'yank_history')
 pcall(require('telescope').load_extension, 'projects')
+pcall(require('telescope').load_extension, 'ascii')
 
 -- See `:help telescope.builtin`
 vim.keymap.set('n', '<leader>fo', require('telescope.builtin').oldfiles, { desc = '[F]ind recently [O]pened files' })
