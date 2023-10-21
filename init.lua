@@ -575,7 +575,14 @@ local servers = {
       telemetry = { enable = false },
     },
   },
+
   emmet_language_server = {},
+
+  jsonls = {},
+
+  custom_elements_ls = {},
+
+  tailwindcss = {}
 }
 
 -- Setup neovim lua configuration
