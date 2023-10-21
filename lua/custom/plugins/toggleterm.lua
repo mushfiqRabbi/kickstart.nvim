@@ -30,6 +30,7 @@ return {
         end
       end,
       persist_mode = false,
+      persist_size = false,
       open_mapping = [[<c-\>]],
     }
   end,
