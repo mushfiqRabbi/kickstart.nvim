@@ -59,9 +59,11 @@ vim.o.shellcmdflag = '-command'
 vim.o.shellquote = '"'
 vim.o.shellxquote = ''
 
-vim.keymap.set('n', '<C-s>', ':update<CR>', { noremap = true, silent = true })
-vim.keymap.set('v', '<C-s>', '<C-c>:update<CR>', { noremap = true, silent = true })
-vim.keymap.set('i', '<C-s>', '<C-o>:update<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<C-s>', '<cmd>update<CR>', { noremap = true, silent = true })
+-- vim.keymap.set('v', '<C-s>', '<C-c><cmd>update<CR>', { noremap = true, silent = true })
+vim.keymap.set('i', '<C-s>', '<cmd>update<CR>', { noremap = true, silent = true })
+-- vim.keymap.set({ 'n', 'i' }, '<C-s>', '<cmd>w<CR>', { noremap = true })
+
 
 -- auto-reload files when modified externally
 -- https://unix.stackexchange.com/a/383044
@@ -143,7 +145,7 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim', opts = {} },
+  { 'folke/which-key.nvim',  opts = {} },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -382,7 +384,8 @@ pcall(require('telescope').load_extension, 'ascii')
 -- See `:help telescope.builtin`
 vim.keymap.set('n', '<leader>fo', require('telescope.builtin').oldfiles, { desc = '[F]ind recently [O]pened files' })
 vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[S]earch existing [B]uffers' })
-vim.keymap.set('n', '<leader>fi', require('telescope.builtin').current_buffer_fuzzy_find, { desc = '[F]uzzily search [I]n current buffer' })
+vim.keymap.set('n', '<leader>fi', require('telescope.builtin').current_buffer_fuzzy_find,
+  { desc = '[F]uzzily search [I]n current buffer' })
 
 vim.keymap.set('n', '<leader>fg', require('telescope.builtin').git_files, { desc = '[F]ind [G]it files' })
 vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, { desc = '[F]ind [F]iles in CWD' })
@@ -516,9 +519,14 @@ local on_attach = function(_, bufnr)
   end, '[W]orkspace [L]ist Folders')
 
   -- Create a command `:Format` local to the LSP buffer
-  -- vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-  --   vim.lsp.buf.format()
-  -- end, { desc = 'Format current buffer with LSP' })
+  vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
+    vim.lsp.buf.format()
+  end, { desc = 'Format current buffer with LSP' })
+
+  vim.api.nvim_create_autocmd('BufWritePost', {
+    pattern = '{[^.]????*,[^o]???*,[^i]??*,[^l]*,[^:]*}',
+    command = 'Format',
+  })
 end
 
 -- document existing key chains
@@ -602,8 +610,8 @@ local lspkind = require 'lspkind'
 cmp.setup {
   formatting = {
     format = lspkind.cmp_format {
-      mode = 'symbol_text', -- show only symbol annotations
-      maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+      mode = 'symbol_text',  -- show only symbol annotations
+      maxwidth = 50,         -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
       ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
 
       -- The function below will be called before any actual modifications from lspkind
