@@ -50,7 +50,8 @@ vim.opt.tabstop = 2
 vim.opt.smartindent = true
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
-vim.g['rooter_cd_cmd'] = 'lcd'
+-- vim.g['rooter_cd_cmd'] = 'lcd'
+ vim.g['rooter_change_directory_for_non_project_files'] = 'current'
 vim.opt.scrolloff = 7
 vim.o.cursorline = true
 
@@ -582,7 +583,9 @@ local servers = {
 
   custom_elements_ls = {},
 
-  tailwindcss = {}
+  tailwindcss = {},
+
+  eslint = {}
 }
 
 -- Setup neovim lua configuration
