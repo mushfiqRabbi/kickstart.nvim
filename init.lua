@@ -46,12 +46,12 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
-vim.opt.tabstop = 2
-vim.opt.smartindent = true
-vim.opt.shiftwidth = 2
-vim.opt.expandtab = true
+-- vim.opt.tabstop = 2
+-- vim.opt.smartindent = true
+-- vim.opt.shiftwidth = 2
+-- vim.opt.expandtab = true
 -- vim.g['rooter_cd_cmd'] = 'lcd'
- vim.g['rooter_change_directory_for_non_project_files'] = 'current'
+vim.g['rooter_change_directory_for_non_project_files'] = 'current'
 vim.opt.scrolloff = 7
 vim.o.cursorline = true
 
@@ -65,7 +65,6 @@ vim.keymap.set('n', '<C-s>', '<cmd>update<CR>', { noremap = true, silent = true 
 vim.keymap.set('i', '<C-s>', '<cmd>update<CR>', { noremap = true, silent = true })
 -- vim.keymap.set({ 'n', 'i' }, '<C-s>', '<cmd>w<CR>', { noremap = true })
 
-
 -- auto-reload files when modified externally
 -- https://unix.stackexchange.com/a/383044
 vim.o.autoread = true
@@ -74,13 +73,27 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'CursorHoldI', 'FocusGai
   pattern = { '*' },
 })
 
-
 vim.cmd [[
     " let g:VM_maps = {}
     " let g:VM_maps['Find Under'] = '<C-m>'
     " let g:VM_maps['Find Subword Under'] = '<C-m>'
     let g:VM_mouse_mappings = 1
     ]]
+
+-- vim.cmd [[
+-- augroup FormatAutogroup
+--   autocmd!
+--   autocmd BufWritePost * FormatWrite
+-- augroup END
+-- ]]
+
+-- vim.cmd [[
+-- augroup FormatAutogroup
+--   autocmd!
+--   autocmd User FormatterPre lua print "Formatting..."
+--   autocmd User FormatterPost lua print "Format complete."
+-- augroup END
+--   ]]
 
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
@@ -222,11 +235,11 @@ require('lazy').setup({
 
   {
     -- Add indentation guides even on blank lines
-    'lukas-reineke/indent-blankline.nvim',
+    -- 'lukas-reineke/indent-blankline.nvim',
     -- Enable `lukas-reineke/indent-blankline.nvim`
     -- See `:help ibl`
-    main = 'ibl',
-    opts = {},
+    -- main = 'ibl',
+    -- opts = {},
   },
 
   -- "gc" to comment visual regions/lines
@@ -489,7 +502,7 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 
 -- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.
-local on_attach = function(_, bufnr)
+local on_attach = function(client, bufnr)
   -- NOTE: Remember that lua is a real programming language, and as such it is possible
   -- to define small helper and utility functions so you don't have to repeat yourself
   -- many times.
@@ -528,25 +541,25 @@ local on_attach = function(_, bufnr)
   end, '[W]orkspace [L]ist Folders')
 
   -- Create a command `:Format` local to the LSP buffer
-  vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-    vim.lsp.buf.format()
-  end, { desc = 'Format current buffer with LSP' })
-
-  vim.api.nvim_create_autocmd('BufWritePost', {
-    pattern = '{[^.]????*,[^o]???*,[^i]??*,[^l]*,[^:]*}',
-    command = 'Format',
-  })
+  -- vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
+  --   vim.lsp.buf.format()
+  -- end, { desc = 'Format current buffer with LSP' })
+  --
+  -- vim.api.nvim_create_autocmd('BufWritePost', {
+  --   pattern = '{[^.]????*,[^o]???*,[^i]??*,[^l]*,[^:]*}',
+  --   command = 'Format',
+  -- })
 end
 
 -- document existing key chains
 -- require('which-key').register {
-  -- ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
-  -- ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
-  -- ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
-  -- ['<leader>h'] = { name = 'More git', _ = 'which_key_ignore' },
-  -- ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
-  -- ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
-  -- ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
+-- ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
+-- ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
+-- ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
+-- ['<leader>h'] = { name = 'More git', _ = 'which_key_ignore' },
+-- ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
+-- ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
+-- ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
 -- }
 
 -- mason-lspconfig requires that these setup functions are called in this order
@@ -585,7 +598,7 @@ local servers = {
 
   tailwindcss = {},
 
-  eslint = {}
+  eslint = {},
 }
 
 -- Setup neovim lua configuration

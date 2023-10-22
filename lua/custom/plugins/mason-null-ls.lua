@@ -7,7 +7,7 @@ return {
   },
   config = function()
     require('mason-null-ls').setup {
-      ensure_installed = {  },
+      ensure_installed = { 'stylua', 'codespell' },
     }
   end,
 }
