@@ -167,7 +167,7 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim',  opts = {} },
+  { 'folke/which-key.nvim', opts = {} },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -234,10 +234,7 @@ require('lazy').setup({
   },
 
   {
-    -- Add indentation guides even on blank lines
     -- 'lukas-reineke/indent-blankline.nvim',
-    -- Enable `lukas-reineke/indent-blankline.nvim`
-    -- See `:help ibl`
     -- main = 'ibl',
     -- opts = {},
   },
@@ -358,15 +355,21 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
+--
+local layout_config = {}
+
+if vim.fn.hostname() == 'DESKTOP-QP9KQE3' then
+  layout_config = {
+    height = 0.9,
+    width = 0.7,
+    preview_width = 0.65,
+  }
+end
+
 require('telescope').setup {
   defaults = {
-
     layout_strategy = 'horizontal',
-    layout_config = {
-      height = 0.9,
-      width = 0.9,
-      preview_width = 0.6,
-    },
+    layout_config = layout_config,
 
     mappings = {
       n = {
@@ -395,6 +398,35 @@ require('telescope').setup {
       },
     },
   },
+  pickers = {
+    find_files = {
+      wrap_results = true,
+    },
+    oldfiles = {
+      wrap_results = true,
+    },
+    buffers = {
+      wrap_results = true,
+    },
+    git_files = {
+      wrap_results = true,
+    },
+    current_buffer_fuzzy_find = {
+      wrap_results = true,
+    },
+    help_tags = {
+      wrap_results = true,
+    },
+    grep_string = {
+      wrap_results = true,
+    },
+    live_grep = {
+      wrap_results = true,
+    },
+    diagnostics = {
+      wrap_results = true,
+    },
+  },
 }
 
 -- Enable telescope fzf native, if installed
@@ -406,8 +438,7 @@ pcall(require('telescope').load_extension, 'ascii')
 -- See `:help telescope.builtin`
 vim.keymap.set('n', '<leader>fo', require('telescope.builtin').oldfiles, { desc = '[F]ind recently [O]pened files' })
 vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[S]earch existing [B]uffers' })
-vim.keymap.set('n', '<leader>fi', require('telescope.builtin').current_buffer_fuzzy_find,
-  { desc = '[F]uzzily search [I]n current buffer' })
+vim.keymap.set('n', '<leader>fi', require('telescope.builtin').current_buffer_fuzzy_find, { desc = '[F]uzzily search [I]n current buffer' })
 
 vim.keymap.set('n', '<leader>fg', require('telescope.builtin').git_files, { desc = '[F]ind [G]it files' })
 vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, { desc = '[F]ind [F]iles in CWD' })
@@ -431,7 +462,7 @@ vim.keymap.set('n', '<leader>fp', ':Telescope projects<CR>', { desc = '[F]ind [P
 vim.defer_fn(function()
   require('nvim-treesitter.configs').setup {
     -- Add languages to be installed here that you want installed for treesitter
-    ensure_installed = { 'lua', 'vimdoc', 'vim', 'javascript', 'typescript', 'tsx' },
+    ensure_installed = { 'lua', 'vimdoc', 'vim', 'javascript', 'typescript', 'tsx', 'json' },
 
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
     auto_install = false,
@@ -641,8 +672,8 @@ local lspkind = require 'lspkind'
 cmp.setup {
   formatting = {
     format = lspkind.cmp_format {
-      mode = 'symbol_text',  -- show only symbol annotations
-      maxwidth = 50,         -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+      mode = 'symbol_text', -- show only symbol annotations
+      maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
       ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
 
       -- The function below will be called before any actual modifications from lspkind
@@ -720,6 +751,18 @@ cmp.setup.cmdline(':', {
   }, {
     { name = 'cmdline' },
   }),
+})
+
+vim.api.nvim_create_autocmd('User', {
+  pattern = 'TelescopePreviewerLoaded',
+  callback = function(args)
+    -- if args.data.filetype ~= 'help' then
+    --   vim.wo.number = true
+    -- elseif args.data.bufname:match '*.csv' then
+    --   vim.wo.wrap = false
+    -- end
+    vim.wo.wrap = true
+  end,
 })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
