@@ -761,6 +761,7 @@ vim.api.nvim_create_autocmd('User', {
     -- elseif args.data.bufname:match '*.csv' then
     --   vim.wo.wrap = false
     -- end
+    vim.wo.number = true
     vim.wo.wrap = true
   end,
 })
