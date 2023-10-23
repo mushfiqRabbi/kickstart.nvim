@@ -56,10 +56,17 @@ vim.g['rooter_change_directory_for_non_project_files'] = 'current'
 vim.opt.scrolloff = 7
 vim.o.cursorline = true
 
-vim.o.shell = 'pwsh.exe'
-vim.o.shellcmdflag = '-command'
-vim.o.shellquote = '"'
-vim.o.shellxquote = ''
+-- vim.o.shell = 'pwsh.exe'
+-- vim.o.shellcmdflag = '-command'
+-- vim.o.shellquote = '"'
+-- vim.o.shellxquote = ''
+
+vim.cmd [[
+set shell=pwsh
+set shellcmdflag=-command
+set shellquote=\"
+set shellxquote=
+]]
 
 vim.keymap.set('n', '<C-s>', '<cmd>update<CR>', { noremap = true, silent = true })
 -- vim.keymap.set('v', '<C-s>', '<C-c><cmd>update<CR>', { noremap = true, silent = true })
@@ -247,6 +254,7 @@ require('lazy').setup({
   {
     'nvim-telescope/telescope.nvim',
     branch = '0.1.x',
+    -- commit = 'cf847b587ac058cf2edcc2131daaef4ae9e8bf18',
     dependencies = {
       'nvim-lua/plenary.nvim',
       -- Fuzzy Finder Algorithm which requires local dependencies to be built.
@@ -387,7 +395,8 @@ require('telescope').setup {
 
           require('telescope.actions').close(prompt_bufnr)
           -- Depending on what you want put `cd`, `lcd`, `tcd`
-          vim.cmd(string.format('lua MiniFiles.open(%s)', dir))
+          vim.cmd(string.format('Oil %s', dir))
+          -- vim.cmd(string.format('lua MiniFiles.open(%s)', dir))
           -- MiniFiles.open(dir, false)
         end,
       },
