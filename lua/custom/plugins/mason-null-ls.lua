@@ -7,7 +7,7 @@ return {
   },
   config = function()
     require('mason-null-ls').setup {
-      ensure_installed = { 'prettierd', 'stylua', 'codespell' },
+      ensure_installed = { 'prettierd', 'stylua' },
     }
   end,
 }

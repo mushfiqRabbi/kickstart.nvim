@@ -40,6 +40,7 @@ P.S. You can delete this when you're done too. It's your config now :)
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
+vim.g['python3_host_prog'] = 'C:\\Users\\mushfiq\\.pyenv\\pyenv-win\\versions\\3.11.3\\python3.exe'
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 vim.opt.splitright = true
@@ -363,6 +364,12 @@ if vim.fn.hostname() == 'DESKTOP-QP9KQE3' then
     height = 0.9,
     width = 0.7,
     preview_width = 0.65,
+  }
+elseif vim.fn.hostname() == 'DESKTOP-CKMOCDG' then
+  layout_config = {
+    height = 0.95,
+    width = 0.8,
+    preview_width = 0.6,
   }
 end
 
