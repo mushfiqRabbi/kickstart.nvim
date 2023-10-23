@@ -441,27 +441,29 @@ pcall(require('telescope').load_extension, 'fzf')
 pcall(require('telescope').load_extension, 'yank_history')
 pcall(require('telescope').load_extension, 'projects')
 pcall(require('telescope').load_extension, 'ascii')
+pcall(require('telescope').load_extension 'undo')
 
 -- See `:help telescope.builtin`
-vim.keymap.set('n', '<leader>fo', require('telescope.builtin').oldfiles, { desc = '[F]ind recently [O]pened files' })
+vim.keymap.set('n', '<leader>so', require('telescope.builtin').oldfiles, { desc = '[S]earch recently [O]pened files' })
 vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[S]earch existing [B]uffers' })
-vim.keymap.set('n', '<leader>fi', require('telescope.builtin').current_buffer_fuzzy_find, { desc = '[F]uzzily search [I]n current buffer' })
+vim.keymap.set('n', '<leader>si', require('telescope.builtin').current_buffer_fuzzy_find, { desc = '[F]uzzily search [I]n current buffer' })
 
-vim.keymap.set('n', '<leader>fg', require('telescope.builtin').git_files, { desc = '[F]ind [G]it files' })
-vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, { desc = '[F]ind [F]iles in CWD' })
+vim.keymap.set('n', '<leader>sg', require('telescope.builtin').git_files, { desc = '[S]earch [G]it files' })
+vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles in CWD' })
 vim.keymap.set(
   'n',
-  '<leader>FF',
+  '<leader>sF',
   "<cmd>lua require('telescope.builtin').find_files({ cwd = vim.env.HOME, follow = true, hidden = true })<cr>",
-  { desc = '[F]ind [F]iles in $HOME' }
+  { desc = '[S]earch [F]iles in $HOME' }
 )
-vim.keymap.set('n', '<leader>fh', require('telescope.builtin').help_tags, { desc = '[F]ind [H]elp' })
-vim.keymap.set('n', '<leader>fw', require('telescope.builtin').grep_string, { desc = '[F]inf current [W]ord' })
+vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
+vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[F]inf current [W]ord' })
 vim.keymap.set('n', '<leader>lg', require('telescope.builtin').live_grep, { desc = '[L]ive [G]rep' })
-vim.keymap.set('n', '<leader>fd', require('telescope.builtin').diagnostics, { desc = '[F]ind [D]iagnostics' })
-vim.keymap.set('n', '<leader>fr', require('telescope.builtin').resume, { desc = '[F]ind [R]esume' })
-vim.keymap.set('n', '<leader>fy', ':Telescope yank_history<CR>', { desc = '[F]ind [Y]ank history' })
-vim.keymap.set('n', '<leader>fp', ':Telescope projects<CR>', { desc = '[F]ind [P]roject' })
+vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
+vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
+vim.keymap.set('n', '<leader>sy', ':Telescope yank_history<CR>', { desc = '[S]earch [Y]ank history' })
+vim.keymap.set('n', '<leader>sp', ':Telescope projects<CR>', { desc = '[S]earch [P]roject' })
+vim.keymap.set('n', '<leader>uh', '<cmd>Telescope undo<cr>', { desc = '[U]ndo [H]istory' })
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
@@ -469,7 +471,7 @@ vim.keymap.set('n', '<leader>fp', ':Telescope projects<CR>', { desc = '[F]ind [P
 vim.defer_fn(function()
   require('nvim-treesitter.configs').setup {
     -- Add languages to be installed here that you want installed for treesitter
-    ensure_installed = { 'lua', 'vimdoc', 'vim', 'javascript', 'typescript', 'tsx', 'json' },
+    ensure_installed = { 'lua', 'vimdoc', 'vim', 'javascript', 'typescript', 'tsx', 'json', 'regex' },
 
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
     auto_install = false,
@@ -529,6 +531,15 @@ vim.defer_fn(function()
         },
       },
     },
+    rainbow = {
+      enable = true,
+      -- list of languages you want to disable the plugin for
+      disable = {},
+      -- Which query to use for finding delimiters
+      query = 'rainbow-parens',
+      -- Highlight the entire buffer all at once
+      strategy = require('ts-rainbow').strategy.global,
+    },
   }
 end, 0)
 
@@ -555,7 +566,7 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
   end
 
-  nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
+  -- nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
   -- nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
   nmap('<leader>ca', ':CodeActionMenu<CR>', '[C]ode [A]ction')
 
