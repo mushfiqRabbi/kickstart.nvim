@@ -10,7 +10,7 @@ return {
         typescript = { 'prettierd' },
         typescriptreact = { 'prettierd' },
 
-        ['*'] = { 'codespell' },
+        -- ['*'] = { 'codespell' },
         ['_'] = { 'trim_whitespace' },
       },
 
