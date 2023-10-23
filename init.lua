@@ -635,8 +635,6 @@ local servers = {
   custom_elements_ls = {},
 
   tailwindcss = {},
-
-  eslint = {},
 }
 
 -- Setup neovim lua configuration
