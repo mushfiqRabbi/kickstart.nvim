@@ -11,7 +11,7 @@ return {
         typescriptreact = { 'prettierd' },
 
         -- ['*'] = { 'codespell' },
-        ['_'] = { 'trim_whitespace' },
+        -- ['_'] = { 'trim_whitespace' },
       },
 
       format_on_save = {
