@@ -243,9 +243,9 @@ require('lazy').setup({
   },
 
   {
-    'lukas-reineke/indent-blankline.nvim',
-    main = 'ibl',
-    opts = {},
+    -- 'lukas-reineke/indent-blankline.nvim',
+    -- main = 'ibl',
+    -- opts = {},
   },
 
   -- "gc" to comment visual regions/lines
@@ -470,7 +470,7 @@ vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc
 vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, { desc = '[F]ind [F]iles in CWD' })
 vim.keymap.set(
   'n',
-  '<leader>FF',
+  '<leader>fF',
   "<cmd>lua require('telescope.builtin').find_files({ cwd = vim.env.HOME, follow = true, hidden = true })<cr>",
   { desc = '[F]ind [F]iles in $HOME' }
 )
