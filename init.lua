@@ -237,14 +237,15 @@ require('lazy').setup({
         component_separators = { left = '', right = '' },
         section_separators = { left = '', right = '' },
         theme = 'onedark',
+        -- theme = 'tokyonight',
       },
     },
   },
 
   {
-    -- 'lukas-reineke/indent-blankline.nvim',
-    -- main = 'ibl',
-    -- opts = {},
+    'lukas-reineke/indent-blankline.nvim',
+    main = 'ibl',
+    opts = {},
   },
 
   -- "gc" to comment visual regions/lines
@@ -461,25 +462,25 @@ pcall(require('telescope').load_extension, 'ascii')
 pcall(require('telescope').load_extension 'undo')
 
 -- See `:help telescope.builtin`
-vim.keymap.set('n', '<leader>so', require('telescope.builtin').oldfiles, { desc = '[S]earch recently [O]pened files' })
-vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[S]earch existing [B]uffers' })
-vim.keymap.set('n', '<leader>si', require('telescope.builtin').current_buffer_fuzzy_find, { desc = '[S]earch [I]nside' })
+vim.keymap.set('n', '<leader>of', require('telescope.builtin').oldfiles, { desc = 'Find [O]ld [F]iles' })
+vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[] Find  buffers' })
+vim.keymap.set('n', '<leader>bf', require('telescope.builtin').current_buffer_fuzzy_find, { desc = 'Current [B]uffer [F]uzzy find' })
 
-vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
-vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles in CWD' })
+vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Find [G]it [F]iles' })
+vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, { desc = '[F]ind [F]iles in CWD' })
 vim.keymap.set(
   'n',
-  '<leader>sF',
+  '<leader>FF',
   "<cmd>lua require('telescope.builtin').find_files({ cwd = vim.env.HOME, follow = true, hidden = true })<cr>",
-  { desc = '[S]earch [F]iles in $HOME' }
+  { desc = '[F]ind [F]iles in $HOME' }
 )
-vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
-vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[F]inf current [W]ord' })
-vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch [G]rep' })
-vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
-vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
-vim.keymap.set('n', '<leader>sy', ':Telescope yank_history<CR>', { desc = '[S]earch [Y]ank history' })
-vim.keymap.set('n', '<leader>sp', ':Telescope projects<CR>', { desc = '[S]earch [P]roject' })
+vim.keymap.set('n', '<leader>hg', require('telescope.builtin').help_tags, { desc = 'Find [H]elp [T]ags' })
+vim.keymap.set('n', '<leader>gs', require('telescope.builtin').grep_string, { desc = '[G]rep current [S]tring' })
+vim.keymap.set('n', '<leader>lg', require('telescope.builtin').live_grep, { desc = '[L]ive [G]rep' })
+vim.keymap.set('n', '<leader>fd', require('telescope.builtin').diagnostics, { desc = '[F]ind [D]iagnostics' })
+vim.keymap.set('n', '<leader>rs', require('telescope.builtin').resume, { desc = '[R]esume [S]earch' })
+vim.keymap.set('n', '<leader>ys', ':Telescope yank_history<CR>', { desc = '[Y]ank [H]istory' })
+vim.keymap.set('n', '<leader>fp', ':Telescope projects<CR>', { desc = '[F]ind [P]roject' })
 vim.keymap.set('n', '<leader>uh', '<cmd>Telescope undo<cr>', { desc = '[U]ndo [H]istory' })
 
 -- [[ Configure Treesitter ]]
