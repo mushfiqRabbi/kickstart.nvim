@@ -51,18 +51,21 @@ vim.g.loaded_netrwPlugin = 1
 -- vim.opt.smartindent = true
 -- vim.opt.shiftwidth = 2
 -- vim.opt.expandtab = true
--- vim.g['rooter_cd_cmd'] = 'lcd'
+vim.g['rooter_cd_cmd'] = 'lcd'
 vim.g['rooter_change_directory_for_non_project_files'] = 'current'
 vim.opt.scrolloff = 7
 vim.o.cursorline = true
 
--- vim.o.shell = 'pwsh.exe'
+vim.opt.spell = true
+vim.opt.spelllang = { 'en_us' }
+
+-- vim.o.shell = 'C:\\"Program Files"\\PowerShell\\7\\pwsh.exe'
 -- vim.o.shellcmdflag = '-command'
 -- vim.o.shellquote = '"'
 -- vim.o.shellxquote = ''
 
 vim.cmd [[
-set shell=pwsh
+set shell=pwsh.exe
 set shellcmdflag=-command
 set shellquote=\"
 set shellxquote=
@@ -164,7 +167,10 @@ require('lazy').setup({
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-path',
+      'f3fora/cmp-spell',
       'hrsh7th/cmp-cmdline',
+      'hrsh7th/cmp-calc',
+      'hrsh7th/cmp-emoji',
 
       -- Adds LSP completion capabilities
       'hrsh7th/cmp-nvim-lsp',
@@ -462,11 +468,11 @@ pcall(require('telescope').load_extension, 'ascii')
 pcall(require('telescope').load_extension 'undo')
 
 -- See `:help telescope.builtin`
-vim.keymap.set('n', '<leader>of', require('telescope.builtin').oldfiles, { desc = 'Find [O]ld [F]iles' })
+vim.keymap.set('n', '<leader>fr', require('telescope.builtin').oldfiles, { desc = 'Find [R]ecent [F]iles' })
 vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[] Find  buffers' })
-vim.keymap.set('n', '<leader>bf', require('telescope.builtin').current_buffer_fuzzy_find, { desc = 'Current [B]uffer [F]uzzy find' })
+vim.keymap.set('n', '<leader>/', require('telescope.builtin').current_buffer_fuzzy_find, { desc = 'Fuzzy find inside current buffer' })
 
-vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Find [G]it [F]iles' })
+vim.keymap.set('n', '<leader>fg', require('telescope.builtin').git_files, { desc = '[F]ind [G]it files' })
 vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, { desc = '[F]ind [F]iles in CWD' })
 vim.keymap.set(
   'n',
@@ -474,14 +480,14 @@ vim.keymap.set(
   "<cmd>lua require('telescope.builtin').find_files({ cwd = vim.env.HOME, follow = true, hidden = true })<cr>",
   { desc = '[F]ind [F]iles in $HOME' }
 )
-vim.keymap.set('n', '<leader>hg', require('telescope.builtin').help_tags, { desc = 'Find [H]elp [T]ags' })
-vim.keymap.set('n', '<leader>gs', require('telescope.builtin').grep_string, { desc = '[G]rep current [S]tring' })
+vim.keymap.set('n', '<leader>fh', require('telescope.builtin').help_tags, { desc = '[F]ind [H]elp tags' })
+vim.keymap.set('n', '<leader>fs', require('telescope.builtin').grep_string, { desc = '[F]ind [S]tring under cursor' })
 vim.keymap.set('n', '<leader>lg', require('telescope.builtin').live_grep, { desc = '[L]ive [G]rep' })
 vim.keymap.set('n', '<leader>fd', require('telescope.builtin').diagnostics, { desc = '[F]ind [D]iagnostics' })
 vim.keymap.set('n', '<leader>rs', require('telescope.builtin').resume, { desc = '[R]esume [S]earch' })
-vim.keymap.set('n', '<leader>ys', ':Telescope yank_history<CR>', { desc = '[Y]ank [H]istory' })
+vim.keymap.set('n', '<leader>fy', ':Telescope yank_history<CR>', { desc = '[F]ind [Y]ank from history' })
 vim.keymap.set('n', '<leader>fp', ':Telescope projects<CR>', { desc = '[F]ind [P]roject' })
-vim.keymap.set('n', '<leader>uh', '<cmd>Telescope undo<cr>', { desc = '[U]ndo [H]istory' })
+vim.keymap.set('n', '<leader>fu', '<cmd>Telescope undo<cr>', { desc = '[F]ind [U]ndo from history' })
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
@@ -749,11 +755,27 @@ cmp.setup {
       end
     end, { 'i', 's' }),
   },
-  sources = {
+  sources = cmp.config.sources {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
-    -- { name = 'buffer' },
-    -- { name = 'path' },
+    { name = 'buffer' },
+    { name = 'path' },
+    {
+      name = 'spell',
+      option = {
+        keep_all_entries = false,
+        enable_in_context = function()
+          return true
+        end,
+      },
+    },
+    { name = 'calc' },
+    {
+      name = 'emoji',
+      option = {
+        insert = true,
+      },
+    },
   },
 }
 
