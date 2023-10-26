@@ -49,8 +49,8 @@ return {
         },
       },
     }
-    vim.keymap.set({ 'n', 'v' }, '<leader>ob', ':Oil<CR>', { noremap = true, silent = true })
-    vim.keymap.set({ 'n', 'v' }, '<leader>oB', ':lua require("oil").open(vim.loop.cwd())<CR>', { noremap = true, silent = true })
+    vim.keymap.set({ 'n', 'v' }, '<leader>oB', ':Oil<CR>', { noremap = true, silent = true })
+    vim.keymap.set({ 'n', 'v' }, '<leader>ob', ':lua require("oil").open(vim.loop.cwd())<CR>', { noremap = true, silent = true })
     vim.api.nvim_create_autocmd('User', {
       pattern = 'OilEnter',
       callback = vim.schedule_wrap(function(args)
