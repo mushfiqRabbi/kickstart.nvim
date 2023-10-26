@@ -40,7 +40,7 @@ P.S. You can delete this when you're done too. It's your config now :)
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
-vim.g['python3_host_prog'] = 'C:\\Users\\mushfiq\\.pyenv\\pyenv-win\\versions\\3.11.3\\python3.exe'
+-- vim.g['python3_host_prog'] = 'C:\\Users\\mushfiq\\.pyenv\\pyenv-win\\versions\\3.11.3\\python3.exe'
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 vim.opt.splitright = true
@@ -64,12 +64,12 @@ vim.opt.spelllang = { 'en_us' }
 -- vim.o.shellquote = '"'
 -- vim.o.shellxquote = ''
 
-vim.cmd [[
-set shell=pwsh.exe
-set shellcmdflag=-command
-set shellquote=\"
-set shellxquote=
-]]
+-- vim.cmd [[
+-- set shell=pwsh.exe
+-- set shellcmdflag=-command
+-- set shellquote=\"
+-- set shellxquote=
+-- ]]
 
 vim.keymap.set('n', '<C-s>', '<cmd>update<CR>', { noremap = true, silent = true })
 -- vim.keymap.set('v', '<C-s>', '<C-c><cmd>update<CR>', { noremap = true, silent = true })
@@ -361,6 +361,7 @@ vim.o.termguicolors = true
 -- See `:help vim.keymap.set()`
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set({ 'n', 'v' }, '<CR>', '<Nop>', { silent = true })
+vim.keymap.set({ 'n', 'v' }, '<backspace>', '<Nop>', { silent = true })
 
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
@@ -658,7 +659,7 @@ local servers = {
 
   jsonls = {},
 
-  custom_elements_ls = {},
+  -- custom_elements_ls = {},
 
   tailwindcss = {},
 }
@@ -759,23 +760,23 @@ cmp.setup {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
     { name = 'buffer' },
-    { name = 'path' },
-    {
-      name = 'spell',
-      option = {
-        keep_all_entries = false,
-        enable_in_context = function()
-          return true
-        end,
-      },
-    },
-    { name = 'calc' },
-    {
-      name = 'emoji',
-      option = {
-        insert = true,
-      },
-    },
+    -- { name = 'path' },
+    -- {
+    --   name = 'spell',
+    --   option = {
+    --     keep_all_entries = false,
+    --     enable_in_context = function()
+    --       return true
+    --     end,
+    --   },
+    -- },
+    -- { name = 'calc' },
+    -- {
+    --   name = 'emoji',
+    --   option = {
+    --     insert = true,
+    --   },
+    -- },
   },
 }
 

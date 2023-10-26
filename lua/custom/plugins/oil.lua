@@ -1,10 +1,10 @@
 return {
   'stevearc/oil.nvim',
   opts = {
-    -- cleanup_delay_ms = false,
-    -- win_options = {
-    --   wrap = true,
-    -- },
+    cleanup_delay_ms = false,
+    win_options = {
+      wrap = true,
+    },
   },
   -- Optional dependencies
   dependencies = { 'nvim-tree/nvim-web-devicons' },
@@ -59,6 +59,18 @@ return {
           oil.select { preview = true }
         end
       end),
+    })
+    vim.api.nvim_create_autocmd('BufEnter', {
+      pattern = 'oil:///*',
+      callback = function()
+        vim.keymap.set('n', '<backspace>', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
+      end,
+    })
+    vim.api.nvim_create_autocmd('BufLeave', {
+      pattern = 'oil:///*',
+      callback = function()
+        vim.keymap.set('n', '<backspace>', '<Nop>', { desc = 'Open parent directory' })
+      end,
     })
   end,
 }
