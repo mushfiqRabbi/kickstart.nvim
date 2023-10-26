@@ -223,12 +223,12 @@ require('lazy').setup({
   },
 
   {
-    -- Theme inspired by Atom
-    'navarasu/onedark.nvim',
-    priority = 1000,
-    config = function()
-      vim.cmd.colorscheme 'onedark'
-    end,
+    -- -- Theme inspired by Atom
+    -- 'navarasu/onedark.nvim',
+    -- priority = 1000,
+    -- config = function()
+    --   vim.cmd.colorscheme 'onedark'
+    -- end,
   },
 
   {
@@ -243,8 +243,8 @@ require('lazy').setup({
         icons_enabled = true,
         component_separators = { left = '', right = '' },
         section_separators = { left = '', right = '' },
-        theme = 'onedark',
-        -- theme = 'tokyonight',
+        -- theme = 'onedark',
+        theme = 'tokyonight',
       },
     },
   },
@@ -402,7 +402,16 @@ require('telescope').setup {
   defaults = {
     layout_strategy = 'horizontal',
     layout_config = layout_config,
-
+    vimgrep_arguments = {
+      'rg',
+      '--color=never',
+      '--no-heading',
+      '--with-filename',
+      '--line-number',
+      '--column',
+      '--smart-case',
+      '--trim', -- add this value
+    },
     mappings = {
       n = {
         ['<C-c>'] = require('telescope.actions').close,
@@ -416,6 +425,13 @@ require('telescope').setup {
           -- vim.cmd(string.format('lua MiniFiles.open(%s)', dir))
           -- MiniFiles.open(dir, false)
         end,
+        ['cd'] = function(prompt_bufnr)
+          local selection = require('telescope.actions.state').get_selected_entry()
+          local dir = vim.fn.fnamemodify(selection.path, ':p:h')
+          require('telescope.actions').close(prompt_bufnr)
+          -- Depending on what you want put `cd`, `lcd`, `tcd`
+          vim.cmd(string.format('silent lcd %s', dir))
+        end,
       },
       i = {
         ['<C-u>'] = false,
@@ -427,6 +443,13 @@ require('telescope').setup {
           -- Depending on what you want put `cd`, `lcd`, `tcd`
           vim.cmd(string.format('Oil %s', dir))
           -- MiniFiles.open(dir, false)
+        end,
+        ['<C-w>'] = function(prompt_bufnr)
+          local selection = require('telescope.actions.state').get_selected_entry()
+          local dir = vim.fn.fnamemodify(selection.path, ':p:h')
+          require('telescope.actions').close(prompt_bufnr)
+          -- Depending on what you want put `cd`, `lcd`, `tcd`
+          vim.cmd(string.format('silent lcd %s', dir))
         end,
       },
     },
@@ -816,10 +839,17 @@ vim.api.nvim_create_autocmd('User', {
 })
 
 local signs = {
-  Error = ' ',
-  Warn = ' ',
-  Hint = ' ',
-  Info = ' ',
+  --   JetBrains friendly icons
+  -- Error = ' ',
+  -- Warn = ' ',
+  -- Hint = ' ',
+  -- Info = ' ',
+
+  -- CaskaydiaCove friendly icons
+  Error = ' ',
+  Warn = ' ',
+  Hint = ' ',
+  Info = ' ',
 }
 for type, icon in pairs(signs) do
   local hl = 'DiagnosticSign' .. type
