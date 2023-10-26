@@ -470,7 +470,7 @@ pcall(require('telescope').load_extension, 'ascii')
 pcall(require('telescope').load_extension 'undo')
 
 -- See `:help telescope.builtin`
-vim.keymap.set('n', '<leader>fr', require('telescope.builtin').oldfiles, { desc = 'Find [R]ecent [F]iles' })
+vim.keymap.set('n', '<leader>fr', require('telescope.builtin').oldfiles, { desc = '[F]ind [R]ecent files' })
 vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[] Find  buffers' })
 vim.keymap.set('n', '<leader>/', require('telescope.builtin').current_buffer_fuzzy_find, { desc = 'Fuzzy find inside current buffer' })
 
