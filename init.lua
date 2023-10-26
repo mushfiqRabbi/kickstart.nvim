@@ -60,7 +60,7 @@ vim.opt.spell = true
 vim.opt.spelllang = { 'en_us' }
 
 -- vim.o.shell = 'C:\\"Program Files"\\PowerShell\\7\\pwsh.exe'
-vim.o.shell = '/bin/bash'
+vim.o.shell = '/usr/bin/zsh'
 -- vim.o.shellcmdflag = '-command'
 -- vim.o.shellquote = '"'
 -- vim.o.shellxquote = ''
