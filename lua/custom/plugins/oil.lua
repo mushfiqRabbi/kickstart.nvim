@@ -12,6 +12,9 @@ return {
     -- local oil = require 'oil'
     -- local util = require 'oil.util'
     require('oil').setup {
+      view_options = {
+        show_hidden = true,
+      },
       skip_confirm_for_simple_edits = true,
       keymaps = {
         ['<C-s>'] = false,

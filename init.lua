@@ -223,12 +223,12 @@ require('lazy').setup({
   },
 
   {
-    -- -- Theme inspired by Atom
-    -- 'navarasu/onedark.nvim',
-    -- priority = 1000,
-    -- config = function()
-    --   vim.cmd.colorscheme 'onedark'
-    -- end,
+    -- Theme inspired by Atom
+    'navarasu/onedark.nvim',
+    priority = 1000,
+    config = function()
+      vim.cmd.colorscheme 'onedark'
+    end,
   },
 
   {
@@ -243,8 +243,8 @@ require('lazy').setup({
         icons_enabled = true,
         component_separators = { left = '', right = '' },
         section_separators = { left = '', right = '' },
-        -- theme = 'onedark',
-        theme = 'tokyonight',
+        theme = 'onedark',
+        -- theme = 'tokyonight',
       },
     },
   },
@@ -398,8 +398,71 @@ elseif vim.fn.hostname() == 'DESKTOP-CKMOCDG' then
   }
 end
 
+local previewers = require 'telescope.previewers'
+local Job = require 'plenary.job'
+local new_maker = function(filepath, bufnr, opts)
+  filepath = vim.fn.expand(filepath)
+  Job:new({
+    command = 'file',
+    args = { '--mime-type', '-b', filepath },
+    on_exit = function(j)
+      -- local mime_type = vim.split(j:result()[1], '/')[1]
+      local is_preview = false
+      if string.match(j:result()[1], 'text') then
+        is_preview = true
+      elseif string.match(j:result()[1], 'json') then
+        is_preview = true
+      elseif string.match(j:result()[1], 'jpg') then
+        is_preview = true
+      elseif string.match(j:result()[1], 'jpeg') then
+        is_preview = true
+      elseif string.match(j:result()[1], 'png') then
+        is_preview = true
+      end
+      if is_preview then
+        previewers.buffer_previewer_maker(filepath, bufnr, opts)
+      else
+        -- maybe we want to write something to the buffer here
+        vim.schedule(function()
+          vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, { 'BINARY' })
+        end)
+      end
+    end,
+  }):sync()
+end
+
 require('telescope').setup {
   defaults = {
+    buffer_previewer_maker = new_maker,
+  },
+}
+
+require('telescope').setup {
+  defaults = {
+    preview = {
+      mime_hook = function(filepath, bufnr, opts)
+        local is_image = function(filepath)
+          local image_extensions = { 'png', 'jpg' } -- Supported image formats
+          local split_path = vim.split(filepath:lower(), '.', { plain = true })
+          local extension = split_path[#split_path]
+          return vim.tbl_contains(image_extensions, extension)
+        end
+        if is_image(filepath) then
+          local term = vim.api.nvim_open_term(bufnr, {})
+          local function send_output(_, data, _)
+            for _, d in ipairs(data) do
+              vim.api.nvim_chan_send(term, d .. '\r\n')
+            end
+          end
+          vim.fn.jobstart({
+            'catimg',
+            filepath, -- Terminal image viewer command
+          }, { on_stdout = send_output, stdout_buffered = true, pty = true })
+        else
+          require('telescope.previewers.utils').set_preview_message(bufnr, opts.winid, 'Binary cannot be previewed')
+        end
+      end,
+    },
     layout_strategy = 'horizontal',
     layout_config = layout_config,
     vimgrep_arguments = {
@@ -498,11 +561,12 @@ vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { d
 vim.keymap.set('n', '<leader>/', require('telescope.builtin').current_buffer_fuzzy_find, { desc = 'Fuzzy find inside current buffer' })
 
 vim.keymap.set('n', '<leader>fg', require('telescope.builtin').git_files, { desc = '[F]ind [G]it files' })
-vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, { desc = '[F]ind [F]iles in CWD' })
+
+vim.keymap.set('n', '<leader>ff', "<CMD>lua require'telescope-config'.project_files()<CR>", { desc = '[F]ind [F]iles in CWD' })
 vim.keymap.set(
   'n',
   '<leader>fF',
-  "<cmd>lua require('telescope.builtin').find_files({ cwd = vim.env.HOME, follow = true, hidden = true })<cr>",
+  "<cmd>lua require('telescope.builtin').find_files({ cwd = vim.env.HOME, follow = true, hidden = true})<cr>",
   { desc = '[F]ind [F]iles in $HOME' }
 )
 vim.keymap.set('n', '<leader>fh', require('telescope.builtin').help_tags, { desc = '[F]ind [H]elp tags' })
@@ -731,6 +795,7 @@ cmp.setup {
       mode = 'symbol_text', -- show only symbol annotations
       maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
       ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
+      symbol_map = { Codeium = '' },
 
       -- The function below will be called before any actual modifications from lspkind
       -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
@@ -761,29 +826,30 @@ cmp.setup {
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
     },
-    ['<Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.expand_or_locally_jumpable() then
-        luasnip.expand_or_jump()
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
-    ['<S-Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.locally_jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
+    -- ['<Tab>'] = cmp.mapping(function(fallback)
+    --   if cmp.visible() then
+    --     cmp.select_next_item()
+    --   elseif luasnip.expand_or_locally_jumpable() then
+    --     luasnip.expand_or_jump()
+    --   else
+    --     fallback()
+    --   end
+    -- end, { 'i', 's' }),
+    -- ['<S-Tab>'] = cmp.mapping(function(fallback)
+    --   if cmp.visible() then
+    --     cmp.select_prev_item()
+    --   elseif luasnip.locally_jumpable(-1) then
+    --     luasnip.jump(-1)
+    --   else
+    --     fallback()
+    --   end
+    -- end, { 'i', 's' }),
   },
   sources = cmp.config.sources {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
     { name = 'buffer' },
+    { name = 'codeium' },
     -- { name = 'path' },
     -- {
     --   name = 'spell',
