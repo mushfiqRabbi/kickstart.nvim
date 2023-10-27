@@ -52,7 +52,11 @@ return {
         bl = vim.api.nvim_create_autocmd('BufLeave', {
           pattern = 'term://*#toggleterm#*',
           callback = function()
-            vim.cmd(string.format('resize %s', vim.o.lines * 0.4))
+            if vim.fn.hostname() == 'DESKTOP-QP9KQE3' then
+              vim.cmd(string.format('resize %s', vim.o.lines * 0.3))
+            elseif vim.fn.hostname() == 'DESKTOP-CKMOCDG' then
+              vim.cmd(string.format('resize %s', vim.o.lines * 0.4))
+            end
             -- vim.cmd 'startinsert'
           end,
         })
