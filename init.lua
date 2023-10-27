@@ -51,8 +51,8 @@ vim.g.loaded_netrwPlugin = 1
 -- vim.opt.smartindent = true
 -- vim.opt.shiftwidth = 2
 -- vim.opt.expandtab = true
-vim.g['rooter_cd_cmd'] = 'lcd'
-vim.g['rooter_change_directory_for_non_project_files'] = 'current'
+-- vim.g['rooter_cd_cmd'] = 'lcd'
+-- vim.g['rooter_change_directory_for_non_project_files'] = 'current'
 vim.opt.scrolloff = 7
 vim.o.cursorline = true
 
@@ -922,7 +922,7 @@ for type, icon in pairs(signs) do
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
-vim.keymap.set('n', '<leader>rl', '<cmd>LspRestart<CR>', { normal = true, desc = '[R]estart [L]SP server' })
+vim.keymap.set('n', '<leader>rl', '<cmd>LspRestart<CR>', { noremap = true, desc = '[R]estart [L]SP server' })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
