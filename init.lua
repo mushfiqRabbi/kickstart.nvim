@@ -922,5 +922,7 @@ for type, icon in pairs(signs) do
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
+vim.keymap.set('n', '<leader>rl', '<cmd>LspRestart<CR>', { normal = true, desc = '[R]estart [L]SP server' })
+
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
