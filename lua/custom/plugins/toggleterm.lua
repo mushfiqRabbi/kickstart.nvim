@@ -35,14 +35,16 @@ return {
       persist_mode = false,
       persist_size = false,
       open_mapping = [[<c-\>]],
-      on_create = function()
-        -- print('on_create', term.bufnr)
-      end,
+      -- on_create = function()
+      --   print('on_create', term.bufnr)
+      -- end,
       on_open = function()
         -- print('on_open', term.bufnr)
         vim.cmd 'wincmd w'
         vim.cmd 'stopinsert'
+        vim.api.nvim_create_augroup('TermAutoResize', { clear = true })
         be = vim.api.nvim_create_autocmd('BufEnter', {
+          group = 'TermAutoResize',
           pattern = 'term://*#toggleterm#*',
           callback = function()
             vim.cmd 'resize'
@@ -50,6 +52,7 @@ return {
           end,
         })
         bl = vim.api.nvim_create_autocmd('BufLeave', {
+          group = 'TermAutoResize',
           pattern = 'term://*#toggleterm#*',
           callback = function()
             if vim.fn.hostname() == 'DESKTOP-QP9KQE3' then
@@ -63,12 +66,13 @@ return {
       end,
       on_close = function()
         -- print('on_close', term.bufnr)
-        vim.api.nvim_del_autocmd(be)
-        vim.api.nvim_del_autocmd(bl)
+        -- vim.api.nvim_del_autocmd(be)
+        -- vim.api.nvim_del_autocmd(bl)
+        vim.api.nvim_del_augroup_by_name 'TermAutoResize'
       end,
-      on_exit = function()
-        -- print('on_exit', term)
-      end,
+      -- on_exit = function()
+      --   -- print('on_exit', term)
+      -- end,
     }
     -- vim.api.nvim_create_autocmd('BufEnter', {
     --   pattern = 'term://*#toggleterm#*',
