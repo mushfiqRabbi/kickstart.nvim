@@ -92,6 +92,12 @@ vim.cmd [[
     let g:VM_mouse_mappings = 1
     ]]
 
+vim.filetype.add {
+  pattern = {
+    ['.env.*'] = 'sh',
+  },
+}
+
 -- vim.cmd [[
 -- augroup FormatAutogroup
 --   autocmd!
@@ -929,12 +935,6 @@ for type, icon in pairs(signs) do
 end
 
 vim.keymap.set('n', '<leader>rll', '<cmd>LspRestart<CR>', { noremap = true, desc = '[R]estart [L]SP server' })
-
-vim.filetype.add {
-  pattern = {
-    ['.env.*'] = 'sh',
-  },
-}
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
