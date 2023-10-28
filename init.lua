@@ -534,17 +534,18 @@ require('telescope').setup {
   pickers = {
     find_files = {
       wrap_results = true,
-      -- find_command = {
-      --   -- 'fd',
-      --   -- '-tf',
-      --   -- '--hidden',
-      --   -- '--follow',
-      --   -- '--absolute-path',
-      --   -- '--exclude',
-      --   -- '.git',
-      --   -- '--exclude',
-      --   -- '.vscode',
-      -- },
+      find_command = {
+        'fd',
+        '--type',
+        'f',
+        '--hidden',
+        '--follow',
+        '--absolute-path',
+        '--exclude',
+        '.git',
+        '--exclude',
+        '.vscode',
+      },
     },
     oldfiles = {
       wrap_results = true,
@@ -586,12 +587,7 @@ vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { d
 vim.keymap.set('n', '<leader>/', require('telescope.builtin').current_buffer_fuzzy_find, { desc = 'Fuzzy find inside current buffer' })
 
 vim.keymap.set('n', '<leader>fg', require('telescope.builtin').git_files, { desc = '[F]ind [G]it files' })
-vim.keymap.set(
-  'n',
-  '<leader>ff',
-  "<cmd>lua require('telescope.builtin').find_files( { find_command =  { 'fd', '-tf', '--hidden', '--follow', '--absolute-path', '--exclude', '.git', '--exclude', '.vscode' } } )<cr>",
-  { desc = '[F]ind [G]it files' }
-)
+vim.keymap.set('n', '<leader>ff', "<cmd>lua require('telescope.builtin').find_files(  )<cr>", { desc = '[F]ind [G]it files' })
 -- vim.keymap.set(
 --   'n',
 --   '<leader>ff',

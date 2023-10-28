@@ -50,7 +50,7 @@ return {
           group = 'TermAutoResize',
           pattern = 'term://*#toggleterm#*',
           callback = function()
-            vim.cmd 'resize'
+            vim.cmd(string.format('resize %s', math.floor(vim.o.lines * 0.7)))
             -- vim.cmd 'startinsert'
           end,
         })
