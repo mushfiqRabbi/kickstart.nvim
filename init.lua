@@ -612,7 +612,7 @@ vim.keymap.set('n', '<leader>ff', "<cmd>lua require('telescope.builtin').find_fi
 vim.keymap.set(
   'n',
   '<leader>fd',
-  "<cmd>lua require('telescope.builtin').find_files( { cwd = vim.env.HOME, find_command = { 'fd', '-td', '-tl', '-uu' } })<cr>",
+  "<cmd>lua require('telescope.builtin').find_files( { cwd = vim.env.HOME, find_command = { 'fd', '-td', '-tl', '-uu' }, previewer = false })<cr>",
   { desc = '[F]ind [D]irectory' }
 )
 vim.keymap.set('n', '<leader>fh', require('telescope.builtin').help_tags, { desc = '[F]ind [H]elp tags' })
