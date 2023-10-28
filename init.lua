@@ -494,8 +494,12 @@ require('telescope').setup {
         ['<C-c>'] = require('telescope.actions').close,
         ['<C-e>'] = function(prompt_bufnr)
           local selection = require('telescope.actions.state').get_selected_entry()
-          local dir = vim.fn.fnamemodify(selection.path, ':p:h')
-
+          local dir
+          if not selection.path then
+            dir = selection.value
+          else
+            dir = vim.fn.fnamemodify(selection.path, ':p:h')
+          end
           require('telescope.actions').close(prompt_bufnr)
           -- Depending on what you want put `cd`, `lcd`, `tcd`
           vim.cmd(string.format('Oil %s', dir))
@@ -504,7 +508,12 @@ require('telescope').setup {
         end,
         ['cd'] = function(prompt_bufnr)
           local selection = require('telescope.actions.state').get_selected_entry()
-          local dir = vim.fn.fnamemodify(selection.path, ':p:h')
+          local dir
+          if not selection.path then
+            dir = selection.value
+          else
+            dir = vim.fn.fnamemodify(selection.path, ':p:h')
+          end
           require('telescope.actions').close(prompt_bufnr)
           -- Depending on what you want put `cd`, `lcd`, `tcd`
           vim.cmd(string.format('silent lcd %s', dir))
@@ -515,7 +524,12 @@ require('telescope').setup {
         ['<C-d>'] = false,
         ['<C-e>'] = function(prompt_bufnr)
           local selection = require('telescope.actions.state').get_selected_entry()
-          local dir = vim.fn.fnamemodify(selection.path, ':p:h')
+          local dir
+          if not selection.path then
+            dir = selection.value
+          else
+            dir = vim.fn.fnamemodify(selection.path, ':p:h')
+          end
           require('telescope.actions').close(prompt_bufnr)
           -- Depending on what you want put `cd`, `lcd`, `tcd`
           vim.cmd(string.format('Oil %s', dir))
@@ -680,10 +694,10 @@ vim.defer_fn(function()
 end, 0)
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '<leader>dn', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
-vim.keymap.set('n', '<leader>dp', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+vim.keymap.set('n', '<leader>en', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
+vim.keymap.set('n', '<leader>ep', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
+vim.keymap.set('n', '<leader>ee', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
+vim.keymap.set('n', '<leader>el', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 -- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.
