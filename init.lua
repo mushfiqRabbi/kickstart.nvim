@@ -595,11 +595,16 @@ vim.keymap.set('n', '<leader>ff', "<cmd>lua require('telescope.builtin').find_fi
 --   { desc = '[F]ind [F]iles in CWD' }
 -- )
 -- vim.keymap.set('n', '<leader>ff', "<CMD>lua require'telescope-config'.project_files()<CR>", { desc = '[F]ind [F]iles in CWD' })
-vim.keymap.set('n', '<leader>fF', "<cmd>lua require('telescope.builtin').find_files({ cwd = vim.env.HOME })<cr>", { desc = '[F]ind [F]iles in $HOME' })
+vim.keymap.set(
+  'n',
+  '<leader>fd',
+  "<cmd>lua require('telescope.builtin').find_files( { cwd = vim.env.HOME, find_command = { 'fd', '-td', '-tl', '-uu' } })<cr>",
+  { desc = '[F]ind [D]irectory' }
+)
 vim.keymap.set('n', '<leader>fh', require('telescope.builtin').help_tags, { desc = '[F]ind [H]elp tags' })
 vim.keymap.set('n', '<leader>fs', require('telescope.builtin').grep_string, { desc = '[F]ind [S]tring under cursor' })
 vim.keymap.set('n', '<leader>lg', require('telescope.builtin').live_grep, { desc = '[L]ive [G]rep' })
-vim.keymap.set('n', '<leader>fd', require('telescope.builtin').diagnostics, { desc = '[F]ind [D]iagnostics' })
+vim.keymap.set('n', '<leader>fe', require('telescope.builtin').diagnostics, { desc = '[F]ind [D]iagnostics' })
 vim.keymap.set('n', '<leader>rs', require('telescope.builtin').resume, { desc = '[R]esume [S]earch' })
 vim.keymap.set('n', '<leader>fy', ':Telescope yank_history<CR>', { desc = '[F]ind [Y]ank from history' })
 vim.keymap.set('n', '<leader>fp', ':Telescope projects<CR>', { desc = '[F]ind [P]roject' })
