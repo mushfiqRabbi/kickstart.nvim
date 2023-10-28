@@ -40,7 +40,7 @@ P.S. You can delete this when you're done too. It's your config now :)
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
--- vim.g['python3_host_prog'] = 'C:\\Users\\mushfiq\\.pyenv\\pyenv-win\\versions\\3.11.3\\python3.exe'
+vim.g['python3_host_prog'] = '/home/mushfiq/.pyenv/versions/py3nvim/bin/python'
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 vim.opt.splitright = true
@@ -56,8 +56,8 @@ vim.g.loaded_netrwPlugin = 1
 vim.opt.scrolloff = 7
 vim.o.cursorline = true
 
-vim.opt.spell = true
-vim.opt.spelllang = { 'en_us' }
+-- vim.opt.spell = true
+-- vim.opt.spelllang = { 'en_us' }
 
 -- vim.o.shell = 'C:\\"Program Files"\\PowerShell\\7\\pwsh.exe'
 -- vim.o.shell = '/usr/bin/zsh'
@@ -561,8 +561,8 @@ vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { d
 vim.keymap.set('n', '<leader>/', require('telescope.builtin').current_buffer_fuzzy_find, { desc = 'Fuzzy find inside current buffer' })
 
 vim.keymap.set('n', '<leader>fg', require('telescope.builtin').git_files, { desc = '[F]ind [G]it files' })
-
-vim.keymap.set('n', '<leader>ff', "<CMD>lua require'telescope-config'.project_files()<CR>", { desc = '[F]ind [F]iles in CWD' })
+vim.keymap.set('n', '<leader>ff', "<cmd>lua require('telescope.builtin').find_files({ hidden = true })<cr>", { desc = '[F]ind [F]iles in CWD' })
+-- vim.keymap.set('n', '<leader>ff', "<CMD>lua require'telescope-config'.project_files()<CR>", { desc = '[F]ind [F]iles in CWD' })
 vim.keymap.set(
   'n',
   '<leader>fF',
@@ -733,10 +733,12 @@ local servers = {
   -- gopls = {},
   -- pyright = {},
   -- rust_analyzer = {},
-  tsserver = {},
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
+  --
+  tsserver = {},
 
   lua_ls = {
+
     Lua = {
       workspace = { checkThirdParty = false },
       telemetry = { enable = false },
@@ -747,9 +749,13 @@ local servers = {
 
   jsonls = {},
 
-  -- custom_elements_ls = {},
+  custom_elements_ls = {},
 
   tailwindcss = {},
+
+  eslint = {},
+
+  bashls = {},
 }
 
 -- Setup neovim lua configuration

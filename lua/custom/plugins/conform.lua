@@ -9,9 +9,10 @@ return {
         javascriptreact = { 'prettierd' },
         typescript = { 'prettierd' },
         typescriptreact = { 'prettierd' },
+        zsh = { 'beautysh' },
 
-        -- ['*'] = { 'codespell' },
-        -- ['_'] = { 'trim_whitespace' },
+        ['*'] = { 'codespell' },
+        ['_'] = { 'trim_whitespace' },
       },
 
       format_on_save = {

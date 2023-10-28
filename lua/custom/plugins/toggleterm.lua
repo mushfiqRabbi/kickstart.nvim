@@ -13,8 +13,11 @@ return {
       -- vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
       -- vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
       vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
-      vim.keymap.set('t', '<C-w>q', 'exit<cr>', opts)
-      vim.keymap.set('n', '<C-w>q', 'iexit<cr>', opts)
+      vim.keymap.set('t', '<C-q><C-q>', 'exit<cr>', opts)
+      vim.keymap.set('n', '<C-q><C-q>', 'iexit<cr>', opts)
+      -- vim.keymap.set('n', 'q', 'iexit<cr>', opts)
+      -- vim.keymap.set('t', '<C-w>q', 'exit<cr>', opts)
+      -- vim.keymap.set('n', '<C-w>q', 'iexit<cr>', opts)
     end
 
     -- if you only want these mappings for toggle term use term://*toggleterm#* instead
