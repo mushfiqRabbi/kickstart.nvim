@@ -92,11 +92,11 @@ vim.cmd [[
     let g:VM_mouse_mappings = 1
     ]]
 
-vim.filetype.add {
-  pattern = {
-    ['.env.*'] = 'sh',
-  },
-}
+-- vim.filetype.add {
+--   pattern = {
+--     ['.env.*'] = 'sh',
+--   },
+-- }
 
 -- vim.cmd [[
 -- augroup FormatAutogroup
@@ -247,8 +247,10 @@ require('lazy').setup({
     opts = {
       options = {
         icons_enabled = true,
-        component_separators = { left = '', right = '' },
-        section_separators = { left = '', right = '' },
+        -- component_separators = { left = '', right = '' },
+        component_separators = { left = '|', right = '|' },
+        -- section_separators = { left = '', right = '' },
+        section_separators = { left = '|', right = '|' },
         theme = 'onedark',
         -- theme = 'tokyonight',
       },
@@ -388,21 +390,22 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
 --
-local layout_config = {}
-
-if vim.fn.hostname() == 'DESKTOP-QP9KQE3' then
-  layout_config = {
-    height = 0.9,
-    width = 0.7,
-    preview_width = 0.65,
-  }
-elseif vim.fn.hostname() == 'DESKTOP-CKMOCDG' then
-  layout_config = {
-    height = 0.95,
-    width = 0.8,
-    preview_width = 0.6,
-  }
-end
+-- local layout_config = {}
+--
+--
+-- if vim.fn.hostname() == 'DESKTOP-QP9KQE3' then
+--   layout_config = {
+--     height = 0.9,
+--     width = 0.7,
+--     preview_width = 0.65,
+--   }
+-- elseif vim.fn.hostname() == 'DESKTOP-CKMOCDG' then
+--   layout_config = {
+--     height = 0.95,
+--     width = 0.8,
+--     preview_width = 0.6,
+--   }
+-- end
 
 local previewers = require 'telescope.previewers'
 local Job = require 'plenary.job'
@@ -470,7 +473,11 @@ require('telescope').setup {
       end,
     },
     layout_strategy = 'horizontal',
-    layout_config = layout_config,
+    layout_config = {
+      width = 0.9,
+      height = 0.95,
+      preview_width = 0.65,
+    },
     vimgrep_arguments = {
       'rg',
       '--color=never',
@@ -526,6 +533,17 @@ require('telescope').setup {
   pickers = {
     find_files = {
       wrap_results = true,
+      find_command = {
+        'fd',
+        '-tf',
+        '--hidden',
+        '--follow',
+        '--absolute-path',
+        '--exclude',
+        '.git',
+        '--exclude',
+        '.vscode',
+      },
     },
     oldfiles = {
       wrap_results = true,
@@ -567,14 +585,15 @@ vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { d
 vim.keymap.set('n', '<leader>/', require('telescope.builtin').current_buffer_fuzzy_find, { desc = 'Fuzzy find inside current buffer' })
 
 vim.keymap.set('n', '<leader>fg', require('telescope.builtin').git_files, { desc = '[F]ind [G]it files' })
-vim.keymap.set('n', '<leader>ff', "<cmd>lua require('telescope.builtin').find_files({ hidden = true })<cr>", { desc = '[F]ind [F]iles in CWD' })
+vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, { desc = '[F]ind [G]it files' })
+-- vim.keymap.set(
+--   'n',
+--   '<leader>ff',
+--   "<cmd>lua require('telescope.builtin').find_files({ find_command = { 'rg', '--files', '--hidden', '-g', '!.git'})<cr>",
+--   { desc = '[F]ind [F]iles in CWD' }
+-- )
 -- vim.keymap.set('n', '<leader>ff', "<CMD>lua require'telescope-config'.project_files()<CR>", { desc = '[F]ind [F]iles in CWD' })
-vim.keymap.set(
-  'n',
-  '<leader>fF',
-  "<cmd>lua require('telescope.builtin').find_files({ cwd = vim.env.HOME, follow = true, hidden = true})<cr>",
-  { desc = '[F]ind [F]iles in $HOME' }
-)
+vim.keymap.set('n', '<leader>fF', "<cmd>lua require('telescope.builtin').find_files({ cwd = vim.env.HOME })<cr>", { desc = '[F]ind [F]iles in $HOME' })
 vim.keymap.set('n', '<leader>fh', require('telescope.builtin').help_tags, { desc = '[F]ind [H]elp tags' })
 vim.keymap.set('n', '<leader>fs', require('telescope.builtin').grep_string, { desc = '[F]ind [S]tring under cursor' })
 vim.keymap.set('n', '<leader>lg', require('telescope.builtin').live_grep, { desc = '[L]ive [G]rep' })
