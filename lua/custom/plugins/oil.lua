@@ -18,6 +18,17 @@ return {
       skip_confirm_for_simple_edits = true,
       keymaps = {
         ['<C-s>'] = false,
+        ['<C-v>'] = {
+          callback = function()
+            local oil = require 'oil'
+            -- local util = require 'oil.util'
+            -- local preview_win = util.get_preview_win()
+            -- if preview_win then
+            --   vim.api.nvim_win_close(preview_win, true)
+            -- end
+            oil.select { vertical = true }
+          end,
+        },
         ['<CR>'] = {
           callback = function()
             local oil = require 'oil'

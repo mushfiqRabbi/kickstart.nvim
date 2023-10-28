@@ -371,6 +371,7 @@ vim.o.termguicolors = true
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set({ 'n', 'v' }, '<CR>', '<Nop>', { silent = true })
 vim.keymap.set({ 'n', 'v' }, '<backspace>', '<Nop>', { silent = true })
+vim.keymap.set('n', '<C-v>', '<Nop>', { silent = true })
 
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
@@ -533,17 +534,17 @@ require('telescope').setup {
   pickers = {
     find_files = {
       wrap_results = true,
-      find_command = {
-        'fd',
-        '-tf',
-        '--hidden',
-        '--follow',
-        '--absolute-path',
-        '--exclude',
-        '.git',
-        '--exclude',
-        '.vscode',
-      },
+      -- find_command = {
+      --   -- 'fd',
+      --   -- '-tf',
+      --   -- '--hidden',
+      --   -- '--follow',
+      --   -- '--absolute-path',
+      --   -- '--exclude',
+      --   -- '.git',
+      --   -- '--exclude',
+      --   -- '.vscode',
+      -- },
     },
     oldfiles = {
       wrap_results = true,
@@ -585,7 +586,12 @@ vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { d
 vim.keymap.set('n', '<leader>/', require('telescope.builtin').current_buffer_fuzzy_find, { desc = 'Fuzzy find inside current buffer' })
 
 vim.keymap.set('n', '<leader>fg', require('telescope.builtin').git_files, { desc = '[F]ind [G]it files' })
-vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, { desc = '[F]ind [G]it files' })
+vim.keymap.set(
+  'n',
+  '<leader>ff',
+  "<cmd>lua require('telescope.builtin').find_files( { find_command =  { 'fd', '-tf', '--hidden', '--follow', '--absolute-path', '--exclude', '.git', '--exclude', '.vscode' } } )<cr>",
+  { desc = '[F]ind [G]it files' }
+)
 -- vim.keymap.set(
 --   'n',
 --   '<leader>ff',
