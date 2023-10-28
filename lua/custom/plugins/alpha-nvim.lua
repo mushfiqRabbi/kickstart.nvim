@@ -7,7 +7,7 @@ return {
     local alpha = require 'alpha'
     local dashboard = require 'alpha.themes.dashboard'
     local ascii = require 'ascii'
-    dashboard.section.header.val = ascii.get_random_global()
+    dashboard.section.header.val = ascii.get_random('text', 'neovim')
 
     dashboard.section.buttons.val = {
       -- dashboard.button('e', '  New file', ':ene <BAR> startinsert <CR>'),
