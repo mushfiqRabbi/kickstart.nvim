@@ -463,6 +463,7 @@ local actions = require 'telescope.actions'
 
 require('telescope').setup {
   defaults = {
+    dynamic_preview_title = true,
     sorting_strategy = 'ascending',
     preview = {
       mime_hook = function(filepath, bufnr, opts)
@@ -608,6 +609,7 @@ require('telescope').setup {
     },
     current_buffer_fuzzy_find = {
       wrap_results = true,
+      skip_empty_lines = true,
     },
     help_tags = {
       wrap_results = true,
