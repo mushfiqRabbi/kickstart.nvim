@@ -56,6 +56,13 @@ vim.g.loaded_netrwPlugin = 1
 vim.opt.scrolloff = 7
 vim.o.cursorline = true
 
+-- vim.cmd [[
+--   let g:VM_maps = {}
+--   let g:VM_maps["Exit"]               = '<C-C>'   " quit VM
+--   let g:VM_maps['Find Under']         = ''   " replace C-n
+--   let g:VM_maps['Find Subword Under'] = ''   " replace visual C-n
+-- ]]
+
 -- vim.opt.spell = true
 -- vim.opt.spelllang = { 'en_us' }
 
@@ -450,6 +457,8 @@ require('telescope').setup {
   },
 }
 
+local trouble = require 'trouble.providers.telescope'
+
 require('telescope').setup {
   defaults = {
     preview = {
@@ -494,6 +503,7 @@ require('telescope').setup {
     },
     mappings = {
       n = {
+        -- ['<c-q>'] = trouble.open_with_trouble,
         ['<C-c>'] = require('telescope.actions').close,
         ['<C-e>'] = function(prompt_bufnr)
           local selection = require('telescope.actions.state').get_selected_entry()
@@ -523,6 +533,7 @@ require('telescope').setup {
         end,
       },
       i = {
+        -- ['<c-q>'] = trouble.open_with_trouble,
         ['<C-u>'] = false,
         ['<C-d>'] = false,
         ['<C-e>'] = function(prompt_bufnr)
