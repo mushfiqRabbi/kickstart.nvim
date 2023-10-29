@@ -1,3 +1,3 @@
 return {
-  -- 'andersevenrud/nvim_context_vt',
+  'andersevenrud/nvim_context_vt',
 }
