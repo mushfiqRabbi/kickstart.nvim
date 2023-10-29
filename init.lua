@@ -463,6 +463,7 @@ local actions = require 'telescope.actions'
 
 require('telescope').setup {
   defaults = {
+    sorting_strategy = 'ascending',
     preview = {
       mime_hook = function(filepath, bufnr, opts)
         local is_image = function(filepath)
@@ -492,6 +493,7 @@ require('telescope').setup {
       width = 0.9,
       height = 0.95,
       preview_width = 0.65,
+      prompt_position = 'top',
     },
     vimgrep_arguments = {
       'rg',
@@ -567,16 +569,32 @@ require('telescope').setup {
     find_files = {
       wrap_results = true,
       find_command = {
-        'fd',
-        '--type',
-        'f',
-        '--hidden',
+        'rg',
+        '--files',
         '--follow',
-        '--absolute-path',
-        '--exclude',
-        '.git',
-        '--exclude',
-        '.vscode',
+        '--hidden',
+        '-g',
+        '!.git',
+        '-g',
+        '!.vscode',
+        --   -- 'rg',
+        --   -- '--files',
+        --   -- '--hidden',
+        --   -- '--follow',
+        --   -- '--glob',
+        --   -- '!.git',
+        --   -- '--glob',
+        --   -- '!.vscode',
+        --   -- 'fd',
+        --   -- '--type',
+        --   -- 'f',
+        --   -- '--hidden',
+        --   -- '--follow',
+        --   -- '--absolute-path',
+        --   -- '--exclude',
+        --   -- '.git',
+        --   -- '--exclude',
+        --   -- '.vscode',
       },
     },
     oldfiles = {
@@ -614,12 +632,20 @@ pcall(require('telescope').load_extension, 'ascii')
 pcall(require('telescope').load_extension 'undo')
 
 -- See `:help telescope.builtin`
-vim.keymap.set('n', '<leader>fo', require('telescope.builtin').oldfiles, { desc = '[F]ind recently [O]pened files' })
-vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[] Find  buffers' })
-vim.keymap.set('n', '<leader>/', require('telescope.builtin').current_buffer_fuzzy_find, { desc = 'Fuzzy find inside current buffer' })
-
-vim.keymap.set('n', '<leader>fg', require('telescope.builtin').git_files, { desc = '[F]ind [G]it files' })
-vim.keymap.set('n', '<leader>ff', "<cmd>lua require('telescope.builtin').find_files(  )<cr>", { desc = '[F]ind [G]it files' })
+vim.keymap.set('n', '<leader>fo', "<cmd>lua require('telescope.builtin').oldfiles()<cr>", { desc = '[F]ind recently [O]pened files' })
+vim.keymap.set('n', '<leader><space>', "<cmd>lua require('telescope.builtin').buffers()<cr>", { desc = '[] Find  buffers' })
+vim.keymap.set('n', '<leader>/', "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>", { desc = 'Fuzzy find inside current buffer' })
+vim.keymap.set('n', '<leader>ff', "<cmd>lua require('telescope.builtin').find_files()<cr>", { desc = '[F]ind [G]it files' })
+vim.keymap.set('n', '<leader>gs', "<cmd>lua require('telescope.builtin').git_status()<cr>", { desc = '[G]it [S]tatus' })
+vim.keymap.set('n', '<leader>fF', "<cmd>lua require('telescope.builtin').find_files({ cwd = vim.env.HOME })<cr>", { desc = '[F]ind [G]it files' })
+vim.keymap.set('n', '<leader>fh', "<cmd>lua require('telescope.builtin').help_tags()<cr>", { desc = '[F]ind [H]elp tags' })
+vim.keymap.set('n', '<leader>fw', "<cmd>lua require('telescope.builtin').grep_string()<cr>", { desc = '[F]ind [W]ord under cursor' })
+vim.keymap.set('n', '<leader>lg', "<cmd>lua require('telescope.builtin').live_grep()<cr>", { desc = '[L]ive [G]rep' })
+vim.keymap.set('n', '<leader>fd', "<cmd>lua require('telescope.builtin').diagnostics()<cr>", { desc = '[F]ind [D]iagnostics' })
+vim.keymap.set('n', '<leader>fy', "<cmd>lua require('telescope').extensions.yank_history.yank_history()<cr>", { desc = '[F]ind [Y]ank from history' })
+vim.keymap.set('n', '<leader>fp', "<cmd>lua require('telescope').extensions.projects.projects()<cr>", { desc = '[F]ind [P]roject' })
+vim.keymap.set('n', '<leader>fu', "<cmd>lua require('telescope').extensions.undo.undo()<cr>", { desc = '[F]ind [U]ndo from history' })
+-- vim.keymap.set('n', '<leader>fg', "<cmd>lua require('telescope.builtin').git_files()<cr>", { desc = '[F]ind [G]it files' })
 -- vim.keymap.set(
 --   'n',
 --   '<leader>ff',
@@ -627,20 +653,14 @@ vim.keymap.set('n', '<leader>ff', "<cmd>lua require('telescope.builtin').find_fi
 --   { desc = '[F]ind [F]iles in CWD' }
 -- )
 -- vim.keymap.set('n', '<leader>ff', "<CMD>lua require'telescope-config'.project_files()<CR>", { desc = '[F]ind [F]iles in CWD' })
-vim.keymap.set(
-  'n',
-  '<leader>fd',
-  "<cmd>lua require('telescope.builtin').find_files( { cwd = vim.env.HOME, find_command = { 'fd', '-td', '-tl', '-uu' }, previewer = false })<cr>",
-  { desc = '[F]ind [D]irectory' }
-)
-vim.keymap.set('n', '<leader>fh', require('telescope.builtin').help_tags, { desc = '[F]ind [H]elp tags' })
-vim.keymap.set('n', '<leader>fs', require('telescope.builtin').grep_string, { desc = '[F]ind [S]tring under cursor' })
-vim.keymap.set('n', '<leader>lg', require('telescope.builtin').live_grep, { desc = '[L]ive [G]rep' })
-vim.keymap.set('n', '<leader>fe', require('telescope.builtin').diagnostics, { desc = '[F]ind [D]iagnostics' })
-vim.keymap.set('n', '<leader>rs', require('telescope.builtin').resume, { desc = '[R]esume [S]earch' })
-vim.keymap.set('n', '<leader>fy', ':Telescope yank_history<CR>', { desc = '[F]ind [Y]ank from history' })
-vim.keymap.set('n', '<leader>fp', ':Telescope projects<CR>', { desc = '[F]ind [P]roject' })
-vim.keymap.set('n', '<leader>fu', '<cmd>Telescope undo<cr>', { desc = '[F]ind [U]ndo from history' })
+-- vim.keymap.set(
+--   'n',
+--   '<leader>fd',
+--   "<cmd>lua require('telescope.builtin').find_files( { cwd = vim.env.HOME, find_command = { 'fd', '-td', '-tl', '-uu' }, previewer = false })<cr>",
+--   { desc = '[F]ind [D]irectory' }
+-- )
+-- vim.keymap.set('n', '<leader>rs', "<cmd>lua require('telescope.builtin').resume()<cr>", { desc = '[R]esume [S]earch' })
+-- vim.keymap.set('n', '<leader>fc', "<cmd>lua require('telescope.builtin').commands()<cr>", { desc = '[F]ind [U]ndo from history' })
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
