@@ -645,7 +645,7 @@ vim.keymap.set('n', '<leader>fu', '<cmd>Telescope undo<cr>', { desc = '[F]ind [U
 vim.defer_fn(function()
   require('nvim-treesitter.configs').setup {
     -- Add languages to be installed here that you want installed for treesitter
-    ensure_installed = { 'lua', 'vimdoc', 'vim', 'javascript', 'typescript', 'tsx', 'json', 'regex' },
+    ensure_installed = { 'lua', 'vimdoc', 'vim', 'javascript', 'typescript', 'tsx', 'json' },
 
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
     auto_install = false,
@@ -811,8 +811,6 @@ local servers = {
   jsonls = {},
 
   tailwindcss = {},
-
-  eslint = {},
 }
 
 -- Setup neovim lua configuration
