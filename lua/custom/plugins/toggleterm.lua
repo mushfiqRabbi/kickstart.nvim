@@ -37,7 +37,7 @@ return {
       end,
       persist_mode = false,
       persist_size = false,
-      open_mapping = [[<c-\>]],
+      open_mapping = [[<c-t>]],
       -- on_create = function()
       --   print('on_create', term.bufnr)
       -- end,
