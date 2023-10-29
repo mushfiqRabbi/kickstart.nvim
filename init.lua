@@ -505,6 +505,8 @@ require('telescope').setup {
     },
     mappings = {
       n = {
+        -- ['<C-q>'] = false,
+        ['<C-q>'] = trouble.open_selected_with_trouble,
         ['<C-c>'] = require('telescope.actions').close,
         ['<C-e>'] = function(prompt_bufnr)
           local selection = require('telescope.actions.state').get_selected_entry()
@@ -534,7 +536,8 @@ require('telescope').setup {
         end,
       },
       i = {
-        -- ['<c-q>'] = trouble.open_with_trouble,
+        -- ['<C-q>'] = false,
+        ['<C-q>'] = trouble.open_selected_with_trouble,
         ['<C-u>'] = false,
         ['<C-d>'] = false,
         ['<C-e>'] = function(prompt_bufnr)
@@ -709,10 +712,15 @@ vim.defer_fn(function()
 end, 0)
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '<leader>en', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
-vim.keymap.set('n', '<leader>ep', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
-vim.keymap.set('n', '<leader>ee', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
-vim.keymap.set('n', '<leader>el', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+vim.keymap.set('n', '<leader>dn', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
+vim.keymap.set('n', '<leader>dp', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
+vim.keymap.set('n', '<leader>dd', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
+vim.keymap.set('n', '<leader>dl', function()
+  require('trouble').toggle 'document_diagnostics'
+end, { desc = 'Open diagnostics list' })
+vim.keymap.set('n', '<leader>ql', function()
+  require('trouble').toggle 'quickfix'
+end, { desc = 'Open quickfix list' })
 
 -- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.
