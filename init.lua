@@ -459,6 +459,8 @@ require('telescope').setup {
 
 local trouble = require 'trouble.providers.telescope'
 
+local actions = require 'telescope.actions'
+
 require('telescope').setup {
   defaults = {
     preview = {
@@ -503,7 +505,6 @@ require('telescope').setup {
     },
     mappings = {
       n = {
-        -- ['<c-q>'] = trouble.open_with_trouble,
         ['<C-c>'] = require('telescope.actions').close,
         ['<C-e>'] = function(prompt_bufnr)
           local selection = require('telescope.actions.state').get_selected_entry()
@@ -809,13 +810,9 @@ local servers = {
 
   jsonls = {},
 
-  custom_elements_ls = {},
-
   tailwindcss = {},
 
   eslint = {},
-
-  bashls = {},
 }
 
 -- Setup neovim lua configuration
