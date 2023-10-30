@@ -37,7 +37,7 @@ return {
       end,
       persist_mode = false,
       persist_size = false,
-      open_mapping = [[<c-t>]],
+      open_mapping = [[<c-\>]],
       on_create = function()
         -- print('on_create', term.bufnr)
         term_count = term_count + 1
