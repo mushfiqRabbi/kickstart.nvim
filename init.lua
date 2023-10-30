@@ -963,7 +963,7 @@ cmp.setup {
     ['<down>'] = cmp.mapping {
       i = function(fallback)
         if cmp.visible() then
-          cmp.select_next_item()
+          cmp.select_next_item { behavior = cmp.SelectBehavior.Select }
         else
           fallback()
         end
@@ -971,7 +971,7 @@ cmp.setup {
       -- s = cmp.mapping.confirm { select = true },
       c = function(fallback)
         if cmp.visible() then
-          cmp.select_next_item()
+          cmp.select_next_item { behavior = cmp.SelectBehavior.Select }
         else
           fallback()
         end
@@ -981,7 +981,7 @@ cmp.setup {
     ['<up>'] = cmp.mapping {
       i = function(fallback)
         if cmp.visible() then
-          cmp.select_prev_item()
+          cmp.select_prev_item { behavior = cmp.SelectBehavior.Select }
         else
           fallback()
         end
@@ -989,7 +989,7 @@ cmp.setup {
       -- s = cmp.mapping.confirm { select = true },
       c = function(fallback)
         if cmp.visible() then
-          cmp.select_prev_item()
+          cmp.select_prev_item { behavior = cmp.SelectBehavior.Select }
         else
           fallback()
         end
