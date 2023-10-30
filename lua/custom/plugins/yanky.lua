@@ -1,6 +1,7 @@
 return {
   'gbprod/yanky.nvim',
   config = function()
+    local mapping = require 'yanky.telescope.mapping'
     require('yanky').setup {
       -- your configuration comes here
       -- or leave it empty to use the default settings
@@ -8,6 +9,17 @@ return {
       picker = {
         select = {
           action = require('yanky.picker').actions.put 'p', -- put after cursor,
+        },
+        telescope = {
+          mappings = {
+            default = mapping.put 'p',
+            -- i = {
+            --   ['<CR>'] = require('yanky.picker').actions.put 'p',
+            -- },
+            -- n = {
+            --   ['<CR>'] = require('yanky.picker').actions.put 'p',
+            -- },
+          },
         },
       },
     }
