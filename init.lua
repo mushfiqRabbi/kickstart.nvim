@@ -210,30 +210,30 @@ require('lazy').setup({
         topdelete = { text = '‾' },
         changedelete = { text = '~' },
       },
-      on_attach = function(bufnr)
-        vim.keymap.set('n', '<leader>hp', require('gitsigns').preview_hunk, { buffer = bufnr, desc = 'Preview git hunk' })
+      -- on_attach = function(bufnr)
+      -- vim.keymap.set('n', '<leader>hp', require('gitsigns').preview_hunk, { buffer = bufnr, desc = 'Preview git hunk' })
 
-        -- don't override the built-in and fugitive keymaps
-        local gs = package.loaded.gitsigns
-        vim.keymap.set({ 'n', 'v' }, ']c', function()
-          if vim.wo.diff then
-            return ']c'
-          end
-          vim.schedule(function()
-            gs.next_hunk()
-          end)
-          return '<Ignore>'
-        end, { expr = true, buffer = bufnr, desc = 'Jump to next hunk' })
-        vim.keymap.set({ 'n', 'v' }, '[c', function()
-          if vim.wo.diff then
-            return '[c'
-          end
-          vim.schedule(function()
-            gs.prev_hunk()
-          end)
-          return '<Ignore>'
-        end, { expr = true, buffer = bufnr, desc = 'Jump to previous hunk' })
-      end,
+      -- don't override the built-in and fugitive keymaps
+      -- local gs = package.loaded.gitsigns
+      -- vim.keymap.set({ 'n', 'v' }, ']c', function()
+      --   if vim.wo.diff then
+      --     return ']c'
+      --   end
+      --   vim.schedule(function()
+      --     gs.next_hunk()
+      --   end)
+      --   return '<Ignore>'
+      -- end, { expr = true, buffer = bufnr, desc = 'Jump to next hunk' })
+      -- vim.keymap.set({ 'n', 'v' }, '[c', function()
+      --   if vim.wo.diff then
+      --     return '[c'
+      --   end
+      --   vim.schedule(function()
+      --     gs.prev_hunk()
+      --   end)
+      --   return '<Ignore>'
+      -- end, { expr = true, buffer = bufnr, desc = 'Jump to previous hunk' })
+      -- end,
     },
   },
 
@@ -463,6 +463,8 @@ local actions = require 'telescope.actions'
 
 require('telescope').setup {
   defaults = {
+    wrap_results = true,
+    skip_empty_lines = true,
     dynamic_preview_title = true,
     sorting_strategy = 'ascending',
     preview = {
@@ -568,7 +570,7 @@ require('telescope').setup {
   },
   pickers = {
     find_files = {
-      wrap_results = true,
+      -- wrap_results = true,
       find_command = {
         'rg',
         '--files',
@@ -598,31 +600,31 @@ require('telescope').setup {
         --   -- '.vscode',
       },
     },
-    oldfiles = {
-      wrap_results = true,
-    },
-    buffers = {
-      wrap_results = true,
-    },
-    git_files = {
-      wrap_results = true,
-    },
-    current_buffer_fuzzy_find = {
-      wrap_results = true,
-      skip_empty_lines = true,
-    },
-    help_tags = {
-      wrap_results = true,
-    },
-    grep_string = {
-      wrap_results = true,
-    },
-    live_grep = {
-      wrap_results = true,
-    },
-    diagnostics = {
-      wrap_results = true,
-    },
+    -- oldfiles = {
+    --   -- wrap_results = true,
+    -- },
+    -- buffers = {
+    --   -- wrap_results = true,
+    -- },
+    -- git_files = {
+    --   -- wrap_results = true,
+    -- },
+    -- current_buffer_fuzzy_find = {
+    --   -- wrap_results = true,
+    --   -- skip_empty_lines = true,
+    -- },
+    -- help_tags = {
+    --   -- wrap_results = true,
+    -- },
+    -- grep_string = {
+    --   -- wrap_results = true,
+    -- },
+    -- live_grep = {
+    --   -- wrap_results = true,
+    -- },
+    -- diagnostics = {
+    --   -- wrap_results = true,
+    -- },
   },
 }
 
@@ -637,18 +639,18 @@ pcall(require('telescope').load_extension 'undo')
 vim.keymap.set('n', '<leader>fo', "<cmd>lua require('telescope.builtin').oldfiles()<cr>", { desc = '[F]ind recently [O]pened files' })
 vim.keymap.set('n', '<leader><space>', "<cmd>lua require('telescope.builtin').buffers()<cr>", { desc = '[] Find  buffers' })
 vim.keymap.set('n', '<leader>/', "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>", { desc = 'Fuzzy find inside current buffer' })
-vim.keymap.set('n', '<leader>ff', "<cmd>lua require('telescope.builtin').find_files()<cr>", { desc = '[F]ind [G]it files' })
-vim.keymap.set('n', '<leader>gs', "<cmd>lua require('telescope.builtin').git_status()<cr>", { desc = '[G]it [S]tatus' })
-vim.keymap.set('n', '<leader>fF', "<cmd>lua require('telescope.builtin').find_files({ cwd = vim.env.HOME })<cr>", { desc = '[F]ind [G]it files' })
-vim.keymap.set('n', '<leader>fh', "<cmd>lua require('telescope.builtin').help_tags()<cr>", { desc = '[F]ind [H]elp tags' })
-vim.keymap.set('n', '<leader>fw', "<cmd>lua require('telescope.builtin').grep_string()<cr>", { desc = '[F]ind [W]ord under cursor' })
+vim.keymap.set('n', '<leader>ff', "<cmd>lua require('telescope.builtin').find_files()<cr>", { desc = '[F]ind [F]iles' })
+-- vim.keymap.set('n', '<leader>gs', "<cmd>lua require('telescope.builtin').git_status()<cr>", { desc = '[G]it [S]tatus' })
+vim.keymap.set('n', '<leader>fF', "<cmd>lua require('telescope.builtin').find_files({ cwd = vim.env.HOME })<cr>", { desc = '[F]ind [F]iles in $HOME' })
+-- vim.keymap.set('n', '<leader>fh', "<cmd>lua require('telescope.builtin').help_tags()<cr>", { desc = '[F]ind [H]elp tags' })
+-- vim.keymap.set('n', '<leader>fw', "<cmd>lua require('telescope.builtin').grep_string()<cr>", { desc = '[F]ind [W]ord under cursor' })
 vim.keymap.set('n', '<leader>lg', "<cmd>lua require('telescope.builtin').live_grep()<cr>", { desc = '[L]ive [G]rep' })
 vim.keymap.set('n', '<leader>fd', "<cmd>lua require('telescope.builtin').diagnostics()<cr>", { desc = '[F]ind [D]iagnostics' })
 vim.keymap.set('n', '<leader>fy', "<cmd>lua require('telescope').extensions.yank_history.yank_history()<cr>", { desc = '[F]ind [Y]ank from history' })
 vim.keymap.set('n', '<leader>fp', "<cmd>lua require('telescope').extensions.projects.projects()<cr>", { desc = '[F]ind [P]roject' })
 vim.keymap.set('n', '<leader>fu', "<cmd>lua require('telescope').extensions.undo.undo()<cr>", { desc = '[F]ind [U]ndo from history' })
-vim.keymap.set('n', '<leader>S', '<cmd>Spectre<cr>', { desc = '[S]earch and replace' })
-vim.keymap.set('n', '<leader>tc', '<cmd>TSContextToggle<cr>', { desc = '[T]oggle [C]ontext' })
+-- vim.keymap.set('n', '<leader>S', '<cmd>Spectre<cr>', { desc = '[S]earch and replace' })
+-- vim.keymap.set('n', '<leader>tc', '<cmd>TSContextToggle<cr>', { desc = '[T]oggle [C]ontext' })
 
 -- vim.keymap.set('n', '<leader>fg', "<cmd>lua require('telescope.builtin').git_files()<cr>", { desc = '[F]ind [G]it files' })
 -- vim.keymap.set(
@@ -685,8 +687,8 @@ vim.defer_fn(function()
       keymaps = {
         init_selection = '<c-space>',
         node_incremental = '<c-space>',
-        scope_incremental = '<c-s>',
-        node_decremental = '<M-space>',
+        -- scope_incremental = '<c-s>',
+        -- node_decremental = '<M-space>',
       },
     },
     textobjects = {
@@ -695,43 +697,43 @@ vim.defer_fn(function()
         lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
         keymaps = {
           -- You can use the capture groups defined in textobjects.scm
-          ['aa'] = '@parameter.outer',
-          ['ia'] = '@parameter.inner',
+          -- ['aa'] = '@parameter.outer',
+          -- ['ia'] = '@parameter.inner',
           ['af'] = '@function.outer',
           ['if'] = '@function.inner',
           ['ac'] = '@class.outer',
           ['ic'] = '@class.inner',
         },
       },
-      move = {
-        enable = true,
-        set_jumps = true, -- whether to set jumps in the jumplist
-        goto_next_start = {
-          [']m'] = '@function.outer',
-          [']]'] = '@class.outer',
-        },
-        goto_next_end = {
-          [']M'] = '@function.outer',
-          [']['] = '@class.outer',
-        },
-        goto_previous_start = {
-          ['[m'] = '@function.outer',
-          ['[['] = '@class.outer',
-        },
-        goto_previous_end = {
-          ['[M'] = '@function.outer',
-          ['[]'] = '@class.outer',
-        },
-      },
-      swap = {
-        enable = true,
-        swap_next = {
-          ['<leader>a'] = '@parameter.inner',
-        },
-        swap_previous = {
-          ['<leader>A'] = '@parameter.inner',
-        },
-      },
+      -- move = {
+      --   enable = true,
+      --   set_jumps = true, -- whether to set jumps in the jumplist
+      --   goto_next_start = {
+      --     [']m'] = '@function.outer',
+      --     [']]'] = '@class.outer',
+      --   },
+      --   goto_next_end = {
+      --     [']M'] = '@function.outer',
+      --     [']['] = '@class.outer',
+      --   },
+      --   goto_previous_start = {
+      --     ['[m'] = '@function.outer',
+      --     ['[['] = '@class.outer',
+      --   },
+      --   goto_previous_end = {
+      --     ['[M'] = '@function.outer',
+      --     ['[]'] = '@class.outer',
+      --   },
+      -- },
+      -- swap = {
+      --   enable = true,
+      --   swap_next = {
+      --     ['<leader>a'] = '@parameter.inner',
+      --   },
+      --   swap_previous = {
+      --     ['<leader>A'] = '@parameter.inner',
+      --   },
+      -- },
     },
   }
 end, 0)
@@ -743,9 +745,9 @@ vim.keymap.set('n', '<leader>dd', vim.diagnostic.open_float, { desc = 'Open floa
 vim.keymap.set('n', '<leader>dl', function()
   require('trouble').toggle 'document_diagnostics'
 end, { desc = 'Open diagnostics list' })
-vim.keymap.set('n', '<leader>ql', function()
-  require('trouble').toggle 'quickfix'
-end, { desc = 'Open quickfix list' })
+-- vim.keymap.set('n', '<leader>ql', function()
+--   require('trouble').toggle 'quickfix'
+-- end, { desc = 'Open quickfix list' })
 
 -- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.
@@ -766,14 +768,14 @@ local on_attach = function(client, bufnr)
 
   -- nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
   -- nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
-  nmap('<leader>ca', ':CodeActionMenu<CR>', '[C]ode [A]ction')
+  -- nmap('<leader>ca', ':CodeActionMenu<CR>', '[C]ode [A]ction')
 
   nmap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
   nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
-  nmap('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
-  nmap('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
-  nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
-  nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+  -- nmap('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
+  -- nmap('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
+  -- nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
+  -- nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
   -- See `:help K` for why this keymap
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
@@ -781,11 +783,11 @@ local on_attach = function(client, bufnr)
 
   -- Lesser used LSP functionality
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-  nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
-  nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
-  nmap('<leader>wl', function()
-    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  end, '[W]orkspace [L]ist Folders')
+  -- nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
+  -- nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
+  -- nmap('<leader>wl', function()
+  -- print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+  -- end, '[W]orkspace [L]ist Folders')
 
   -- Create a command `:Format` local to the LSP buffer
   -- vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
@@ -1016,7 +1018,7 @@ for type, icon in pairs(signs) do
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
-vim.keymap.set('n', '<leader>rll', '<cmd>LspRestart<CR>', { noremap = true, desc = '[R]estart [L]SP server' })
+-- vim.keymap.set('n', '<leader>rll', '<cmd>LspRestart<CR>', { noremap = true, desc = '[R]estart [L]SP server' })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
