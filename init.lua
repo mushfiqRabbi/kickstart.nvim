@@ -379,6 +379,7 @@ vim.o.termguicolors = true
 -- See `:help vim.keymap.set()`
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set({ 'n', 'v' }, '<CR>', '<Nop>', { silent = true })
+-- vim.keymap.set({ 'n', 'v' }, '<CR>', ':', { noremap = true, silent = true })
 vim.keymap.set({ 'n', 'v' }, '<backspace>', '<Nop>', { silent = true })
 vim.keymap.set('n', '<C-v>', '<Nop>', { silent = true })
 -- vim.keymap.set({ 'n', 'v', 'i' }, '<C-t>', '<Nop>', { silent = true })
@@ -922,24 +923,29 @@ cmp.setup {
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
     },
-    -- ['<Tab>'] = cmp.mapping(function(fallback)
-    --   if cmp.visible() then
-    --     cmp.select_next_item()
-    --   elseif luasnip.expand_or_locally_jumpable() then
-    --     luasnip.expand_or_jump()
-    --   else
-    --     fallback()
-    --   end
-    -- end, { 'i', 's' }),
-    -- ['<S-Tab>'] = cmp.mapping(function(fallback)
-    --   if cmp.visible() then
-    --     cmp.select_prev_item()
-    --   elseif luasnip.locally_jumpable(-1) then
-    --     luasnip.jump(-1)
-    --   else
-    --     fallback()
-    --   end
-    -- end, { 'i', 's' }),
+    ['<Tab>'] = cmp.mapping(function(fallback)
+      -- if cmp.visible() then
+      --   cmp.select_next_item()
+      -- elseif luasnip.expand_or_locally_jumpable() then
+      --   luasnip.expand_or_jump()
+      if not cmp.visible() and luasnip.expand_or_locally_jumpable() then
+        luasnip.expand_or_jump()
+      else
+        fallback()
+      end
+    end, { 'i', 's' }),
+    ['<S-Tab>'] = cmp.mapping(function(fallback)
+      -- if cmp.visible() then
+      --   cmp.select_prev_item()
+      -- elseif luasnip.locally_jumpable(-1) then
+      --   luasnip.jump(-1)
+
+      if not cmp.visible() and luasnip.locally_jumpable(-1) then
+        luasnip.jump(-1)
+      else
+        fallback()
+      end
+    end, { 'i', 's' }),
   },
   sources = cmp.config.sources {
     { name = 'nvim_lsp' },
