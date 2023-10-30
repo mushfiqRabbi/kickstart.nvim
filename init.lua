@@ -643,7 +643,7 @@ vim.keymap.set('n', '<leader>/', "<cmd>lua require('telescope.builtin').current_
 vim.keymap.set('n', '<leader>ff', "<cmd>lua require('telescope.builtin').find_files()<cr>", { desc = '[F]ind [F]iles' })
 -- vim.keymap.set('n', '<leader>gs', "<cmd>lua require('telescope.builtin').git_status()<cr>", { desc = '[G]it [S]tatus' })
 vim.keymap.set('n', '<leader>fF', "<cmd>lua require('telescope.builtin').find_files({ cwd = vim.env.HOME })<cr>", { desc = '[F]ind [F]iles in $HOME' })
--- vim.keymap.set('n', '<leader>fh', "<cmd>lua require('telescope.builtin').help_tags()<cr>", { desc = '[F]ind [H]elp tags' })
+vim.keymap.set('n', '<leader>fh', "<cmd>lua require('telescope.builtin').help_tags()<cr>", { desc = '[F]ind [H]elp tags' })
 -- vim.keymap.set('n', '<leader>fw', "<cmd>lua require('telescope.builtin').grep_string()<cr>", { desc = '[F]ind [W]ord under cursor' })
 vim.keymap.set('n', '<leader>lg', "<cmd>lua require('telescope.builtin').live_grep()<cr>", { desc = '[L]ive [G]rep' })
 vim.keymap.set('n', '<leader>fd', "<cmd>lua require('telescope.builtin').diagnostics()<cr>", { desc = '[F]ind [D]iagnostics' })
