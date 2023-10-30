@@ -919,9 +919,22 @@ cmp.setup {
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete {},
-    ['<CR>'] = cmp.mapping.confirm {
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
+    ['<CR>'] = cmp.mapping {
+      i = function(fallback)
+        if cmp.visible() then
+          cmp.confirm { behavior = cmp.ConfirmBehavior.Replace, select = true }
+        else
+          fallback()
+        end
+      end,
+      -- s = cmp.mapping.confirm { select = true },
+      c = function(fallback)
+        if cmp.visible() then
+          cmp.confirm { behavior = cmp.ConfirmBehavior.Replace, select = true }
+        else
+          fallback()
+        end
+      end,
     },
     ['<Tab>'] = cmp.mapping(function(fallback)
       -- if cmp.visible() then
@@ -946,6 +959,42 @@ cmp.setup {
         fallback()
       end
     end, { 'i', 's' }),
+
+    ['<down>'] = cmp.mapping {
+      i = function(fallback)
+        if cmp.visible() then
+          cmp.select_next_item()
+        else
+          fallback()
+        end
+      end,
+      -- s = cmp.mapping.confirm { select = true },
+      c = function(fallback)
+        if cmp.visible() then
+          cmp.select_next_item()
+        else
+          fallback()
+        end
+      end,
+    },
+
+    ['<up>'] = cmp.mapping {
+      i = function(fallback)
+        if cmp.visible() then
+          cmp.select_prev_item()
+        else
+          fallback()
+        end
+      end,
+      -- s = cmp.mapping.confirm { select = true },
+      c = function(fallback)
+        if cmp.visible() then
+          cmp.select_prev_item()
+        else
+          fallback()
+        end
+      end,
+    },
   },
   sources = cmp.config.sources {
     { name = 'nvim_lsp' },
@@ -983,7 +1032,7 @@ cmp.setup.cmdline({ '/', '?' }, {
 })
 cmp.setup.cmdline(':', {
   completion = {
-    completeopt = 'menu,menuone,noinsert,noselect',
+    completeopt = 'menu,menuone,noinsert',
   },
   mapping = cmp.mapping.preset.cmdline {},
   sources = cmp.config.sources({
