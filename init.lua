@@ -1,5 +1,7 @@
 --[[
 
+this is a test
+
 =====================================================================
 ==================== READ THIS BEFORE CONTINUING ====================
 ====================================================================
@@ -52,9 +54,10 @@ vim.g.loaded_netrwPlugin = 1
 -- vim.opt.shiftwidth = 2
 -- vim.opt.expandtab = true
 -- vim.g['rooter_cd_cmd'] = 'lcd'
--- vim.g['rooter_change_directory_for_non_project_files'] = 'current'
 vim.opt.scrolloff = 7
 vim.o.cursorline = true
+
+vim.g['rooter_change_directory_for_non_project_files'] = 'current'
 
 -- vim.cmd [[
 --   let g:VM_maps = {}
@@ -93,9 +96,9 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'CursorHoldI', 'FocusGai
 })
 
 vim.cmd [[
-    " let g:VM_maps = {}
-    " let g:VM_maps['Find Under'] = '<C-m>'
-    " let g:VM_maps['Find Subword Under'] = '<C-m>'
+    let g:VM_maps = {}
+    let g:VM_maps['Find Under'] = '<leader>m'
+    let g:VM_maps['Find Subword Under'] = '<leader>m'
     let g:VM_mouse_mappings = 1
     ]]
 
@@ -165,7 +168,7 @@ require('lazy').setup({
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
+      -- { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
 
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
@@ -633,8 +636,9 @@ require('telescope').setup {
 pcall(require('telescope').load_extension, 'fzf')
 pcall(require('telescope').load_extension, 'yank_history')
 pcall(require('telescope').load_extension, 'projects')
-pcall(require('telescope').load_extension, 'ascii')
+-- pcall(require('telescope').load_extension, 'ascii')
 pcall(require('telescope').load_extension 'undo')
+-- pcall(require('telescope').load_extension 'neoclip')
 
 -- See `:help telescope.builtin`
 vim.keymap.set('n', '<leader>fo', "<cmd>lua require('telescope.builtin').oldfiles()<cr>", { desc = '[F]ind recently [O]pened files' })
@@ -643,7 +647,7 @@ vim.keymap.set('n', '<leader>/', "<cmd>lua require('telescope.builtin').current_
 vim.keymap.set('n', '<leader>ff', "<cmd>lua require('telescope.builtin').find_files()<cr>", { desc = '[F]ind [F]iles' })
 -- vim.keymap.set('n', '<leader>gs', "<cmd>lua require('telescope.builtin').git_status()<cr>", { desc = '[G]it [S]tatus' })
 vim.keymap.set('n', '<leader>fF', "<cmd>lua require('telescope.builtin').find_files({ cwd = vim.env.HOME })<cr>", { desc = '[F]ind [F]iles in $HOME' })
-vim.keymap.set('n', '<leader>fh', "<cmd>lua require('telescope.builtin').help_tags()<cr>", { desc = '[F]ind [H]elp tags' })
+-- vim.keymap.set('n', '<leader>fh', "<cmd>lua require('telescope.builtin').help_tags()<cr>", { desc = '[F]ind [H]elp tags' })
 -- vim.keymap.set('n', '<leader>fw', "<cmd>lua require('telescope.builtin').grep_string()<cr>", { desc = '[F]ind [W]ord under cursor' })
 vim.keymap.set('n', '<leader>lg', "<cmd>lua require('telescope.builtin').live_grep()<cr>", { desc = '[L]ive [G]rep' })
 vim.keymap.set('n', '<leader>fd', "<cmd>lua require('telescope.builtin').diagnostics()<cr>", { desc = '[F]ind [D]iagnostics' })
