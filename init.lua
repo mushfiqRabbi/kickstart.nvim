@@ -66,8 +66,8 @@ vim.g['rooter_change_directory_for_non_project_files'] = 'current'
 --   let g:VM_maps['Find Subword Under'] = ''   " replace visual C-n
 -- ]]
 
--- vim.opt.spell = true
--- vim.opt.spelllang = { 'en_us' }
+vim.opt.spell = true
+vim.opt.spelllang = { 'en_us' }
 
 -- vim.o.shell = 'C:\\"Program Files"\\PowerShell\\7\\pwsh.exe'
 -- vim.o.shell = '/usr/bin/zsh'
@@ -150,8 +150,8 @@ require('lazy').setup({
   -- NOTE: First, some plugins that don't require any configuration
 
   -- Git related plugins
-  'tpope/vim-fugitive',
-  'tpope/vim-rhubarb',
+  -- 'tpope/vim-fugitive',
+  -- 'tpope/vim-rhubarb',
 
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
@@ -744,9 +744,9 @@ vim.defer_fn(function()
 end, 0)
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '<leader>dn', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
-vim.keymap.set('n', '<leader>dp', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
-vim.keymap.set('n', '<leader>dd', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
+vim.keymap.set('n', '<leader>dn', vim.diagnostic.goto_next, { desc = 'Go to previous diagnostic message' })
+vim.keymap.set('n', '<leader>dp', vim.diagnostic.goto_prev, { desc = 'Go to next diagnostic message' })
+vim.keymap.set('n', '<leader>df', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>dl', function()
   require('trouble').toggle 'document_diagnostics'
 end, { desc = 'Open diagnostics list' })
@@ -1004,24 +1004,24 @@ cmp.setup {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
     { name = 'buffer' },
-    { name = 'codeium' },
-    -- { name = 'path' },
-    -- {
-    --   name = 'spell',
-    --   option = {
-    --     keep_all_entries = false,
-    --     enable_in_context = function()
-    --       return true
-    --     end,
-    --   },
-    -- },
-    -- { name = 'calc' },
-    -- {
-    --   name = 'emoji',
-    --   option = {
-    --     insert = true,
-    --   },
-    -- },
+    { name = 'path' },
+    { name = 'calc' },
+    {
+      name = 'spell',
+      option = {
+        keep_all_entries = false,
+        enable_in_context = function()
+          return true
+        end,
+      },
+    },
+    {
+      name = 'emoji',
+      option = {
+        insert = true,
+      },
+    },
+    -- { name = 'codeium' },
   },
 }
 
@@ -1076,6 +1076,12 @@ for type, icon in pairs(signs) do
   local hl = 'DiagnosticSign' .. type
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
+
+vim.diagnostic.config {
+  float = {
+    border = 'rounded',
+  },
+}
 
 -- vim.keymap.set('n', '<leader>rll', '<cmd>LspRestart<CR>', { noremap = true, desc = '[R]estart [L]SP server' })
 
