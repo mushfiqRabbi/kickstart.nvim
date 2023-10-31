@@ -1,5 +1,6 @@
 return {
-  'sontungexpt/url-open',
+  'git@github.com:mushfiqRabbi/url-open.git',
+  branch = 'tork',
   event = 'VeryLazy',
   cmd = 'URLOpenUnderCursor',
   config = function()
