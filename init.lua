@@ -263,6 +263,7 @@ require('lazy').setup({
         component_separators = { left = '|', right = '|' },
         -- section_separators = { left = '', right = '' },
         section_separators = { left = '|', right = '|' },
+
         theme = 'onedark',
         -- theme = 'tokyonight',
       },
@@ -680,7 +681,7 @@ vim.keymap.set('n', '<leader>fu', "<cmd>lua require('telescope').extensions.undo
 vim.defer_fn(function()
   require('nvim-treesitter.configs').setup {
     -- Add languages to be installed here that you want installed for treesitter
-    ensure_installed = { 'lua', 'vimdoc', 'vim', 'javascript', 'typescript', 'tsx', 'json' },
+    ensure_installed = { 'lua', 'vimdoc', 'vim', 'javascript', 'typescript', 'tsx', 'json', 'bash', 'markdown', 'markdown_inline' },
 
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
     auto_install = false,
@@ -922,7 +923,16 @@ cmp.setup {
     ['<C-p>'] = cmp.mapping.select_prev_item(),
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete {},
+    -- ['<C-Space>'] = cmp.mapping.complete {},
+    ['<C-Space>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.abort()
+      elseif not cmp.visible() then
+        cmp.complete()
+      else
+        fallback()
+      end
+    end),
     ['<CR>'] = cmp.mapping {
       i = function(fallback)
         if cmp.visible() then
@@ -1007,6 +1017,12 @@ cmp.setup {
     { name = 'path' },
     { name = 'calc' },
     {
+      name = 'emoji',
+      option = {
+        insert = true,
+      },
+    },
+    {
       name = 'spell',
       option = {
         keep_all_entries = false,
@@ -1015,35 +1031,28 @@ cmp.setup {
         end,
       },
     },
-    {
-      name = 'emoji',
-      option = {
-        insert = true,
-      },
-    },
     -- { name = 'codeium' },
   },
 }
 
 cmp.setup.cmdline({ '/', '?' }, {
-  completion = {
-    completeopt = 'menu,menuone,noinsert,noselect',
-  },
+  -- completion = {
+  --   completeopt = 'menu,menuone,noinsert,noselect',
+  -- },
   mapping = cmp.mapping.preset.cmdline(),
   sources = {
     { name = 'buffer' },
   },
 })
 cmp.setup.cmdline(':', {
-  completion = {
-    completeopt = 'menu,menuone,noinsert',
-  },
+  -- completion = {
+  --   completeopt = 'menu,menuone,noinsert',
+  -- },
   mapping = cmp.mapping.preset.cmdline {},
-  sources = cmp.config.sources({
-    { name = 'path' },
-  }, {
+  sources = cmp.config.sources {
     { name = 'cmdline' },
-  }),
+    { name = 'path' },
+  },
 })
 
 vim.api.nvim_create_autocmd('User', {
