@@ -12,16 +12,12 @@ return {
     dashboard.section.buttons.val = {
       -- dashboard.button('e', '  New file', ':ene <BAR> startinsert <CR>'),
       dashboard.button('SPC f p', '  Projects', ':Telescope projects<CR>'),
-      dashboard.button(
-        'SPC f F',
-        '󰱽  Search file',
-        ':lua require("telescope.builtin").find_files({ cwd = vim.env.HOME, follow = true, hidden = true })<CR>'
-      ),
-      dashboard.button('SPC f r', '  Recent files', ':Telescope oldfiles<CR>'),
-      dashboard.button('SPC o b', '  File browser', ':Oil<cr>'),
+      dashboard.button('SPC F F', '󰱽  Search file', ':lua require("telescope.builtin").find_files({ cwd = vim.env.HOME })<CR>'),
+      dashboard.button('SPC f o', '  Recent files', ':Telescope oldfiles<CR>'),
+      dashboard.button('SPC o b', '  File browser', ':lua require("oil").open(vim.loop.cwd())<CR>'),
       -- dashboard.button('SPC l g', '󰺯  Live grep', ':Telescope live_grep<CR>'),
       -- dashboard.button('SPC s w', '󰈭  Find word', ':Telescope grep_string<CR>'),
-      dashboard.button('SPC f h', '󰋖  Help', ':Telescope help_tags<CR>'),
+      -- dashboard.button('SPC f h', '󰋖  Help', ':Telescope help_tags<CR>'),
       dashboard.button('q', '󰅚  Quit NVIM', ':qa<CR>'),
     }
 

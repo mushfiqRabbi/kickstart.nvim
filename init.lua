@@ -42,6 +42,8 @@ P.S. You can delete this when you're done too. It's your config now :)
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
+
+local auto_diag_float
 vim.g['python3_host_prog'] = '/home/mushfiq/.pyenv/versions/py3nvim/bin/python'
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
@@ -647,7 +649,7 @@ vim.keymap.set('n', '<leader><space>', "<cmd>lua require('telescope.builtin').bu
 vim.keymap.set('n', '<leader>/', "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>", { desc = 'Fuzzy find inside current buffer' })
 vim.keymap.set('n', '<leader>ff', "<cmd>lua require('telescope.builtin').find_files()<cr>", { desc = '[F]ind [F]iles' })
 -- vim.keymap.set('n', '<leader>gs', "<cmd>lua require('telescope.builtin').git_status()<cr>", { desc = '[G]it [S]tatus' })
-vim.keymap.set('n', '<leader>fF', "<cmd>lua require('telescope.builtin').find_files({ cwd = vim.env.HOME })<cr>", { desc = '[F]ind [F]iles in $HOME' })
+vim.keymap.set('n', '<leader>FF', "<cmd>lua require('telescope.builtin').find_files({ cwd = vim.env.HOME })<cr>", { desc = '[F]ind [F]iles in $HOME' })
 -- vim.keymap.set('n', '<leader>fh', "<cmd>lua require('telescope.builtin').help_tags()<cr>", { desc = '[F]ind [H]elp tags' })
 -- vim.keymap.set('n', '<leader>fw', "<cmd>lua require('telescope.builtin').grep_string()<cr>", { desc = '[F]ind [W]ord under cursor' })
 vim.keymap.set('n', '<leader>lg', "<cmd>lua require('telescope.builtin').live_grep()<cr>", { desc = '[L]ive [G]rep' })
@@ -784,8 +786,16 @@ local on_attach = function(client, bufnr)
   -- nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
   -- See `:help K` for why this keymap
-  nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-  nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+  nmap('K', function()
+    vim.api.nvim_del_autocmd(auto_diag_float)
+    auto_diag_float = nil
+    vim.lsp.buf.hover()
+  end, 'Hover Documentation')
+  nmap('<C-k>', function()
+    vim.api.nvim_del_autocmd(auto_diag_float)
+    auto_diag_float = nil
+    vim.lsp.buf.signature_help()
+  end, 'Signature Documentation')
 
   -- Lesser used LSP functionality
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
@@ -924,15 +934,26 @@ cmp.setup {
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     -- ['<C-Space>'] = cmp.mapping.complete {},
-    ['<C-Space>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.abort()
-      elseif not cmp.visible() then
-        cmp.complete()
-      else
-        fallback()
-      end
-    end),
+    ['<C-Space>'] = cmp.mapping {
+      i = function(fallback)
+        if cmp.visible() then
+          cmp.close()
+        elseif not cmp.visible() then
+          cmp.complete()
+        else
+          fallback()
+        end
+      end,
+      c = function(fallback)
+        if cmp.visible() then
+          cmp.close()
+        elseif not cmp.visible() then
+          cmp.complete()
+        else
+          fallback()
+        end
+      end,
+    },
     ['<CR>'] = cmp.mapping {
       i = function(fallback)
         if cmp.visible() then
@@ -941,38 +962,43 @@ cmp.setup {
           fallback()
         end
       end,
+      -- c = function(fallback)
+      --   if cmp.visible() and cmp.get_active_entry() then
+      --     cmp.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false }
+      --   else
+      --     fallback()
+      --   end
+      -- end,
       -- s = cmp.mapping.confirm { select = true },
-      c = function(fallback)
-        if cmp.visible() then
-          cmp.confirm { behavior = cmp.ConfirmBehavior.Replace, select = true }
+      -- c = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace, select = true },
+    },
+    ['<Tab>'] = cmp.mapping {
+      i = function(fallback)
+        -- if cmp.visible() then
+        --   cmp.select_next_item()
+        -- elseif luasnip.expand_or_locally_jumpable() then
+        --   luasnip.expand_or_jump()
+        if not cmp.visible() and luasnip.expand_or_locally_jumpable() then
+          luasnip.expand_or_jump()
         else
           fallback()
         end
       end,
     },
-    ['<Tab>'] = cmp.mapping(function(fallback)
-      -- if cmp.visible() then
-      --   cmp.select_next_item()
-      -- elseif luasnip.expand_or_locally_jumpable() then
-      --   luasnip.expand_or_jump()
-      if not cmp.visible() and luasnip.expand_or_locally_jumpable() then
-        luasnip.expand_or_jump()
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
-    ['<S-Tab>'] = cmp.mapping(function(fallback)
-      -- if cmp.visible() then
-      --   cmp.select_prev_item()
-      -- elseif luasnip.locally_jumpable(-1) then
-      --   luasnip.jump(-1)
+    ['<S-Tab>'] = cmp.mapping {
+      i = function(fallback)
+        -- if cmp.visible() then
+        --   cmp.select_prev_item()
+        -- elseif luasnip.locally_jumpable(-1) then
+        --   luasnip.jump(-1)
 
-      if not cmp.visible() and luasnip.locally_jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
+        if not cmp.visible() and luasnip.locally_jumpable(-1) then
+          luasnip.jump(-1)
+        else
+          fallback()
+        end
+      end,
+    },
 
     ['<down>'] = cmp.mapping {
       i = function(fallback)
@@ -985,7 +1011,7 @@ cmp.setup {
       -- s = cmp.mapping.confirm { select = true },
       c = function(fallback)
         if cmp.visible() then
-          cmp.select_next_item { behavior = cmp.SelectBehavior.Select }
+          cmp.select_next_item { behavior = cmp.SelectBehavior.Insert }
         else
           fallback()
         end
@@ -1003,7 +1029,7 @@ cmp.setup {
       -- s = cmp.mapping.confirm { select = true },
       c = function(fallback)
         if cmp.visible() then
-          cmp.select_prev_item { behavior = cmp.SelectBehavior.Select }
+          cmp.select_prev_item { behavior = cmp.SelectBehavior.Insert }
         else
           fallback()
         end
@@ -1015,45 +1041,50 @@ cmp.setup {
     { name = 'luasnip' },
     { name = 'buffer' },
     { name = 'path' },
-    { name = 'calc' },
-    {
-      name = 'emoji',
-      option = {
-        insert = true,
-      },
-    },
-    {
-      name = 'spell',
-      option = {
-        keep_all_entries = false,
-        enable_in_context = function()
-          return true
-        end,
-      },
-    },
+    -- { name = 'calc' },
+    -- {
+    --   name = 'emoji',
+    --   option = {
+    --     insert = true,
+    --   },
+    -- },
+    -- {
+    --   name = 'spell',
+    --   option = {
+    --     keep_all_entries = false,
+    --     enable_in_context = function()
+    --       return true
+    --     end,
+    --   },
+    -- },
     -- { name = 'codeium' },
   },
 }
 
 cmp.setup.cmdline({ '/', '?' }, {
-  -- completion = {
-  --   completeopt = 'menu,menuone,noinsert,noselect',
-  -- },
-  mapping = cmp.mapping.preset.cmdline(),
+  completion = {
+    completeopt = 'menu,menuone,noinsert,noselect',
+  },
+  -- mapping = cmp.mapping.preset.cmdline(),
   sources = {
     { name = 'buffer' },
   },
 })
 cmp.setup.cmdline(':', {
-  -- completion = {
-  --   completeopt = 'menu,menuone,noinsert',
-  -- },
-  mapping = cmp.mapping.preset.cmdline {},
+  completion = {
+    completeopt = 'menu,menuone,noinsert,noselect',
+  },
+  -- mapping = cmp.mapping.preset.cmdline {},
   sources = cmp.config.sources {
     { name = 'cmdline' },
     { name = 'path' },
   },
 })
+
+-- If you want insert `(` after select function or method item
+local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
+local cmp = require 'cmp'
+cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
 
 vim.api.nvim_create_autocmd('User', {
   pattern = 'TelescopePreviewerLoaded',
@@ -1087,10 +1118,35 @@ for type, icon in pairs(signs) do
 end
 
 vim.diagnostic.config {
+  virtual_text = false,
   float = {
     border = 'rounded',
   },
 }
+
+-- vim.api.nvim_create_augroup('AutoDiagFloat', { clear = true })
+
+vim.api.nvim_create_autocmd('CursorHold', {
+  callback = function()
+    if not auto_diag_float then
+      auto_diag_float = vim.api.nvim_create_autocmd('CursorHold', {
+        -- group = 'AutoDiagFloat',
+        callback = function()
+          if vim.lsp.buf.server_ready() then
+            local r, c = unpack(vim.api.nvim_win_get_cursor(0))
+            if next(vim.diagnostic.get(0, { lnum = r - 1, col = c })) ~= nil then
+              vim.diagnostic.open_float(nil, { focusable = false, close_events = { 'CursorMoved', 'CursorMovedI', 'BufHidden', 'InsertCharPre', 'WinLeave' } })
+            end
+          end
+        end,
+      })
+    end
+  end,
+})
+
+vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'rounded' })
+
+vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = 'rounded' })
 
 -- vim.keymap.set('n', '<leader>rll', '<cmd>LspRestart<CR>', { noremap = true, desc = '[R]estart [L]SP server' })
 
