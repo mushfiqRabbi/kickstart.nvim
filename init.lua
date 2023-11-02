@@ -652,14 +652,14 @@ vim.keymap.set('n', '<leader>/', "<cmd>lua require('telescope.builtin').current_
 vim.keymap.set('n', '<leader>ff', "<cmd>lua require('telescope.builtin').find_files()<cr>", { desc = '[F]ind [F]iles' })
 -- vim.keymap.set('n', '<leader>gs', "<cmd>lua require('telescope.builtin').git_status()<cr>", { desc = '[G]it [S]tatus' })
 vim.keymap.set('n', '<leader>FF', "<cmd>lua require('telescope.builtin').find_files({ cwd = vim.env.HOME })<cr>", { desc = '[F]ind [F]iles in $HOME' })
--- vim.keymap.set('n', '<leader>fh', "<cmd>lua require('telescope.builtin').help_tags()<cr>", { desc = '[F]ind [H]elp tags' })
+vim.keymap.set('n', '<leader>fh', "<cmd>lua require('telescope.builtin').help_tags()<cr>", { desc = '[F]ind [H]elp tags' })
 -- vim.keymap.set('n', '<leader>fw', "<cmd>lua require('telescope.builtin').grep_string()<cr>", { desc = '[F]ind [W]ord under cursor' })
 vim.keymap.set('n', '<leader>lg', "<cmd>lua require('telescope.builtin').live_grep()<cr>", { desc = '[L]ive [G]rep' })
 vim.keymap.set('n', '<leader>fd', "<cmd>lua require('telescope.builtin').diagnostics()<cr>", { desc = '[F]ind [D]iagnostics' })
 vim.keymap.set('n', '<leader>fy', "<cmd>lua require('telescope').extensions.yank_history.yank_history()<cr>", { desc = '[F]ind [Y]ank from history' })
 vim.keymap.set('n', '<leader>fp', "<cmd>lua require('telescope').extensions.projects.projects()<cr>", { desc = '[F]ind [P]roject' })
 vim.keymap.set('n', '<leader>fu', "<cmd>lua require('telescope').extensions.undo.undo()<cr>", { desc = '[F]ind [U]ndo from history' })
--- vim.keymap.set('n', '<leader>S', '<cmd>Spectre<cr>', { desc = '[S]earch and replace' })
+vim.keymap.set('n', '<leader>sr', '<cmd>Spectre<cr>', { desc = '[S]earch and [R]eplace' })
 -- vim.keymap.set('n', '<leader>tc', '<cmd>TSContextToggle<cr>', { desc = '[T]oggle [C]ontext' })
 
 -- vim.keymap.set('n', '<leader>fg', "<cmd>lua require('telescope.builtin').git_files()<cr>", { desc = '[F]ind [G]it files' })
@@ -755,9 +755,9 @@ vim.keymap.set('n', '<leader>df', vim.diagnostic.open_float, { desc = 'Open floa
 vim.keymap.set('n', '<leader>dl', function()
   require('trouble').toggle 'document_diagnostics'
 end, { desc = 'Open diagnostics list' })
--- vim.keymap.set('n', '<leader>ql', function()
---   require('trouble').toggle 'quickfix'
--- end, { desc = 'Open quickfix list' })
+vim.keymap.set('n', '<leader>ql', function()
+  require('trouble').toggle 'quickfix'
+end, { desc = 'Open quickfix list' })
 
 -- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.
@@ -1149,6 +1149,17 @@ vim.api.nvim_create_autocmd('CursorHold', {
 --     end
 --   end,
 -- })
+--
+
+vim.keymap.set('n', '<leader>ou', function()
+  local url_under_cursor = vim.fn.expand '<cWORD>'
+  if string.match(url_under_cursor, '[a-z]*://[^ >,;]*') then
+    vim.fn.jobstart { 'wslview', url_under_cursor }
+  end
+end, { noremap = true, desc = '[O]pen [U]RL under cursor' })
+
+vim.keymap.set({ 'n', 'v' }, '<C-q>t', '<cmd>tabclose<cr>', { noremap = true, desc = '[Q]uit [T]ab' })
+vim.keymap.set({ 'n', 'v' }, '<leader>dv', '<cmd>DiffviewOpen<cr>', { noremap = true, desc = '[D]iff [V]iew' })
 
 -- vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'rounded' })
 
