@@ -56,6 +56,10 @@ return {
         },
         opts = { skip = true },
       },
+      {
+        view = 'notify',
+        filter = { event = 'msg_showmode' },
+      },
     },
   },
   dependencies = {

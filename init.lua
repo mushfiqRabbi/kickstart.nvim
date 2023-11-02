@@ -272,6 +272,22 @@ require('lazy').setup({
         -- theme = 'tokyonight',
       },
     },
+    config = function()
+      require('lualine').setup {
+        sections = {
+          lualine_x = {
+            {
+              require('noice').api.statusline.mode.get,
+              cond = require('noice').api.statusline.mode.has,
+              color = { fg = '#ff9e64' },
+            },
+            'encoding',
+            'fileformat',
+            'filetype',
+          },
+        },
+      }
+    end,
   },
 
   {
@@ -693,13 +709,13 @@ vim.defer_fn(function()
     highlight = { enable = true },
     indent = { enable = true },
     incremental_selection = {
-      enable = true,
-      keymaps = {
-        init_selection = '<c-space>',
-        node_incremental = '<c-space>',
-        -- scope_incremental = '<c-s>',
-        -- node_decremental = '<M-space>',
-      },
+      -- enable = true,
+      -- keymaps = {
+      --   init_selection = '<c-space>',
+      --   node_incremental = '<c-space>',
+      --   -- scope_incremental = '<c-s>',
+      --   -- node_decremental = '<M-space>',
+      -- },
     },
     textobjects = {
       select = {
@@ -1135,6 +1151,9 @@ vim.api.nvim_create_augroup('AutoDiagFloat', { clear = true })
 --   callback = function()
 --     if not auto_diag_float then
 -- auto_diag_float =
+--
+--
+--
 vim.api.nvim_create_autocmd('CursorHold', {
   group = 'AutoDiagFloat',
   callback = function()
@@ -1146,6 +1165,8 @@ vim.api.nvim_create_autocmd('CursorHold', {
     end
   end,
 })
+--
+--
 --     end
 --   end,
 -- })
