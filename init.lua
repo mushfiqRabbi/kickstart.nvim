@@ -43,7 +43,7 @@ P.S. You can delete this when you're done too. It's your config now :)
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
 
--- local auto_diag_float
+local auto_diag_float
 vim.g['python3_host_prog'] = '/home/mushfiq/.pyenv/versions/py3nvim/bin/python'
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
@@ -260,34 +260,62 @@ require('lazy').setup({
       'nvim-tree/nvim-web-devicons',
     },
     -- See `:help lualine.txt`
-    opts = {
-      options = {
-        icons_enabled = true,
-        -- component_separators = { left = '', right = '' },
-        component_separators = { left = '|', right = '|' },
-        -- section_separators = { left = '', right = '' },
-        section_separators = { left = '|', right = '|' },
+    -- opts = {
+    --  options = {
+    --    icons_enabled = true,
+    --    -- component_separators = { left = '', right = '' },
+    --    component_separators = { left = '|', right = '|' },
+    --    -- section_separators = { left = '', right = '' },
+    --    section_separators = { left = '|', right = '|' },
 
-        theme = 'onedark',
-        -- theme = 'tokyonight',
-      },
-    },
-    -- config = function()
-    --   require('lualine').setup {
-    --     sections = {
-    --       lualine_x = {
-    --         {
-    --           require('noice').api.statusline.mode.get,
-    --           cond = require('noice').api.statusline.mode.has,
-    --           color = { fg = '#ff9e64' },
-    --         },
-    --         'encoding',
-    --         'fileformat',
-    --         'filetype',
-    --       },
-    --     },
-    --   }
-    -- end,
+    --    theme = 'onedark',
+    --    -- theme = 'tokyonight',
+    --  },
+    --  sections = {
+    --    lualine_x = {
+    --      {
+    --        require('noice').api.statusline.mode.get,
+    --        cond = require('noice').api.statusline.mode.has,
+    --        color = { fg = '#ff9e64' },
+    --      },
+    --      'encoding',
+    --      'fileformat',
+    --      'filetype',
+    --    },
+    --  },
+    -- },
+    config = function()
+      require('lualine').setup {
+        options = {
+          icons_enabled = true,
+          -- component_separators = { left = '', right = '' },
+          component_separators = { left = '|', right = '|' },
+          -- section_separators = { left = '', right = '' },
+          section_separators = { left = '|', right = '|' },
+
+          theme = 'onedark',
+          -- theme = 'tokyonight',
+        },
+        sections = {
+          lualine_x = {
+            -- {
+            --   function()
+            --     return vim.fn['codeium#GetStatusString']()
+            --   end,
+            -- },
+
+            -- {
+            --   require('noice').api.statusline.mode.get,
+            --   cond = require('noice').api.statusline.mode.has,
+            --   color = { fg = '#ff9e64' },
+            -- },
+            -- 'encoding',
+            -- 'fileformat',
+            'filetype',
+          },
+        },
+      }
+    end,
   },
 
   {
@@ -701,7 +729,7 @@ vim.keymap.set('n', '<leader>sr', '<cmd>Spectre<cr>', { desc = '[S]earch and [R]
 vim.defer_fn(function()
   require('nvim-treesitter.configs').setup {
     -- Add languages to be installed here that you want installed for treesitter
-    ensure_installed = { 'lua', 'vimdoc', 'vim', 'javascript', 'typescript', 'tsx', 'json', 'bash', 'markdown', 'markdown_inline' },
+    ensure_installed = { 'lua', 'vimdoc', 'vim', 'javascript', 'typescript', 'tsx', 'json' },
 
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
     auto_install = false,
@@ -804,19 +832,19 @@ local on_attach = function(client, bufnr)
   -- nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
   -- See `:help K` for why this keymap
-  -- nmap('K', function()
-  --   vim.api.nvim_del_autocmd(auto_diag_float)
-  --   auto_diag_float = nil
-  --   vim.lsp.buf.hover()
-  -- end, 'Hover Documentation')
-  -- nmap('<C-k>', function()
-  --   vim.api.nvim_del_autocmd(auto_diag_float)
-  --   auto_diag_float = nil
-  --   vim.lsp.buf.signature_help()
-  -- end, 'Signature Documentation')
+  nmap('K', function()
+    vim.api.nvim_del_autocmd(auto_diag_float)
+    auto_diag_float = nil
+    vim.lsp.buf.hover()
+  end, 'Hover Documentation')
+  nmap('<C-k>', function()
+    vim.api.nvim_del_autocmd(auto_diag_float)
+    auto_diag_float = nil
+    vim.lsp.buf.signature_help()
+  end, 'Signature Documentation')
 
-  nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-  nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+  -- nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
+  -- nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
   -- Lesser used LSP functionality
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
@@ -1145,32 +1173,25 @@ vim.diagnostic.config {
   },
 }
 
-vim.api.nvim_create_augroup('AutoDiagFloat', { clear = true })
+-- vim.api.nvim_create_augroup('AutoDiagFloat', { clear = true })
 
--- vim.api.nvim_create_autocmd('CursorHold', {
---   callback = function()
---     if not auto_diag_float then
--- auto_diag_float =
---
---
---
 vim.api.nvim_create_autocmd('CursorHold', {
-  group = 'AutoDiagFloat',
   callback = function()
-    if vim.lsp.buf.server_ready() then
-      local r, _ = unpack(vim.api.nvim_win_get_cursor(0))
-      if next(vim.diagnostic.get(0, { lnum = r - 1 })) ~= nil then
-        vim.diagnostic.open_float(nil, { focusable = false, close_events = { 'CursorMoved', 'CursorMovedI', 'BufHidden', 'InsertCharPre', 'WinLeave' } })
-      end
+    if not auto_diag_float then
+      auto_diag_float = vim.api.nvim_create_autocmd('CursorHold', {
+        -- group = 'AutoDiagFloat',
+        callback = function()
+          if vim.lsp.buf.server_ready() then
+            local r, _ = unpack(vim.api.nvim_win_get_cursor(0))
+            if next(vim.diagnostic.get(0, { lnum = r - 1 })) ~= nil then
+              vim.diagnostic.open_float(nil, { focusable = false, close_events = { 'CursorMoved', 'CursorMovedI', 'BufHidden', 'InsertCharPre', 'WinLeave' } })
+            end
+          end
+        end,
+      })
     end
   end,
 })
---
---
---     end
---   end,
--- })
---
 
 vim.keymap.set('n', '<leader>ou', function()
   local url_under_cursor = vim.fn.expand '<cWORD>'
@@ -1182,9 +1203,9 @@ end, { noremap = true, desc = '[O]pen [U]RL under cursor' })
 vim.keymap.set({ 'n', 'v' }, '<C-q>t', '<cmd>tabclose<cr>', { noremap = true, desc = '[Q]uit [T]ab' })
 vim.keymap.set({ 'n', 'v' }, '<leader>dv', '<cmd>DiffviewOpen<cr>', { noremap = true, desc = '[D]iff [V]iew' })
 
--- vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'rounded' })
+vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'rounded' })
 
--- vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = 'rounded' })
+vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = 'rounded' })
 
 -- vim.keymap.set('n', '<leader>rll', '<cmd>LspRestart<CR>', { noremap = true, desc = '[R]estart [L]SP server' })
 
