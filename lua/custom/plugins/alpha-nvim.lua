@@ -17,7 +17,7 @@ return {
       dashboard.button('SPC o b', '  File browser', ':lua require("oil").open(vim.loop.cwd())<CR>'),
       -- dashboard.button('SPC l g', '󰺯  Live grep', ':Telescope live_grep<CR>'),
       -- dashboard.button('SPC s w', '󰈭  Find word', ':Telescope grep_string<CR>'),
-      -- dashboard.button('SPC f h', '󰋖  Help', ':Telescope help_tags<CR>'),
+      dashboard.button('SPC f h', '󰋖  Help', ':Telescope help_tags<CR>'),
       dashboard.button('q', '󰅚  Quit NVIM', ':qa<CR>'),
     }
 
