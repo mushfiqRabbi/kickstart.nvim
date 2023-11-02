@@ -70,9 +70,9 @@ vim.g['rooter_change_directory_for_non_project_files'] = 'current'
 
 vim.opt.spell = true
 vim.opt.spelllang = { 'en_us' }
-vim.cmd [[
-  set guicursor+=a:blinkon1
-]]
+-- vim.cmd [[
+--   set guicursor+=a:blinkon1
+-- ]]
 -- vim.o.shell = 'C:\\"Program Files"\\PowerShell\\7\\pwsh.exe'
 -- vim.o.shell = '/usr/bin/zsh'
 -- vim.o.shellcmdflag = '-command'
@@ -272,22 +272,22 @@ require('lazy').setup({
         -- theme = 'tokyonight',
       },
     },
-    config = function()
-      require('lualine').setup {
-        sections = {
-          lualine_x = {
-            {
-              require('noice').api.statusline.mode.get,
-              cond = require('noice').api.statusline.mode.has,
-              color = { fg = '#ff9e64' },
-            },
-            'encoding',
-            'fileformat',
-            'filetype',
-          },
-        },
-      }
-    end,
+    -- config = function()
+    --   require('lualine').setup {
+    --     sections = {
+    --       lualine_x = {
+    --         {
+    --           require('noice').api.statusline.mode.get,
+    --           cond = require('noice').api.statusline.mode.has,
+    --           color = { fg = '#ff9e64' },
+    --         },
+    --         'encoding',
+    --         'fileformat',
+    --         'filetype',
+    --       },
+    --     },
+    --   }
+    -- end,
   },
 
   {
