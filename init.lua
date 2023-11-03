@@ -43,7 +43,7 @@ P.S. You can delete this when you're done too. It's your config now :)
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
 
-local auto_diag_float
+-- local auto_diag_float
 vim.g['python3_host_prog'] = '/home/mushfiq/.pyenv/versions/py3nvim/bin/python'
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
@@ -303,11 +303,11 @@ require('lazy').setup({
             --   end,
             -- },
 
-            -- {
-            --   require('noice').api.statusline.mode.get,
-            --   cond = require('noice').api.statusline.mode.has,
-            --   color = { fg = '#ff9e64' },
-            -- },
+            {
+              require('noice').api.statusline.mode.get,
+              cond = require('noice').api.statusline.mode.has,
+              color = { fg = '#ff9e64' },
+            },
             -- 'encoding',
             -- 'fileformat',
             'filetype',
@@ -831,19 +831,19 @@ local on_attach = function(client, bufnr)
   -- nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
   -- See `:help K` for why this keymap
-  nmap('K', function()
-    vim.api.nvim_del_autocmd(auto_diag_float)
-    auto_diag_float = nil
-    vim.lsp.buf.hover()
-  end, 'Hover Documentation')
-  nmap('<C-k>', function()
-    vim.api.nvim_del_autocmd(auto_diag_float)
-    auto_diag_float = nil
-    vim.lsp.buf.signature_help()
-  end, 'Signature Documentation')
+  -- nmap('K', function()
+  --   vim.api.nvim_del_autocmd(auto_diag_float)
+  --   auto_diag_float = nil
+  --   vim.lsp.buf.hover()
+  -- end, 'Hover Documentation')
+  -- nmap('<C-k>', function()
+  --   vim.api.nvim_del_autocmd(auto_diag_float)
+  --   auto_diag_float = nil
+  --   vim.lsp.buf.signature_help()
+  -- end, 'Signature Documentation')
 
-  -- nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-  -- nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+  nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
+  nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
   -- Lesser used LSP functionality
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
@@ -1172,25 +1172,26 @@ vim.diagnostic.config {
   },
 }
 
--- vim.api.nvim_create_augroup('AutoDiagFloat', { clear = true })
+vim.api.nvim_create_augroup('AutoDiagFloat', { clear = true })
 
+-- vim.api.nvim_create_autocmd('CursorHold', {
+--   callback = function()
+--     if not auto_diag_float then
+--       auto_diag_float =
 vim.api.nvim_create_autocmd('CursorHold', {
+  group = 'AutoDiagFloat',
   callback = function()
-    if not auto_diag_float then
-      auto_diag_float = vim.api.nvim_create_autocmd('CursorHold', {
-        -- group = 'AutoDiagFloat',
-        callback = function()
-          if vim.lsp.buf.server_ready() then
-            local r, _ = unpack(vim.api.nvim_win_get_cursor(0))
-            if next(vim.diagnostic.get(0, { lnum = r - 1 })) ~= nil then
-              vim.diagnostic.open_float(nil, { focusable = false, close_events = { 'CursorMoved', 'CursorMovedI', 'BufHidden', 'InsertCharPre', 'WinLeave' } })
-            end
-          end
-        end,
-      })
+    if vim.lsp.buf.server_ready() then
+      local r, _ = unpack(vim.api.nvim_win_get_cursor(0))
+      if next(vim.diagnostic.get(0, { lnum = r - 1 })) ~= nil then
+        vim.diagnostic.open_float(nil, { focusable = false, close_events = { 'CursorMoved', 'CursorMovedI', 'BufHidden', 'InsertCharPre', 'WinLeave' } })
+      end
     end
   end,
 })
+--     end
+--   end,
+-- })
 
 vim.keymap.set('n', '<leader>ou', function()
   local url_under_cursor = vim.fn.expand '<cWORD>'
@@ -1202,9 +1203,9 @@ end, { noremap = true, desc = '[O]pen [U]RL under cursor' })
 vim.keymap.set({ 'n', 'v' }, '<C-q>t', '<cmd>tabclose<cr>', { noremap = true, desc = '[Q]uit [T]ab' })
 vim.keymap.set({ 'n', 'v' }, '<leader>dv', '<cmd>DiffviewOpen<cr>', { noremap = true, desc = '[D]iff [V]iew' })
 
-vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'rounded' })
+-- vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'rounded' })
 
-vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = 'rounded' })
+-- vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = 'rounded' })
 
 -- vim.keymap.set('n', '<leader>rll', '<cmd>LspRestart<CR>', { noremap = true, desc = '[R]estart [L]SP server' })
 
