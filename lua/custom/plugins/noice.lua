@@ -56,7 +56,7 @@ return {
         filter = {
           event = 'msg_show',
           kind = '',
-          find = 'more line;',
+          find = 'more line',
         },
         opts = { skip = true },
       },
@@ -72,7 +72,7 @@ return {
         filter = {
           event = 'msg_show',
           kind = '',
-          find = 'more lines;',
+          find = 'more lines',
         },
         opts = { skip = true },
       },
@@ -81,6 +81,14 @@ return {
           event = 'msg_show',
           kind = '',
           find = 'fewer lines',
+        },
+        opts = { skip = true },
+      },
+      {
+        filter = {
+          event = 'msg_show',
+          kind = '',
+          find = 'change',
         },
         opts = { skip = true },
       },
