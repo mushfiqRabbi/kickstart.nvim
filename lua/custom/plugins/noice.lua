@@ -44,14 +44,50 @@ return {
       },
     },
     routes = {
-      -- {
-      --   filter = {
-      --     event = 'msg_show',
-      --     kind = '',
-      --     find = 'written',
-      --   },
-      --   opts = { skip = true },
-      -- },
+      {
+        filter = {
+          event = 'msg_show',
+          kind = '',
+          find = 'written',
+        },
+        opts = { skip = true },
+      },
+
+      {
+        filter = {
+          event = 'msg_show',
+          kind = '',
+          find = 'fewer lines',
+        },
+        opts = { skip = true },
+      },
+
+      {
+        filter = {
+          event = 'msg_show',
+          kind = '',
+          find = 'line less',
+        },
+        opts = { skip = true },
+      },
+
+      {
+        filter = {
+          event = 'msg_show',
+          kind = 'echo',
+          find = 'more line',
+        },
+        opts = { skip = true },
+      },
+
+      {
+        filter = {
+          event = 'msg_show',
+          kind = '',
+          find = 'more line',
+        },
+        opts = { skip = true },
+      },
       -- {
       --   filter = {
       --     event = 'msg_show',

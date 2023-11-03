@@ -304,7 +304,14 @@ require('lazy').setup({
             -- },
 
             {
-              require('noice').api.statusline.mode.get,
+              function()
+                if string.find(require('noice').api.statusline.mode.get(), 'recording') then
+                  return require('noice').api.statusline.mode.get()
+                else
+                  return ''
+                end
+              end,
+              -- require('noice').api.statusline.mode.get,
               cond = require('noice').api.statusline.mode.has,
               color = { fg = '#ff9e64' },
             },

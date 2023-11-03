@@ -63,7 +63,7 @@ return {
         },
       },
     }
-    vim.keymap.set({ 'n', 'v' }, '<leader>bF', ':Oil<CR>', { noremap = true, silent = true, desc = '[B]rowse [F]iles relative to buffer' })
+    vim.keymap.set({ 'n', 'v' }, '<leader>BF', ':Oil<CR>', { noremap = true, silent = true, desc = '[B]rowse [F]iles relative to buffer' })
     vim.keymap.set({ 'n', 'v' }, '<leader>bf', ':lua require("oil").open(vim.loop.cwd())<CR>', { noremap = true, silent = true, desc = '[B]rowse [F]iles' })
     vim.api.nvim_create_autocmd('User', {
       pattern = 'OilEnter',
