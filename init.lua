@@ -702,7 +702,19 @@ vim.keymap.set('n', '<leader>fd', "<cmd>lua require('telescope.builtin').diagnos
 vim.keymap.set('n', '<leader>fy', "<cmd>lua require('telescope').extensions.yank_history.yank_history()<cr>", { desc = '[F]ind [Y]ank from history' })
 vim.keymap.set('n', '<leader>fp', "<cmd>lua require('telescope').extensions.projects.projects()<cr>", { desc = '[F]ind [P]roject' })
 vim.keymap.set('n', '<leader>fu', "<cmd>lua require('telescope').extensions.undo.undo()<cr>", { desc = '[F]ind [U]ndo from history' })
-vim.keymap.set('n', '<leader>sr', '<cmd>Spectre<cr>', { desc = '[S]earch and [R]eplace' })
+vim.keymap.set('n', '<leader>sr', '<cmd>lua require("spectre").open()<CR>', {
+  desc = '[S]earch and [R]eplace',
+})
+vim.keymap.set('n', '<leader>SR', '<cmd>lua require("spectre").open_file_search()<CR>', {
+  desc = '[S]earch and [R]eplace in current file',
+})
+-- vim.keymap.set('n', '<leader>sr', '<cmd>Spectre<cr>', { desc = '[S]earch and [R]eplace' })
+-- vim.keymap.set('n', '<leader>sw', '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', {
+--   desc = 'Search current word',
+-- })
+-- vim.keymap.set('v', '<leader>sw', '<esc><cmd>lua require("spectre").open_visual()<CR>', {
+--   desc = 'Search current word',
+-- })
 -- vim.keymap.set('n', '<leader>tc', '<cmd>TSContextToggle<cr>', { desc = '[T]oggle [C]ontext' })
 
 -- vim.keymap.set('n', '<leader>fg', "<cmd>lua require('telescope.builtin').git_files()<cr>", { desc = '[F]ind [G]it files' })

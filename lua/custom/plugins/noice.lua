@@ -44,64 +44,20 @@ return {
       },
     },
     routes = {
-      {
-        filter = {
-          event = 'msg_show',
-          kind = '',
-          find = 'written',
-        },
-        opts = { skip = true },
-      },
-      {
-        filter = {
-          event = 'msg_show',
-          kind = '',
-          find = 'more line',
-        },
-        opts = { skip = true },
-      },
-      {
-        filter = {
-          event = 'msg_show',
-          kind = '',
-          find = 'line less',
-        },
-        opts = { skip = true },
-      },
-      {
-        filter = {
-          event = 'msg_show',
-          kind = '',
-          find = 'more lines',
-        },
-        opts = { skip = true },
-      },
-      {
-        filter = {
-          event = 'msg_show',
-          kind = '',
-          find = 'fewer lines',
-        },
-        opts = { skip = true },
-      },
-      {
-        filter = {
-          event = 'msg_show',
-          kind = '',
-          find = 'change',
-        },
-        opts = { skip = true },
-      },
-      {
-        filter = {
-          event = 'msg_show',
-          kind = 'search_count',
-        },
-        opts = { skip = true },
-      },
       -- {
-      --   view = 'notify',
-      --   filter = { event = 'msg_showmode' },
+      --   filter = {
+      --     event = 'msg_show',
+      --     kind = '',
+      --     find = 'written',
+      --   },
+      --   opts = { skip = true },
+      -- },
+      -- {
+      --   filter = {
+      --     event = 'msg_show',
+      --     kind = 'search_count',
+      --   },
+      --   opts = { skip = true },
       -- },
     },
   },
