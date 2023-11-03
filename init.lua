@@ -51,10 +51,10 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
--- vim.opt.tabstop = 2
--- vim.opt.smartindent = true
--- vim.opt.shiftwidth = 2
--- vim.opt.expandtab = true
+vim.opt.tabstop = 2
+vim.opt.smartindent = true
+vim.opt.shiftwidth = 2
+vim.opt.expandtab = true
 -- vim.g['rooter_cd_cmd'] = 'lcd'
 vim.opt.scrolloff = 7
 vim.o.cursorline = true
@@ -1104,8 +1104,26 @@ cmp.setup {
     },
   },
   sources = cmp.config.sources {
-    { name = 'nvim_lsp' },
-    { name = 'luasnip' },
+    {
+      name = 'nvim_lsp',
+      -- entry_filter = function()
+      --   local context = require 'cmp.config.context'
+      --   return not context.in_treesitter_capture 'comment'
+      --     and not context.in_syntax_group 'Comment'
+      --     and not context.in_treesitter_capture 'string'
+      --     and not context.in_syntax_group 'String'
+      -- end,
+    },
+    {
+      name = 'luasnip',
+      entry_filter = function()
+        local context = require 'cmp.config.context'
+        return not context.in_treesitter_capture 'comment'
+          and not context.in_syntax_group 'Comment'
+          and not context.in_treesitter_capture 'string'
+          and not context.in_syntax_group 'String'
+      end,
+    },
     { name = 'buffer' },
     { name = 'path' },
     -- { name = 'calc' },
