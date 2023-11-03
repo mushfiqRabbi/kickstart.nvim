@@ -68,8 +68,8 @@ vim.g['rooter_change_directory_for_non_project_files'] = 'current'
 --   let g:VM_maps['Find Subword Under'] = ''   " replace visual C-n
 -- ]]
 
-vim.opt.spell = true
-vim.opt.spelllang = { 'en_us' }
+-- vim.opt.spell = true
+-- vim.opt.spelllang = { 'en_us' }
 -- vim.cmd [[
 --   set guicursor+=a:blinkon1
 -- ]]
@@ -187,19 +187,18 @@ require('lazy').setup({
       'L3MON4D3/LuaSnip',
       'saadparwaiz1/cmp_luasnip',
 
-      'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-buffer',
-      'hrsh7th/cmp-path',
-      'f3fora/cmp-spell',
-      'hrsh7th/cmp-cmdline',
-      'hrsh7th/cmp-calc',
-      'hrsh7th/cmp-emoji',
-
       -- Adds LSP completion capabilities
       'hrsh7th/cmp-nvim-lsp',
 
       -- Adds a number of user-friendly snippets
       'rafamadriz/friendly-snippets',
+
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-path',
+      -- 'f3fora/cmp-spell',
+      'hrsh7th/cmp-cmdline',
+      -- 'hrsh7th/cmp-calc',
+      -- 'hrsh7th/cmp-emoji',
     },
   },
 
