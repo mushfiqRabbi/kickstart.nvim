@@ -704,9 +704,9 @@ vim.keymap.set('n', '<leader>fh', "<cmd>lua require('telescope.builtin').help_ta
 -- vim.keymap.set('n', '<leader>fw', "<cmd>lua require('telescope.builtin').grep_string()<cr>", { desc = '[F]ind [W]ord under cursor' })
 vim.keymap.set('n', '<leader>lg', "<cmd>lua require('telescope.builtin').live_grep()<cr>", { desc = '[L]ive [G]rep' })
 vim.keymap.set('n', '<leader>fd', "<cmd>lua require('telescope.builtin').diagnostics()<cr>", { desc = '[F]ind [D]iagnostics' })
-vim.keymap.set('n', '<leader>fy', "<cmd>lua require('telescope').extensions.yank_history.yank_history()<cr>", { desc = '[F]ind [Y]ank from history' })
+vim.keymap.set('n', '<leader>yh', "<cmd>lua require('telescope').extensions.yank_history.yank_history()<cr>", { desc = '[Y]ank [H]istory' })
 vim.keymap.set('n', '<leader>fp', "<cmd>lua require('telescope').extensions.projects.projects()<cr>", { desc = '[F]ind [P]roject' })
-vim.keymap.set('n', '<leader>fu', "<cmd>lua require('telescope').extensions.undo.undo()<cr>", { desc = '[F]ind [U]ndo from history' })
+vim.keymap.set('n', '<leader>uh', "<cmd>lua require('telescope').extensions.undo.undo()<cr>", { desc = '[U]ndo [H]istory' })
 vim.keymap.set('n', '<leader>sr', '<cmd>lua require("spectre").open()<CR>', {
   desc = '[S]earch and [R]eplace',
 })
@@ -1228,7 +1228,7 @@ vim.api.nvim_create_autocmd('CursorHold', {
 --   end,
 -- })
 
-vim.keymap.set('n', 'gx', function()
+vim.keymap.set('n', '<leader>U', function()
   local url_under_cursor = vim.fn.expand '<cWORD>'
   if string.match(url_under_cursor, '[a-z]*://[^ >,;]*') then
     vim.fn.jobstart { 'wslview', url_under_cursor }
