@@ -580,9 +580,9 @@ require('telescope').setup {
           end
           require('telescope.actions').close(prompt_bufnr)
           -- Depending on what you want put `cd`, `lcd`, `tcd`
-          vim.cmd(string.format('Oil %s', dir))
+          -- vim.cmd(string.format('Oil %s', dir))
           -- vim.cmd(string.format('lua MiniFiles.open(%s)', dir))
-          -- MiniFiles.open(dir, false)
+          MiniFiles.open(dir, false)
         end,
         ['cd'] = function(prompt_bufnr)
           local selection = require('telescope.actions.state').get_selected_entry()
@@ -612,8 +612,8 @@ require('telescope').setup {
           end
           require('telescope.actions').close(prompt_bufnr)
           -- Depending on what you want put `cd`, `lcd`, `tcd`
-          vim.cmd(string.format('Oil %s', dir))
-          -- MiniFiles.open(dir, false)
+          -- vim.cmd(string.format('Oil %s', dir))
+          MiniFiles.open(dir, false)
         end,
         ['<C-w>'] = function(prompt_bufnr)
           local selection = require('telescope.actions.state').get_selected_entry()
