@@ -3,6 +3,13 @@ return {
   version = false,
   config = function()
     require('mini.files').setup {
+      mappings = {
+        go_in = 'L',
+        go_in_plus = 'l',
+        go_out = 'H',
+        go_out_plus = 'h',
+      },
+
       windows = {
         preview = true,
         width_focus = function()
@@ -27,11 +34,12 @@ return {
         end,
       },
     }
-    vim.keymap.set(
-      'n',
-      '<leader>e',
-      '<CMD>lua require("mini.files").open(vim.api.nvim_buf_get_name(0), false)<CR>',
-      { noremap = true, silent = true, desc = '[E]xplore files/folders' }
-    )
+    local minifiles_toggle = function()
+      if not MiniFiles.close() then
+        MiniFiles.open(vim.api.nvim_buf_get_name(0), false)
+      end
+    end
+
+    vim.keymap.set('n', '<leader>e', minifiles_toggle, { noremap = true, silent = true, desc = '[E]xplore files/folders' })
   end,
 }
