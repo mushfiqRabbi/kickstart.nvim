@@ -3,6 +3,7 @@ return {
   version = '*',
   config = function()
     local term_count = 0
+    local term_auto_resize_augroup_id = nil
     local is_exit = false
     function _G.set_terminal_keymaps()
       local opts = { buffer = 0 }
@@ -42,17 +43,17 @@ return {
       on_create = function()
         -- print('on_create', term.bufnr)
         term_count = term_count + 1
-        -- print 'creating'
-        -- print(term_count)
+        --         print 'creating'
+        --         print(term_count)
       end,
       on_open = function()
         -- print('on_open', term.bufnr)
-        -- print 'opening'
-        -- print(term_count)
+        --         print 'opening'
+        --         print(term_count)
         vim.cmd 'wincmd w'
         vim.cmd 'stopinsert'
-        if term_count == 1 then
-          vim.api.nvim_create_augroup('TermAutoResize', { clear = true })
+        if term_count == 1 or not term_auto_resize_augroup_id then
+          term_auto_resize_augroup_id = vim.api.nvim_create_augroup('TermAutoResize', { clear = true })
           vim.api.nvim_create_autocmd('BufEnter', {
             group = 'TermAutoResize',
             pattern = 'term://*#toggleterm#*',
@@ -81,23 +82,25 @@ return {
         -- print('on_close', term.bufnr)
         -- vim.api.nvim_del_autocmd(be)
         -- vim.api.nvim_del_autocmd(bl)
-        -- print 'closing'
-        -- print(term_count)
+        --         print 'closing'
+        --         print(term_count)
         if is_exit then
+          is_exit = false
           if term_count == 0 then
             vim.api.nvim_del_augroup_by_name 'TermAutoResize'
+            term_auto_resize_augroup_id = nil
           end
-        else
+        elseif term_count == 1 then
           vim.api.nvim_del_augroup_by_name 'TermAutoResize'
+          term_auto_resize_augroup_id = nil
         end
-        is_exit = false
       end,
       on_exit = function()
         -- print('on_exit', term)
         term_count = term_count - 1
         is_exit = true
-        -- print 'exiting'
-        -- print(term_count)
+        --         print 'exiting'
+        --         print(term_count)
       end,
     }
     -- vim.api.nvim_create_autocmd('BufEnter', {

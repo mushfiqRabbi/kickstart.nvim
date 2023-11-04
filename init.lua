@@ -313,7 +313,7 @@ require('lazy').setup({
               cond = require('noice').api.statusline.mode.has,
               color = { fg = '#ff9e64' },
             },
-            -- 'encoding',
+            'encoding',
             -- 'fileformat',
             'filetype',
           },
@@ -745,7 +745,7 @@ vim.keymap.set('n', '<leader>SR', '<cmd>lua require("spectre").open_file_search(
 vim.defer_fn(function()
   require('nvim-treesitter.configs').setup {
     -- Add languages to be installed here that you want installed for treesitter
-    ensure_installed = { 'lua', 'vimdoc', 'vim', 'javascript', 'typescript', 'tsx', 'json' },
+    ensure_installed = { 'lua', 'vimdoc', 'vim', 'javascript', 'typescript', 'tsx', 'json', 'http' },
 
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
     auto_install = false,
