@@ -93,6 +93,24 @@ return {
         },
         opts = { skip = true },
       },
+
+      {
+        filter = {
+          event = 'msg_show',
+          kind = '',
+          find = 'change',
+        },
+        opts = { skip = true },
+      },
+
+      {
+        filter = {
+          event = 'msg_show',
+          kind = 'echo',
+          find = 'change',
+        },
+        opts = { skip = true },
+      },
       -- {
       --   filter = {
       --     event = 'msg_show',
