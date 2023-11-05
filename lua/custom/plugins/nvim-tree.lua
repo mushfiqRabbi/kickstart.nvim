@@ -17,10 +17,32 @@ return {
           enable = true,
         },
       },
-      -- update_focused_file = {
-      --   enable = true,
-      --   update_root = true,
-      -- },
+      view = {
+        width = function()
+          local resposive_width = math.floor(vim.o.columns * 0.15)
+          if resposive_width < 25 then
+            return 25
+          else
+            return resposive_width
+          end
+        end,
+        centralize_selection = true,
+      },
+      update_focused_file = {
+        enable = true,
+        update_root = true,
+      },
+      filters = {
+        custom = {
+          '^.git$',
+          '^.github$',
+          '^.vscode$',
+        },
+        exclude = {
+          '.env',
+          '.env.local',
+        },
+      },
     }
     vim.api.nvim_create_autocmd('QuitPre', {
       callback = function()
