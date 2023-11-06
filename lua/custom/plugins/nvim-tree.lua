@@ -18,14 +18,15 @@ return {
         },
       },
       view = {
-        width = function()
-          local resposive_width = math.floor(vim.o.columns * 0.15)
-          if resposive_width < 25 then
-            return 25
-          else
-            return resposive_width
-          end
-        end,
+        width = {},
+        --   function()
+        --   local resposive_width = math.floor(vim.o.columns * 0.15)
+        --   if resposive_width < 25 then
+        --     return 25
+        --   else
+        --     return resposive_width
+        --   end
+        -- end,
         centralize_selection = true,
       },
       update_focused_file = {
@@ -72,5 +73,21 @@ return {
         end
       end,
     })
+
+    -- vim.api.nvim_create_autocmd('BufEnter', {
+    --   -- pattern = 'NvimTree_*',
+    --   callback = function(ev)
+    --     print(vim.inspect(ev))
+    --     print(vim.api.nvim_buf_get_name(0))
+    --   end,
+    -- })
+    --
+    -- vim.api.nvim_create_autocmd('BufLeave', {
+    --   -- pattern = 'NvimTree_*',
+    --   callback = function(ev)
+    --     print(vim.inspect(ev))
+    --     print(vim.api.nvim_buf_get_name(0))
+    --   end,
+    -- })
   end,
 }

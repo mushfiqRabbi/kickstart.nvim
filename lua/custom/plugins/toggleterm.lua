@@ -51,7 +51,7 @@ return {
         --         print 'opening'
         --         print(term_count)
         vim.cmd 'wincmd p'
-        -- vim.cmd 'stopinsert'
+        vim.cmd 'stopinsert'
         if term_count == 1 or not term_auto_resize_augroup_id then
           term_auto_resize_augroup_id = vim.api.nvim_create_augroup('TermAutoResize', { clear = true })
           vim.api.nvim_create_autocmd('BufEnter', {
