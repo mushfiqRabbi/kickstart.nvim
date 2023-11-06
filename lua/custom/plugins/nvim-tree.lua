@@ -44,6 +44,12 @@ return {
         },
       },
     }
+
+    local api = require 'nvim-tree.api'
+    vim.keymap.set('n', '<C-g>', function()
+      api.tree.toggle { focus = false }
+    end, { noremap = true, desc = 'Toggle NvimTree' })
+
     vim.api.nvim_create_autocmd('QuitPre', {
       callback = function()
         local tree_wins = {}
