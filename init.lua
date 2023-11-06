@@ -573,20 +573,20 @@ require('telescope').setup {
         -- ['<C-q>'] = false,
         ['<C-q>'] = trouble.open_selected_with_trouble,
         ['<C-c>'] = require('telescope.actions').close,
-        ['<C-e>'] = function(prompt_bufnr)
-          local selection = require('telescope.actions.state').get_selected_entry()
-          local dir
-          if not selection.path then
-            dir = selection.value
-          else
-            dir = vim.fn.fnamemodify(selection.path, ':p:h')
-          end
-          require('telescope.actions').close(prompt_bufnr)
-          -- Depending on what you want put `cd`, `lcd`, `tcd`
-          vim.cmd(string.format('Oil %s', dir))
-          -- vim.cmd(string.format('lua MiniFiles.open(%s)', dir))
-          -- MiniFiles.open(dir, false)
-        end,
+        -- ['<C-e>'] = function(prompt_bufnr)
+        --   local selection = require('telescope.actions.state').get_selected_entry()
+        --   local dir
+        --   if not selection.path then
+        --     dir = selection.value
+        --   else
+        --     dir = vim.fn.fnamemodify(selection.path, ':p:h')
+        --   end
+        --   require('telescope.actions').close(prompt_bufnr)
+        --   -- Depending on what you want put `cd`, `lcd`, `tcd`
+        --   -- vim.cmd(string.format('Oil %s', dir))
+        --   -- vim.cmd(string.format('lua MiniFiles.open(%s)', dir))
+        --   -- MiniFiles.open(dir, false)
+        -- end,
         ['cd'] = function(prompt_bufnr)
           local selection = require('telescope.actions.state').get_selected_entry()
           local dir
@@ -605,19 +605,19 @@ require('telescope').setup {
         ['<C-q>'] = trouble.open_selected_with_trouble,
         ['<C-u>'] = false,
         ['<C-d>'] = false,
-        ['<C-e>'] = function(prompt_bufnr)
-          local selection = require('telescope.actions.state').get_selected_entry()
-          local dir
-          if not selection.path then
-            dir = selection.value
-          else
-            dir = vim.fn.fnamemodify(selection.path, ':p:h')
-          end
-          require('telescope.actions').close(prompt_bufnr)
-          -- Depending on what you want put `cd`, `lcd`, `tcd`
-          vim.cmd(string.format('Oil %s', dir))
-          -- MiniFiles.open(dir, false)
-        end,
+        -- ['<C-e>'] = function(prompt_bufnr)
+        --   local selection = require('telescope.actions.state').get_selected_entry()
+        --   local dir
+        --   if not selection.path then
+        --     dir = selection.value
+        --   else
+        --     dir = vim.fn.fnamemodify(selection.path, ':p:h')
+        --   end
+        --   require('telescope.actions').close(prompt_bufnr)
+        --   -- Depending on what you want put `cd`, `lcd`, `tcd`
+        --   vim.cmd(string.format('Oil %s', dir))
+        --   -- MiniFiles.open(dir, false)
+        -- end,
         ['<C-w>'] = function(prompt_bufnr)
           local selection = require('telescope.actions.state').get_selected_entry()
           local dir = vim.fn.fnamemodify(selection.path, ':p:h')
@@ -1240,6 +1240,8 @@ end, { noremap = true })
 
 vim.keymap.set({ 'n', 'v' }, '<C-q>t', '<cmd>tabclose<cr>', { noremap = true, desc = '[Q]uit [T]ab' })
 vim.keymap.set({ 'n', 'v' }, '<leader>dv', '<cmd>DiffviewOpen<cr>', { noremap = true, desc = '[D]iff [V]iew' })
+vim.keymap.set({ 'n', 'v' }, '<leader>L', '<cmd>Lazy<cr>', { noremap = true, desc = '[L]azy' })
+vim.keymap.set({ 'n', 'v' }, '<leader>M', '<cmd>Mason<cr>', { noremap = true, desc = '[M]ason' })
 
 -- vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'rounded' })
 
