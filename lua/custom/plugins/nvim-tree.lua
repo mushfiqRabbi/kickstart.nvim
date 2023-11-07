@@ -13,6 +13,16 @@ return {
     local HEIGHT_RATIO = 0.8 -- You can change this
     local WIDTH_RATIO = 0.5 -- You can change this too
     require('nvim-tree').setup {
+      diagnostics = {
+        enable = true,
+        show_on_dirs = true,
+        icons = {
+          error = '',
+          warning = '',
+          hint = '',
+          info = '',
+        },
+      },
       sync_root_with_cwd = true,
       renderer = {
         indent_markers = {
