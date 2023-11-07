@@ -26,6 +26,7 @@ return {
     vim.cmd 'autocmd! TermOpen term://* lua set_terminal_keymaps()'
 
     require('toggleterm').setup {
+      direction = 'float',
       size = function(term)
         if term.direction == 'horizontal' then
           if vim.fn.hostname() == 'DESKTOP-QP9KQE3' then
@@ -40,13 +41,19 @@ return {
       persist_mode = false,
       persist_size = false,
       open_mapping = [[<c-\>]],
-      on_create = function()
+      on_create = function(term)
+        if term.direction == 'float' then
+          return
+        end
         -- print('on_create', term.bufnr)
         term_count = term_count + 1
         --         print 'creating'
         --         print(term_count)
       end,
-      on_open = function()
+      on_open = function(term)
+        if term.direction == 'float' then
+          return
+        end
         -- print('on_open', term.bufnr)
         --         print 'opening'
         --         print(term_count)
@@ -78,7 +85,10 @@ return {
           })
         end
       end,
-      on_close = function()
+      on_close = function(term)
+        if term.direction == 'float' then
+          return
+        end
         -- print('on_close', term.bufnr)
         -- vim.api.nvim_del_autocmd(be)
         -- vim.api.nvim_del_autocmd(bl)
@@ -95,7 +105,10 @@ return {
           term_auto_resize_augroup_id = nil
         end
       end,
-      on_exit = function()
+      on_exit = function(term)
+        if term.direction == 'float' then
+          return
+        end
         -- print('on_exit', term)
         term_count = term_count - 1
         is_exit = true
