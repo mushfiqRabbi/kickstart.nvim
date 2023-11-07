@@ -93,6 +93,10 @@ return {
       api.tree.toggle()
     end, { noremap = true, desc = 'Toggle NvimTree' })
 
+    api.events.subscribe(api.events.Event.FileCreated, function(file)
+      vim.cmd('edit ' .. file.fname)
+    end)
+
     vim.api.nvim_create_autocmd('QuitPre', {
       callback = function()
         local tree_wins = {}

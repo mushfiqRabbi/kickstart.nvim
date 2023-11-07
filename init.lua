@@ -56,6 +56,7 @@ vim.opt.expandtab = true
 -- vim.g['rooter_cd_cmd'] = 'lcd'
 vim.opt.scrolloff = 7
 vim.o.cursorline = true
+vim.opt.colorcolumn = '80'
 
 vim.g['rooter_change_directory_for_non_project_files'] = 'current'
 
