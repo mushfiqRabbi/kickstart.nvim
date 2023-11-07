@@ -243,12 +243,12 @@ require('lazy').setup({
   },
 
   {
-    -- Theme inspired by Atom
-    'navarasu/onedark.nvim',
-    priority = 1000,
-    config = function()
-      vim.cmd.colorscheme 'onedark'
-    end,
+    -- -- Theme inspired by Atom
+    -- 'navarasu/onedark.nvim',
+    -- priority = 1000,
+    -- config = function()
+    --   vim.cmd.colorscheme 'onedark'
+    -- end,
   },
 
   {
@@ -293,8 +293,8 @@ require('lazy').setup({
           -- section_separators = { left = '', right = '' },
           section_separators = { left = '|', right = '|' },
 
-          theme = 'onedark',
-          -- theme = 'tokyonight',
+          -- theme = 'onedark',
+          theme = 'tokyonight',
         },
         sections = {
           lualine_x = {
