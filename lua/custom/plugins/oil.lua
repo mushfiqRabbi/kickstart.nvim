@@ -40,7 +40,7 @@ return {
       skip_confirm_for_simple_edits = true,
     }
 
-    vim.keymap.set({ 'n', 'v', 'i' }, '<C-g>', '<cmd>Oil<CR>', { noremap = true, silent = true, desc = '[E]xplore files/folders' })
+    vim.keymap.set({ 'n', 'v', 'i' }, '<C-g>', '<cmd>Oil<CR>', { noremap = true, silent = true, desc = '[] Explore files/folders' })
 
     vim.api.nvim_create_autocmd('User', {
       pattern = 'OilEnter',

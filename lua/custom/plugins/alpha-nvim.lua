@@ -14,7 +14,7 @@ return {
       dashboard.button('SPC f p', '  [F]ind [P]rojects', ':Telescope projects<CR>'),
       dashboard.button('SPC F F', '󰱽  [F]ind [F]iles', ':lua require("telescope.builtin").find_files({ cwd = vim.env.HOME })<CR>'),
       dashboard.button('SPC f o', '  Recent files', ':Telescope oldfiles<CR>'),
-      dashboard.button('CTRL g', '  File browser', '<cmd>NvimTreeToggle<CR>'),
+      dashboard.button('CTRL g', '  File browser', '<cmd>Oil<CR>'),
       -- dashboard.button('SPC l g', '󰺯  Live grep', ':Telescope live_grep<CR>'),
       -- dashboard.button('SPC s w', '󰈭  Find word', ':Telescope grep_string<CR>'),
       dashboard.button('SPC f h', '󰋖  [F]ind [H]elp', ':Telescope help_tags<CR>'),
