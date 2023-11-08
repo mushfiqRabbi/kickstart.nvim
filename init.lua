@@ -127,7 +127,6 @@ vim.cmd [[
 --   ]]
 
 vim.keymap.set('i', '<C-w>', '<C-c><C-w>', { noremap = true })
-vim.keymap.set('i', '<C-g>', '<C-c><C-g>', { noremap = true })
 
 -- Install package manager
 --    https://github.com/folke/lazy.nvim

@@ -89,9 +89,8 @@ return {
     }
 
     local api = require 'nvim-tree.api'
-    vim.keymap.set('n', '<C-g>', function()
-      api.tree.toggle()
-    end, { noremap = true, desc = 'Toggle NvimTree' })
+    vim.keymap.set('n', '<C-g>', '<cmd>NvimTreeToggle<CR>', { noremap = true, desc = 'Toggle NvimTree' })
+    vim.keymap.set('i', '<C-g>', '<C-c>:NvimTreeToggle<CR>', { noremap = true, desc = 'Toggle NvimTree' })
 
     api.events.subscribe(api.events.Event.FileCreated, function(file)
       vim.cmd('edit ' .. file.fname)
