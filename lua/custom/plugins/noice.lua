@@ -131,7 +131,7 @@ return {
       config = function()
         require('notify').setup {
           on_open = function(win)
-            vim.api.nvim_win_set_config(win, { focusable = false })
+            vim.api.nvim_win_set_config(win, { focusable = false, zindex = 100 })
           end,
         }
       end,
