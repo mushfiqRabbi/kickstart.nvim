@@ -206,6 +206,7 @@ require('lazy').setup({
       'hrsh7th/cmp-path',
       -- 'f3fora/cmp-spell',
       'hrsh7th/cmp-cmdline',
+      'dmitmel/cmp-cmdline-history',
       -- 'hrsh7th/cmp-calc',
       -- 'hrsh7th/cmp-emoji',
     },
@@ -298,10 +299,10 @@ require('lazy').setup({
           ignore_focus = { 'NvimTree' },
           extensions = { 'nvim-tree' },
           icons_enabled = true,
-          -- component_separators = { left = '', right = '' },
-          component_separators = { left = '|', right = '|' },
-          -- section_separators = { left = '', right = '' },
-          section_separators = { left = '|', right = '|' },
+          component_separators = { left = '', right = '' },
+          -- component_separators = { left = '|', right = '|' },
+          section_separators = { left = '', right = '' },
+          -- section_separators = { left = '|', right = '|' },
 
           -- theme = 'onedark',
           -- theme = 'tokyonight',
@@ -1016,10 +1017,10 @@ cmp.setup {
     documentation = cmp.config.window.bordered(),
   },
   mapping = cmp.mapping.preset.insert {
-    ['<C-n>'] = cmp.mapping.select_next_item(),
-    ['<C-p>'] = cmp.mapping.select_prev_item(),
-    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    -- ['<C-n>'] = cmp.mapping.select_next_item(),
+    -- ['<C-p>'] = cmp.mapping.select_prev_item(),
+    -- ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    -- ['<C-f>'] = cmp.mapping.scroll_docs(4),
     -- ['<C-Space>'] = cmp.mapping.complete {},
     ['<C-Space>'] = cmp.mapping {
       i = function(fallback)
@@ -1183,6 +1184,7 @@ cmp.setup.cmdline(':', {
   sources = cmp.config.sources {
     { name = 'cmdline' },
     { name = 'path' },
+    { name = 'cmdline_history' },
   },
 })
 
