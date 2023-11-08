@@ -171,7 +171,17 @@ require('lazy').setup({
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
+      {
+        'j-hui/fidget.nvim',
+        tag = 'legacy',
+        config = function()
+          require('fidget').setup {
+            --   window = {
+            --     blend = 100,
+            --   },
+          }
+        end,
+      },
 
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
@@ -294,7 +304,8 @@ require('lazy').setup({
           section_separators = { left = '|', right = '|' },
 
           -- theme = 'onedark',
-          theme = 'tokyonight',
+          -- theme = 'tokyonight',
+          theme = 'catppuccin-macchiato',
         },
         sections = {
           lualine_x = {
@@ -324,11 +335,19 @@ require('lazy').setup({
       }
     end,
   },
-
+  -- '▏'
   {
-    -- 'lukas-reineke/indent-blankline.nvim',
-    -- main = 'ibl',
-    -- opts = {},
+    'lukas-reineke/indent-blankline.nvim',
+    main = 'ibl',
+    opts = {
+      indent = {
+        char = '▏',
+      },
+      scope = {
+        show_start = false,
+        show_end = false,
+      },
+    },
   },
 
   -- "gc" to comment visual regions/lines
@@ -572,22 +591,8 @@ require('telescope').setup {
       n = {
         -- ['<C-q>'] = false,
         ['<C-q>'] = trouble.open_selected_with_trouble,
-        ['<C-c>'] = require('telescope.actions').close,
-        -- ['<C-e>'] = function(prompt_bufnr)
-        --   local selection = require('telescope.actions.state').get_selected_entry()
-        --   local dir
-        --   if not selection.path then
-        --     dir = selection.value
-        --   else
-        --     dir = vim.fn.fnamemodify(selection.path, ':p:h')
-        --   end
-        --   require('telescope.actions').close(prompt_bufnr)
-        --   -- Depending on what you want put `cd`, `lcd`, `tcd`
-        --   -- vim.cmd(string.format('Oil %s', dir))
-        --   -- vim.cmd(string.format('lua MiniFiles.open(%s)', dir))
-        --   -- MiniFiles.open(dir, false)
-        -- end,
-        ['cd'] = function(prompt_bufnr)
+        -- ['<C-c>'] = require('telescope.actions').close,
+        ['<C-g>'] = function(prompt_bufnr)
           local selection = require('telescope.actions.state').get_selected_entry()
           local dir
           if not selection.path then
@@ -597,15 +602,11 @@ require('telescope').setup {
           end
           require('telescope.actions').close(prompt_bufnr)
           -- Depending on what you want put `cd`, `lcd`, `tcd`
-          vim.cmd(string.format('silent lcd %s', dir))
+          vim.cmd(string.format('Oil %s', dir))
+          -- vim.cmd(string.format('lua MiniFiles.open(%s)', dir))
+          -- MiniFiles.open(dir, false)
         end,
-      },
-      i = {
-        -- ['<C-q>'] = false,
-        ['<C-q>'] = trouble.open_selected_with_trouble,
-        ['<C-u>'] = false,
-        ['<C-d>'] = false,
-        -- ['<C-e>'] = function(prompt_bufnr)
+        -- ['cd'] = function(prompt_bufnr)
         --   local selection = require('telescope.actions.state').get_selected_entry()
         --   local dir
         --   if not selection.path then
@@ -615,16 +616,34 @@ require('telescope').setup {
         --   end
         --   require('telescope.actions').close(prompt_bufnr)
         --   -- Depending on what you want put `cd`, `lcd`, `tcd`
-        --   vim.cmd(string.format('Oil %s', dir))
-        --   -- MiniFiles.open(dir, false)
+        --   vim.cmd(string.format('silent lcd %s', dir))
         -- end,
-        ['<C-w>'] = function(prompt_bufnr)
+      },
+      i = {
+        -- ['<C-q>'] = false,
+        ['<C-q>'] = trouble.open_selected_with_trouble,
+        -- ['<C-u>'] = false,
+        -- ['<C-d>'] = false,
+        ['<C-g>'] = function(prompt_bufnr)
           local selection = require('telescope.actions.state').get_selected_entry()
-          local dir = vim.fn.fnamemodify(selection.path, ':p:h')
+          local dir
+          if not selection.path then
+            dir = selection.value
+          else
+            dir = vim.fn.fnamemodify(selection.path, ':p:h')
+          end
           require('telescope.actions').close(prompt_bufnr)
           -- Depending on what you want put `cd`, `lcd`, `tcd`
-          vim.cmd(string.format('silent lcd %s', dir))
+          vim.cmd(string.format('Oil %s', dir))
+          -- MiniFiles.open(dir, false)
         end,
+        -- ['<C-w>'] = function(prompt_bufnr)
+        --   local selection = require('telescope.actions.state').get_selected_entry()
+        --   local dir = vim.fn.fnamemodify(selection.path, ':p:h')
+        --   require('telescope.actions').close(prompt_bufnr)
+        --   -- Depending on what you want put `cd`, `lcd`, `tcd`
+        --   vim.cmd(string.format('silent lcd %s', dir))
+        -- end,
       },
     },
   },
@@ -748,7 +767,7 @@ vim.keymap.set('n', '<leader>SR', '<cmd>lua require("spectre").open_file_search(
 vim.defer_fn(function()
   require('nvim-treesitter.configs').setup {
     -- Add languages to be installed here that you want installed for treesitter
-    ensure_installed = { 'lua', 'vimdoc', 'vim', 'javascript', 'typescript', 'tsx', 'json', 'http' },
+    ensure_installed = { 'lua', 'vimdoc', 'vim', 'javascript', 'typescript', 'tsx', 'json', 'http', 'regex', 'bash', 'markdown', 'markdown_inline' },
 
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
     auto_install = false,
@@ -1243,7 +1262,19 @@ vim.keymap.set({ 'n', 'v' }, '<leader>dv', '<cmd>DiffviewOpen<cr>', { noremap = 
 vim.keymap.set({ 'n', 'v' }, '<leader>L', '<cmd>Lazy<cr>', { noremap = true, desc = '[L]azy' })
 vim.keymap.set({ 'n', 'v' }, '<leader>M', '<cmd>Mason<cr>', { noremap = true, desc = '[M]ason' })
 
-vim.cmd 'hi MatchParen guifg=lightgray guibg=#7f7f7f'
+-- vim.cmd 'hi MatchParen guifg=#ffffff guibg=#7f7f7f'
+-- --
+-- vim.api.nvim_create_autocmd('InsertEnter', {
+--   callback = function()
+--     vim.cmd 'hi MatchParen cterm=bold gui=bold guifg=#ff9e64 guibg=NONE'
+--   end,
+-- })
+--
+-- vim.api.nvim_create_autocmd('InsertLeave', {
+--   callback = function()
+--     vim.cmd 'hi MatchParen guifg=#ffffff guibg=#7f7f7f'
+--   end,
+-- })
 
 -- vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'rounded' })
 
