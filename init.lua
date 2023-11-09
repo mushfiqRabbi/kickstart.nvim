@@ -950,6 +950,8 @@ local servers = {
   jsonls = {},
 
   tailwindcss = {},
+
+  eslint = {},
 }
 
 -- Setup neovim lua configuration
