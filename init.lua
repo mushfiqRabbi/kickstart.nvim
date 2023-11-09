@@ -947,8 +947,6 @@ local servers = {
 
   emmet_language_server = {},
 
-  jsonls = {},
-
   tailwindcss = {},
 
   eslint = {},
