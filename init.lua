@@ -354,12 +354,23 @@ require('lazy').setup({
   -- "gc" to comment visual regions/lines
   {
     'numToStr/Comment.nvim',
-    event = 'VeryLazy',
-    init = function()
-      vim.o.timeout = true
-      vim.o.timeoutlen = 300
+    -- event = 'VeryLazy',
+    -- init = function()
+    --   vim.o.timeout = true
+    --   vim.o.timeoutlen = 300
+    -- end,
+    dependencies = {
+      'JoosepAlviste/nvim-ts-context-commentstring',
+    },
+    --opts = {
+    --  pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
+    --},
+    config = function()
+      require('Comment').setup {
+        pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
+      }
     end,
-    opts = {},
+    lazy = false,
   },
 
   -- Fuzzy Finder (files, lsp, etc)
@@ -389,6 +400,7 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
+      'JoosepAlviste/nvim-ts-context-commentstring',
     },
     build = ':TSUpdate',
   },
@@ -775,15 +787,15 @@ vim.defer_fn(function()
 
     highlight = { enable = true },
     indent = { enable = true },
-    incremental_selection = {
-      -- enable = true,
-      -- keymaps = {
-      --   init_selection = '<c-space>',
-      --   node_incremental = '<c-space>',
-      --   -- scope_incremental = '<c-s>',
-      --   -- node_decremental = '<M-space>',
-      -- },
-    },
+    -- incremental_selection = {
+    -- enable = true,
+    -- keymaps = {
+    --   init_selection = '<c-space>',
+    --   node_incremental = '<c-space>',
+    --   -- scope_incremental = '<c-s>',
+    --   -- node_decremental = '<M-space>',
+    -- },
+    -- },
     textobjects = {
       select = {
         enable = true,
@@ -827,6 +839,11 @@ vim.defer_fn(function()
       --     ['<leader>A'] = '@parameter.inner',
       --   },
       -- },
+    },
+
+    context_commentstring = {
+      enable = true,
+      enable_autocmd = false,
     },
   }
 end, 0)
