@@ -40,7 +40,6 @@ P.S. You can delete this when you're done too. It's your config now :)
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
-
 -- local auto_diag_float
 vim.g['python3_host_prog'] = '/home/mushfiq/.pyenv/versions/py3nvim/bin/python'
 vim.g.mapleader = ' '
@@ -998,9 +997,9 @@ mason_lspconfig.setup_handlers {
   end,
 }
 
-vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-  underline = false,
-})
+-- vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+--   underline = false,
+-- })
 
 -- [[ Configure nvim-cmp ]]
 -- See `:help cmp`
