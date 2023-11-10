@@ -8,6 +8,7 @@ return {
       },
       virtual_text = {
         enabled = true,
+        text = '',
       },
       -- float = {
       --   enabled = true,
