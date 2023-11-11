@@ -15,6 +15,15 @@ return {
     },
   },
   config = function()
+    vim.keymap.set('n', '<leader>dd', function()
+      require('trouble').toggle 'document_diagnostics'
+    end, { desc = '[D]iagnostic [D]ocument' })
+    vim.keymap.set('n', '<leader>dw', function()
+      require('trouble').toggle 'workspace_diagnostics'
+    end, { desc = '[D]iagnostic [W]orkspace' })
+    -- vim.keymap.set('n', '<leader>ql', function()
+    --   require('trouble').toggle 'quickfix'
+    -- end, { desc = '[Q]uickfix [L]ist' })
     -- Lua
     -- vim.keymap.set('n', '<leader>xx', function()
     --   require('trouble').toggle()

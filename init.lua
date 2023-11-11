@@ -853,12 +853,6 @@ end, 0)
 vim.keymap.set('n', '<leader>dn', vim.diagnostic.goto_next, { desc = '[D]iagnostic [N]ext' })
 vim.keymap.set('n', '<leader>dp', vim.diagnostic.goto_prev, { desc = '[D]iagnostic [P]revious' })
 vim.keymap.set('n', '<leader>df', vim.diagnostic.open_float, { desc = '[D]iagnostic [F]loat' })
-vim.keymap.set('n', '<leader>dl', function()
-  require('trouble').toggle 'document_diagnostics'
-end, { desc = '[D]iagnostic [L]ist' })
-vim.keymap.set('n', '<leader>ql', function()
-  require('trouble').toggle 'quickfix'
-end, { desc = '[Q]uickfix [L]ist' })
 
 -- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.
