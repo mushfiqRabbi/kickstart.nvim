@@ -16,7 +16,7 @@ return {
       },
       integrations = {
         fidget = true,
-        hop = true,
+        -- hop = true,
         mason = true,
         noice = true,
         notify = true,
