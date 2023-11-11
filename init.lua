@@ -550,7 +550,15 @@ require('telescope').setup {
 
 local trouble = require 'trouble.providers.telescope'
 
-local actions = require 'telescope.actions'
+-- local actions = require 'telescope.actions'
+--
+
+local is_image = function(filepath)
+  local image_extensions = { 'png', 'jpg', 'jpeg' } -- Supported image formats
+  local split_path = vim.split(filepath:lower(), '.', { plain = true })
+  local extension = split_path[#split_path]
+  return vim.tbl_contains(image_extensions, extension)
+end
 
 require('telescope').setup {
   defaults = {
@@ -560,12 +568,6 @@ require('telescope').setup {
     sorting_strategy = 'ascending',
     preview = {
       mime_hook = function(filepath, bufnr, opts)
-        local is_image = function(filepath)
-          local image_extensions = { 'png', 'jpg' } -- Supported image formats
-          local split_path = vim.split(filepath:lower(), '.', { plain = true })
-          local extension = split_path[#split_path]
-          return vim.tbl_contains(image_extensions, extension)
-        end
         if is_image(filepath) then
           local term = vim.api.nvim_open_term(bufnr, {})
           local function send_output(_, data, _)
@@ -1210,7 +1212,7 @@ cmp.setup.cmdline(':', {
 
 -- If you want insert `(` after select function or method item
 local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
-local cmp = require 'cmp'
+-- local cmp = require 'cmp'
 cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
 
 vim.api.nvim_create_autocmd('User', {
