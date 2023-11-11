@@ -8,6 +8,6 @@ return {
       --- Get the same options from Packer setup
       skip_ssl_verification = true,
     }
-    vim.keymap.set('n', '<leader>rr', '<Plug>RestNvim', { noremap = true, silent = true })
+    vim.keymap.set('n', '<leader>rr', '<Plug>RestNvim', { noremap = true, silent = true, desc = '[R]est [R]equest' })
   end,
 }

@@ -97,12 +97,12 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'CursorHoldI', 'FocusGai
   pattern = { '*' },
 })
 
-vim.cmd [[
-    let g:VM_maps = {}
-    let g:VM_maps['Find Under'] = '<leader>m'
-    let g:VM_maps['Find Subword Under'] = '<leader>m'
-    let g:VM_mouse_mappings = 1
-    ]]
+-- vim.cmd [[
+--     let g:VM_maps = {}
+--     let g:VM_maps['Find Under'] = '<leader>m'
+--     let g:VM_maps['Find Subword Under'] = '<leader>m'
+--     let g:VM_mouse_mappings = 1
+--     ]]
 
 vim.filetype.add {
   pattern = {
@@ -729,18 +729,18 @@ pcall(require('telescope').load_extension 'undo')
 
 -- See `:help telescope.builtin`
 vim.keymap.set('n', '<leader>fo', "<cmd>lua require('telescope.builtin').oldfiles()<cr>", { desc = '[F]ind recently [O]pened files' })
-vim.keymap.set('n', '<leader><space>', "<cmd>lua require('telescope.builtin').buffers()<cr>", { desc = '[] Find  buffers' })
-vim.keymap.set('n', '<leader>/', "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>", { desc = 'Fuzzy find inside current buffer' })
+vim.keymap.set('n', '<leader>fb', "<cmd>lua require('telescope.builtin').buffers()<cr>", { desc = '[F]ind  [B]uffer' })
+vim.keymap.set('n', '<leader><space>', "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>", { desc = '[] Fuzzy find in current buffer' })
 vim.keymap.set('n', '<leader>ff', "<cmd>lua require('telescope.builtin').find_files()<cr>", { desc = '[F]ind [F]iles' })
 -- vim.keymap.set('n', '<leader>gs', "<cmd>lua require('telescope.builtin').git_status()<cr>", { desc = '[G]it [S]tatus' })
 vim.keymap.set('n', '<leader>FF', "<cmd>lua require('telescope.builtin').find_files({ cwd = vim.env.HOME })<cr>", { desc = '[F]ind [F]iles in $HOME' })
 vim.keymap.set('n', '<leader>fh', "<cmd>lua require('telescope.builtin').help_tags()<cr>", { desc = '[F]ind [H]elp tags' })
 -- vim.keymap.set('n', '<leader>fw', "<cmd>lua require('telescope.builtin').grep_string()<cr>", { desc = '[F]ind [W]ord under cursor' })
-vim.keymap.set('n', '<leader>lg', "<cmd>lua require('telescope.builtin').live_grep()<cr>", { desc = '[L]ive [G]rep' })
+vim.keymap.set('n', '<leader>fg', "<cmd>lua require('telescope.builtin').live_grep()<cr>", { desc = '[F]ind using live [G]rep' })
 vim.keymap.set('n', '<leader>fd', "<cmd>lua require('telescope.builtin').diagnostics()<cr>", { desc = '[F]ind [D]iagnostics' })
-vim.keymap.set('n', '<leader>yh', "<cmd>lua require('telescope').extensions.yank_history.yank_history()<cr>", { desc = '[Y]ank [H]istory' })
+vim.keymap.set('n', '<leader>fy', "<cmd>lua require('telescope').extensions.yank_history.yank_history()<cr>", { desc = '[F]ind in [Y]ank history' })
 vim.keymap.set('n', '<leader>fp', "<cmd>lua require('telescope').extensions.projects.projects()<cr>", { desc = '[F]ind [P]roject' })
-vim.keymap.set('n', '<leader>uh', "<cmd>lua require('telescope').extensions.undo.undo()<cr>", { desc = '[U]ndo [H]istory' })
+vim.keymap.set('n', '<leader>fu', "<cmd>lua require('telescope').extensions.undo.undo()<cr>", { desc = '[F]ind in [U]ndo history' })
 vim.keymap.set('n', '<leader>sr', '<cmd>lua require("spectre").open()<CR>', {
   desc = '[S]earch and [R]eplace',
 })
@@ -848,15 +848,15 @@ vim.defer_fn(function()
 end, 0)
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '<leader>dn', vim.diagnostic.goto_next, { desc = 'Go to previous diagnostic message' })
-vim.keymap.set('n', '<leader>dp', vim.diagnostic.goto_prev, { desc = 'Go to next diagnostic message' })
-vim.keymap.set('n', '<leader>df', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
+vim.keymap.set('n', '<leader>dn', vim.diagnostic.goto_next, { desc = '[D]iagnostic [N]ext' })
+vim.keymap.set('n', '<leader>dp', vim.diagnostic.goto_prev, { desc = '[D]iagnostic [P]revious' })
+vim.keymap.set('n', '<leader>df', vim.diagnostic.open_float, { desc = '[D]iagnostic [F]loat' })
 vim.keymap.set('n', '<leader>dl', function()
   require('trouble').toggle 'document_diagnostics'
-end, { desc = 'Open diagnostics list' })
+end, { desc = '[D]iagnostic [L]ist' })
 vim.keymap.set('n', '<leader>ql', function()
   require('trouble').toggle 'quickfix'
-end, { desc = 'Open quickfix list' })
+end, { desc = '[Q]uickfix [L]ist' })
 
 -- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.
