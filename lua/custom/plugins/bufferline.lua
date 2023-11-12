@@ -44,7 +44,7 @@ return {
             end
 
             if hint ~= 0 then
-              table.insert(result, { text = '  ' .. hint, fg = '#A3BA5E' })
+              table.insert(result, { text = '  ' .. hint, fg = '#A3BA5E' })
             end
 
             if info ~= 0 then

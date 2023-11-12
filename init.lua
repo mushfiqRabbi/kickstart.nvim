@@ -343,10 +343,10 @@ require('lazy').setup({
       indent = {
         char = '▏',
       },
-      -- scope = {
-      --   show_start = false,
-      --   show_end = false,
-      -- },
+      scope = {
+        show_start = false,
+        show_end = false,
+      },
     },
   },
 
@@ -1226,13 +1226,13 @@ local signs = {
   --   JetBrains friendly icons
   -- Error = ' ',
   -- Warn = ' ',
-  -- Hint = ' ',
+  Hint = ' ',
   -- Info = ' ',
 
   -- CaskaydiaCove friendly icons
   Error = ' ',
   Warn = ' ',
-  Hint = ' ',
+  -- Hint = ' ',
   Info = ' ',
 }
 for type, icon in pairs(signs) do
