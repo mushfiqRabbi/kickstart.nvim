@@ -7,5 +7,6 @@ return {
       default_picker = 'telescope',
       default_action = 'system',
     }
+    vim.keymap.set('n', '<leader>uv', '<cmd>UrlView<cr>', { desc = '[U]rl [V]iew' })
   end,
 }
