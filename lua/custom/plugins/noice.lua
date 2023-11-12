@@ -14,10 +14,10 @@ return {
         enabled = false,
       },
       signature = {
-        -- enabled = false,
-        auto_open = {
-          enabled = false,
-        },
+        enabled = false,
+        -- auto_open = {
+        --   enabled = false,
+        -- },
       },
       -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
       override = {
