@@ -14,24 +14,24 @@ return {
       highlights = require('catppuccin.groups.integrations.bufferline').get(),
       options = {
         --   always_show_bufferline = false,
-        -- indicator = {
-        --   style = 'underline',
-        -- },
+        indicator = {
+          style = 'underline',
+        },
         diagnostics = 'nvim_lsp',
         diagnostics_indicator = function(count, level, diagnostics_dict, context)
           local icon = level:match 'error' and ' ' or ' '
           return ' ' .. icon .. count
         end,
-        offsets = {
-          {
-            filetype = 'NvimTree',
-            text = function()
-              return vim.fn.getcwd()
-            end,
-            highlight = 'Directory',
-            separator = true, -- use a "true" to enable the default, or set your own character
-          },
-        },
+        -- offsets = {
+        --   {
+        --     filetype = 'NvimTree',
+        --     text = function()
+        --       return vim.fn.getcwd()
+        --     end,
+        --     highlight = 'Directory',
+        --     separator = true, -- use a "true" to enable the default, or set your own character
+        --   },
+        -- },
         custom_areas = {
           right = function()
             local result = {}
@@ -59,6 +59,7 @@ return {
             return result
           end,
         },
+        -- separator_style = 'thick',
       },
     }
     vim.keymap.set({ 'n', 'i', 'v' }, '<C-l>', '<cmd>BufferLineCycleNext<cr>', { noremap = true, silent = true })
