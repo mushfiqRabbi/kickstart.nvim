@@ -555,56 +555,56 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 --   }
 -- end
 
-local previewers = require 'telescope.previewers'
-local Job = require 'plenary.job'
-local new_maker = function(filepath, bufnr, opts)
-  filepath = vim.fn.expand(filepath)
-  Job:new({
-    command = 'file',
-    args = { '--mime-type', '-b', filepath },
-    on_exit = function(j)
-      -- local mime_type = vim.split(j:result()[1], '/')[1]
-      local is_preview = false
-      if string.match(j:result()[1], 'text') then
-        is_preview = true
-      elseif string.match(j:result()[1], 'json') then
-        is_preview = true
-      elseif string.match(j:result()[1], 'jpg') then
-        is_preview = true
-      elseif string.match(j:result()[1], 'jpeg') then
-        is_preview = true
-      elseif string.match(j:result()[1], 'png') then
-        is_preview = true
-      end
-      if is_preview then
-        previewers.buffer_previewer_maker(filepath, bufnr, opts)
-      else
-        -- maybe we want to write something to the buffer here
-        vim.schedule(function()
-          vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, { 'BINARY' })
-        end)
-      end
-    end,
-  }):sync()
-end
+-- local previewers = require 'telescope.previewers'
+-- local Job = require 'plenary.job'
+-- local new_maker = function(filepath, bufnr, opts)
+--   filepath = vim.fn.expand(filepath)
+--   Job:new({
+--     command = 'file',
+--     args = { '--mime-type', '-b', filepath },
+--     on_exit = function(j)
+--       -- local mime_type = vim.split(j:result()[1], '/')[1]
+--       local is_preview = false
+--       if string.match(j:result()[1], 'text') then
+--         is_preview = true
+--       elseif string.match(j:result()[1], 'json') then
+--         is_preview = true
+--       elseif string.match(j:result()[1], 'jpg') then
+--         is_preview = true
+--       elseif string.match(j:result()[1], 'jpeg') then
+--         is_preview = true
+--       elseif string.match(j:result()[1], 'png') then
+--         is_preview = true
+--       end
+--       if is_preview then
+--         previewers.buffer_previewer_maker(filepath, bufnr, opts)
+--       else
+--         -- maybe we want to write something to the buffer here
+--         vim.schedule(function()
+--           vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, { 'BINARY' })
+--         end)
+--       end
+--     end,
+--   }):sync()
+-- end
 
-require('telescope').setup {
-  defaults = {
-    buffer_previewer_maker = new_maker,
-  },
-}
+-- require('telescope').setup {
+--   defaults = {
+--     buffer_previewer_maker = new_maker,
+--   },
+-- }
 
 local trouble = require 'trouble.providers.telescope'
 
 -- local actions = require 'telescope.actions'
 --
 
-local is_image = function(filepath)
-  local image_extensions = { 'png', 'jpg', 'jpeg' } -- Supported image formats
-  local split_path = vim.split(filepath:lower(), '.', { plain = true })
-  local extension = split_path[#split_path]
-  return vim.tbl_contains(image_extensions, extension)
-end
+-- local is_image = function(filepath)
+--   local image_extensions = { 'png', 'jpg', 'jpeg' } -- Supported image formats
+--   local split_path = vim.split(filepath:lower(), '.', { plain = true })
+--   local extension = split_path[#split_path]
+--   return vim.tbl_contains(image_extensions, extension)
+-- end
 
 require('telescope').setup {
   defaults = {
@@ -613,23 +613,26 @@ require('telescope').setup {
     dynamic_preview_title = true,
     sorting_strategy = 'ascending',
     preview = {
-      mime_hook = function(filepath, bufnr, opts)
-        if is_image(filepath) then
-          local term = vim.api.nvim_open_term(bufnr, {})
-          local function send_output(_, data, _)
-            for _, d in ipairs(data) do
-              vim.api.nvim_chan_send(term, d .. '\r\n')
-            end
-          end
-          vim.fn.jobstart({
-            'catimg',
-            filepath, -- Terminal image viewer command
-          }, { on_stdout = send_output, stdout_buffered = true, pty = true })
-        else
-          require('telescope.previewers.utils').set_preview_message(bufnr, opts.winid, 'Binary cannot be previewed')
-        end
-      end,
+      filesize_limit = 0.1, -- MB
     },
+    -- preview = {
+    --   mime_hook = function(filepath, bufnr, opts)
+    --     if is_image(filepath) then
+    --       local term = vim.api.nvim_open_term(bufnr, {})
+    --       local function send_output(_, data, _)
+    --         for _, d in ipairs(data) do
+    --           vim.api.nvim_chan_send(term, d .. '\r\n')
+    --         end
+    --       end
+    --       vim.fn.jobstart({
+    --         'catimg',
+    --         filepath, -- Terminal image viewer command
+    --       }, { on_stdout = send_output, stdout_buffered = true, pty = true })
+    --     else
+    --       require('telescope.previewers.utils').set_preview_message(bufnr, opts.winid, 'Binary cannot be previewed')
+    --     end
+    --   end,
+    -- },
     layout_strategy = 'horizontal',
     layout_config = {
       width = 0.9,
