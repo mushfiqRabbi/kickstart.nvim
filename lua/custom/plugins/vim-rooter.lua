@@ -1,3 +1,4 @@
 return {
-  'airblade/vim-rooter',
+  'mushfiqRabbi/vim-rooter',
+  branch = 'tork',
 }

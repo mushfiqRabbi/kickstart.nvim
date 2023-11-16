@@ -682,6 +682,20 @@ require('telescope').setup {
         --   -- Depending on what you want put `cd`, `lcd`, `tcd`
         --   vim.cmd(string.format('silent lcd %s', dir))
         -- end,
+        ['<C-\\>'] = function(prompt_bufnr)
+          local selection = require('telescope.actions.state').get_selected_entry()
+          local dir
+          if not selection.path then
+            dir = selection.value
+          else
+            dir = vim.fn.fnamemodify(selection.path, ':p:h')
+          end
+          require('telescope.actions').close(prompt_bufnr)
+          -- print(dir)
+          -- print(vim.fn.FindRootDirectory(dir))
+          local root_dir = vim.fn.FindRootDirectory(dir)
+          vim.cmd(string.format('ToggleTerm dir=%s', root_dir))
+        end,
       },
       i = {
         -- ['<C-q>'] = false,
@@ -708,6 +722,21 @@ require('telescope').setup {
         --   -- Depending on what you want put `cd`, `lcd`, `tcd`
         --   vim.cmd(string.format('silent lcd %s', dir))
         -- end,
+        ['<C-\\>'] = function(prompt_bufnr)
+          -- vim.cmd 'stopinsert!'
+          local selection = require('telescope.actions.state').get_selected_entry()
+          local dir
+          if not selection.path then
+            dir = selection.value
+          else
+            dir = vim.fn.fnamemodify(selection.path, ':p:h')
+          end
+          require('telescope.actions').close(prompt_bufnr)
+          -- print(dir)
+          -- print(vim.fn.FindRootDirectory(dir))
+          local root_dir = vim.fn.FindRootDirectory(dir)
+          vim.cmd(string.format('ToggleTerm dir=%s', root_dir))
+        end,
       },
     },
   },
@@ -997,6 +1026,8 @@ local servers = {
   -- rust_analyzer = {},
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
   --
+  vimls = {},
+
   tsserver = {},
 
   lua_ls = {
