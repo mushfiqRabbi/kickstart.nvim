@@ -1373,6 +1373,8 @@ vim.keymap.set({ 'n', 'v' }, '<leader>dv', '<cmd>DiffviewOpen<cr>', { noremap = 
 vim.keymap.set({ 'n', 'v' }, '<leader>L', '<cmd>Lazy<cr>', { noremap = true, desc = '[L]azy' })
 vim.keymap.set({ 'n', 'v' }, '<leader>M', '<cmd>Mason<cr>', { noremap = true, desc = '[M]ason' })
 
+vim.cmd 'hi DiagnosticUnderlineError cterm=undercurl gui=undercurl guisp=#ed8796'
+
 -- vim.cmd 'hi MatchParen guifg=#ffffff guibg=#7f7f7f'
 -- --
 -- vim.api.nvim_create_autocmd('InsertEnter', {
