@@ -400,11 +400,11 @@ require('lazy').setup({
   -- "gc" to comment visual regions/lines
   {
     'numToStr/Comment.nvim',
-    -- event = 'VeryLazy',
-    -- init = function()
-    --   vim.o.timeout = true
-    --   vim.o.timeoutlen = 300
-    -- end,
+    event = 'VeryLazy',
+    init = function()
+      vim.o.timeout = true
+      vim.o.timeoutlen = 300
+    end,
     dependencies = {
       'JoosepAlviste/nvim-ts-context-commentstring',
     },
