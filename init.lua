@@ -723,7 +723,6 @@ require('telescope').setup {
         --   vim.cmd(string.format('silent lcd %s', dir))
         -- end,
         ['<C-\\>'] = function(prompt_bufnr)
-          -- vim.cmd 'stopinsert!'
           local selection = require('telescope.actions.state').get_selected_entry()
           local dir
           if not selection.path then
@@ -736,6 +735,7 @@ require('telescope').setup {
           -- print(vim.fn.FindRootDirectory(dir))
           local root_dir = vim.fn.FindRootDirectory(dir)
           vim.cmd(string.format('ToggleTerm dir=%s', root_dir))
+          vim.cmd.normal 'i'
         end,
       },
     },
