@@ -1374,6 +1374,9 @@ vim.keymap.set({ 'n', 'v' }, '<leader>L', '<cmd>Lazy<cr>', { noremap = true, des
 vim.keymap.set({ 'n', 'v' }, '<leader>M', '<cmd>Mason<cr>', { noremap = true, desc = '[M]ason' })
 
 vim.cmd 'hi DiagnosticUnderlineError cterm=undercurl gui=undercurl guisp=#ed8796'
+vim.cmd 'hi DiagnosticUnderlineWarn cterm=undercurl gui=undercurl guisp=#eed49f'
+vim.cmd 'hi DiagnosticUnderlineHint cterm=undercurl gui=undercurl guisp=#8bd5ca'
+vim.cmd 'hi DiagnosticUnderlineInfo cterm=undercurl gui=undercurl guisp=#91d7e3'
 
 vim.cmd 'set list'
 vim.cmd 'set listchars=leadmultispace:ᐧ'
