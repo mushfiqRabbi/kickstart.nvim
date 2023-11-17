@@ -342,7 +342,7 @@ require('lazy').setup({
     main = 'ibl',
     opts = {
       indent = {
-        char = '▏',
+        char = '│',
       },
       scope = {
         show_start = false,
@@ -1374,6 +1374,9 @@ vim.keymap.set({ 'n', 'v' }, '<leader>L', '<cmd>Lazy<cr>', { noremap = true, des
 vim.keymap.set({ 'n', 'v' }, '<leader>M', '<cmd>Mason<cr>', { noremap = true, desc = '[M]ason' })
 
 vim.cmd 'hi DiagnosticUnderlineError cterm=undercurl gui=undercurl guisp=#ed8796'
+
+vim.cmd 'set list'
+vim.cmd 'set listchars=leadmultispace:·'
 
 -- vim.cmd 'hi MatchParen guifg=#ffffff guibg=#7f7f7f'
 -- --
