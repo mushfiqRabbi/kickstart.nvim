@@ -412,6 +412,7 @@ require('lazy').setup({
     --  pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
     --},
     config = function()
+      ---@diagnostic disable-next-line: missing-fields
       require('Comment').setup {
         pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
       }
@@ -858,6 +859,7 @@ vim.keymap.set('n', '<leader>SR', '<cmd>lua require("spectre").open_file_search(
 -- See `:help nvim-treesitter`
 -- Defer Treesitter setup after first render to improve startup time of 'nvim {filename}'
 vim.defer_fn(function()
+  ---@diagnostic disable-next-line: missing-fields
   require('nvim-treesitter.configs').setup {
     -- Add languages to be installed here that you want installed for treesitter
     ensure_installed = { 'lua', 'vimdoc', 'vim', 'javascript', 'typescript', 'tsx', 'json', 'http', 'regex', 'bash', 'markdown', 'markdown_inline' },
@@ -1092,9 +1094,9 @@ vim.diagnostic.config {
 
 vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
   virtual_text = true,
-  underline = {
-    severity = { min = vim.diagnostic.severity.ERROR },
-  },
+  -- underline = {
+  --   severity = { min = vim.diagnostic.severity.WARN },
+  -- },
 })
 
 -- [[ Configure nvim-cmp ]]
@@ -1105,7 +1107,9 @@ require('luasnip.loaders.from_vscode').lazy_load()
 luasnip.config.setup {}
 
 local lspkind = require 'lspkind'
+---@diagnostic disable-next-line: missing-fields
 cmp.setup {
+  ---@diagnostic disable-next-line: missing-fields
   formatting = {
     format = lspkind.cmp_format {
       mode = 'symbol_text', -- show only symbol annotations
@@ -1125,6 +1129,7 @@ cmp.setup {
       luasnip.lsp_expand(args.body)
     end,
   },
+  ---@diagnostic disable-next-line: missing-fields
   completion = {
     completeopt = 'menu,menuone,noinsert',
   },
@@ -1283,7 +1288,9 @@ cmp.setup {
   },
 }
 
+---@diagnostic disable-next-line: missing-fields
 cmp.setup.cmdline({ '/', '?' }, {
+  ---@diagnostic disable-next-line: missing-fields
   completion = {
     completeopt = 'menu,menuone,noinsert,noselect',
   },
@@ -1292,7 +1299,9 @@ cmp.setup.cmdline({ '/', '?' }, {
     { name = 'buffer' },
   },
 })
+---@diagnostic disable-next-line: missing-fields
 cmp.setup.cmdline(':', {
+  ---@diagnostic disable-next-line: missing-fields
   completion = {
     completeopt = 'menu,menuone,noinsert,noselect',
   },
