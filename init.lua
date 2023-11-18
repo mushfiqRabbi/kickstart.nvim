@@ -1052,7 +1052,7 @@ local servers = {
 
   tailwindcss = {},
 
-  eslint = {},
+  -- eslint = {},
 
   jsonls = {},
 
@@ -1085,17 +1085,19 @@ mason_lspconfig.setup_handlers {
 }
 
 vim.diagnostic.config {
+  virtual_text = {
+    prefix = '●',
+  },
   float = {
     border = 'rounded',
   },
 }
 
-vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-  virtual_text = true,
-  -- underline = {
-  --   severity = { min = vim.diagnostic.severity.WARN },
-  -- },
-})
+-- vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+-- underline = {
+--   severity = { min = vim.diagnostic.severity.WARN },
+-- },
+-- })
 
 -- [[ Configure nvim-cmp ]]
 -- See `:help cmp`
