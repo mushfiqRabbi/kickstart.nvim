@@ -1,3 +1,3 @@
 return {
-  -- 'davidmh/cspell.nvim',
+  'davidmh/cspell.nvim',
 }
