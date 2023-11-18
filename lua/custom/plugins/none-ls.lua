@@ -7,7 +7,7 @@ return {
         -- Diagnostics
         null_ls.builtins.diagnostics.eslint_d,
         null_ls.builtins.diagnostics.cspell.with {
-          disabled_filetypes = { 'lua', 'sh' },
+          disabled_filetypes = { 'lua', 'sh', 'oil' },
           diagnostics_postprocess = function(diagnostic)
             diagnostic.severity = vim.diagnostic.severity['INFO']
           end,
@@ -16,7 +16,7 @@ return {
         -- Code Actions
         null_ls.builtins.code_actions.eslint_d,
         null_ls.builtins.code_actions.cspell.with {
-          disabled_filetypes = { 'lua', 'sh' },
+          disabled_filetypes = { 'lua', 'sh', 'oil' },
         },
       },
     }
