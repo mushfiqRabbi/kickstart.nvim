@@ -48,6 +48,11 @@ return {
       hover = {
         zindex = 60,
       },
+      -- mini = {
+      --   win_options = {
+      --     winblend = 100,
+      --   },
+      -- },
     },
     routes = {
       {

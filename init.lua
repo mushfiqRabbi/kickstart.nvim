@@ -173,14 +173,23 @@ require('lazy').setup({
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
       {
         'j-hui/fidget.nvim',
-        tag = 'legacy',
-        config = function()
-          require('fidget').setup {
-            --   window = {
-            --     blend = 100,
-            --   },
-          }
-        end,
+        opts = {
+          progress = {
+            display = {
+              done_icon = '',
+              progress_icon = { pattern = 'dots_pulse', period = 0.5 },
+            },
+            ignore = {
+              'null-ls',
+            },
+          },
+          notification = {
+            window = {
+              winblend = 75,
+              x_padding = 2,
+            },
+          },
+        },
       },
 
       -- Additional lua configuration, makes nvim stuff amazing!
@@ -406,7 +415,14 @@ require('lazy').setup({
       vim.o.timeoutlen = 300
     end,
     dependencies = {
-      'JoosepAlviste/nvim-ts-context-commentstring',
+      {
+        'JoosepAlviste/nvim-ts-context-commentstring',
+        config = function()
+          require('ts_context_commentstring').setup {
+            enable_autocmd = false,
+          }
+        end,
+      },
     },
     --opts = {
     --  pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
@@ -416,7 +432,6 @@ require('lazy').setup({
         pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
       }
     end,
-    lazy = false,
   },
 
   -- Fuzzy Finder (files, lsp, etc)
@@ -446,7 +461,14 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
-      'JoosepAlviste/nvim-ts-context-commentstring',
+      {
+        'JoosepAlviste/nvim-ts-context-commentstring',
+        config = function()
+          require('ts_context_commentstring').setup {
+            enable_autocmd = false,
+          }
+        end,
+      },
     },
     build = ':TSUpdate',
   },
@@ -921,20 +943,20 @@ vim.defer_fn(function()
       -- },
     },
 
-    context_commentstring = {
-      enable = true,
-      enable_autocmd = false,
-      -- config = {
-      --   javascript = {
-      --     __default = '// %s',
-      --     jsx_element = '{/* %s */}',
-      --     jsx_fragment = '{/* %s */}',
-      --     jsx_attribute = '// %s',
-      --     comment = '// %s',
-      --   },
-      --   typescript = { __default = '// %s', __multiline = '/* %s */' },
-      -- },
-    },
+    -- context_commentstring = {
+    --   enable = true,
+    --   enable_autocmd = false,
+    -- config = {
+    --   javascript = {
+    --     __default = '// %s',
+    --     jsx_element = '{/* %s */}',
+    --     jsx_fragment = '{/* %s */}',
+    --     jsx_attribute = '// %s',
+    --     comment = '// %s',
+    --   },
+    --   typescript = { __default = '// %s', __multiline = '/* %s */' },
+    -- },
+    -- },
   }
 end, 0)
 
@@ -1041,7 +1063,6 @@ local servers = {
   tsserver = {},
 
   lua_ls = {
-
     Lua = {
       workspace = { checkThirdParty = false },
       telemetry = { enable = false },
