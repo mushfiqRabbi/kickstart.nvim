@@ -1,24 +1,18 @@
 return {
   'nvimtools/none-ls.nvim',
   config = function()
-    local cspell = require 'cspell'
+    local null_ls = require 'null-ls'
     require('null-ls').setup {
       sources = {
-        cspell.diagnostics.with {
-          -- filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
+        null_ls.builtins.diagnostics.cspell.with {
           disabled_filetypes = { 'lua' },
           diagnostics_postprocess = function(diagnostic)
             diagnostic.severity = vim.diagnostic.severity['INFO']
           end,
         },
-        cspell.code_actions.with {
-          -- filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
+        null_ls.builtins.code_actions.cspell.with {
           disabled_filetypes = { 'lua' },
-          diagnostics_postprocess = function(diagnostic)
-            diagnostic.severity = vim.diagnostic.severity['INFO']
-          end,
         },
-        -- cspell.code_actions,
       },
     }
   end,
