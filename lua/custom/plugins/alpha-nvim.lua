@@ -23,6 +23,8 @@ return {
 
     alpha.setup(dashboard.config)
 
+    vim.keymap.set('n', '<leader>db', '<cmd>Alpha<cr>', { desc = '[D]ashboard' })
+
     vim.api.nvim_create_autocmd({ 'User' }, {
       pattern = 'AlphaReady',
       callback = function()
