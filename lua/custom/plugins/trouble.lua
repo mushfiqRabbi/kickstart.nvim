@@ -20,7 +20,7 @@ return {
       require('trouble').toggle 'workspace_diagnostics'
     end, { desc = '[D]iagnostic [W]orkspace' })
     vim.api.nvim_create_autocmd({ 'BufEnter', 'BufLeave' }, {
-      pattern = '/home/mushfiq/.config/nvim/Trouble',
+      pattern = '*/Trouble',
       callback = function(ev)
         if ev.event == 'BufEnter' then
           vim.cmd(string.format('resize %s', vim.o.lines * 0.4))
