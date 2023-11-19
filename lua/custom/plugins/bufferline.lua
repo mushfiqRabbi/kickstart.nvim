@@ -11,15 +11,21 @@ return {
   },
   config = function()
     require('bufferline').setup {
-      highlights = require('catppuccin.groups.integrations.bufferline').get(),
+      -- highlights = require('catppuccin.groups.integrations.bufferline').get {},
+      highlights = {
+        indicator_selected = {
+          fg = '#f5a97f',
+          bg = '#24273a',
+        },
+      },
       options = {
         --   always_show_bufferline = false,
-        indicator = {
-          style = 'underline',
-        },
+        -- indicator = {
+        --   style = 'underline',
+        -- },
         diagnostics = 'nvim_lsp',
-        diagnostics_indicator = function(count, level, diagnostics_dict, context)
-          local icon = level:match 'error' and ' ' or ' '
+        diagnostics_indicator = function(count, level)
+          local icon = level:match 'error' and ' ' or level:match 'warn' and ' ' or level:match 'hint' and ' ' or ' '
           return ' ' .. icon .. count
         end,
         -- offsets = {
