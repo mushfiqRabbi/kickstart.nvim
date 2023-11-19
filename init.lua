@@ -1127,12 +1127,20 @@ local luasnip = require 'luasnip'
 require('luasnip.loaders.from_vscode').lazy_load()
 luasnip.config.setup {}
 
+local get_mw = function()
+  if math.floor(vim.o.columns * 0.1) < 20 then
+    return 20
+  else
+    return math.floor(vim.o.columns * 0.1)
+  end
+end
+
 local lspkind = require 'lspkind'
 cmp.setup {
   formatting = {
     format = lspkind.cmp_format {
       mode = 'symbol_text', -- show only symbol annotations
-      maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+      maxwidth = get_mw(), -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
       ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
       -- symbol_map = { Codeium = '' },
 
@@ -1284,7 +1292,7 @@ cmp.setup {
           and not context.in_syntax_group 'String'
       end,
     },
-    { name = 'buffer' },
+    -- { name = 'buffer' },
     { name = 'path' },
     -- { name = 'calc' },
     -- {
@@ -1322,7 +1330,7 @@ cmp.setup.cmdline(':', {
   mapping = cmp.mapping.preset.cmdline {},
   sources = cmp.config.sources {
     { name = 'cmdline' },
-    { name = 'path' },
+    -- { name = 'path' },
     -- { name = 'cmdline_history' },
   },
 })
@@ -1404,6 +1412,18 @@ vim.cmd 'hi DiagnosticUnderlineInfo cterm=undercurl gui=undercurl guisp=#91d7e3'
 vim.cmd 'set list'
 vim.cmd 'set listchars=leadmultispace:ᐧ'
 
+local get_pum = function()
+  if math.floor(vim.o.lines * 0.45) < 15 then
+    return 15
+  else
+    return math.floor(vim.o.lines * 0.45)
+  end
+end
+
+vim.o.pumheight = get_pum()
+-- math.floor(vim.o.lines * 0.45)
+-- vim.o.pumheight = 13
+
 -- vim.cmd 'hi MatchParen guifg=#ffffff guibg=#7f7f7f'
 -- --
 -- vim.api.nvim_create_autocmd('InsertEnter', {
@@ -1417,6 +1437,7 @@ vim.cmd 'set listchars=leadmultispace:ᐧ'
 --     vim.cmd 'hi MatchParen guifg=#ffffff guibg=#7f7f7f'
 --   end,
 -- })
+--
 
 -- vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'rounded' })
 
