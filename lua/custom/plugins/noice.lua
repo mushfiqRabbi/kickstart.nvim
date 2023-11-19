@@ -117,6 +117,25 @@ return {
         },
         opts = { skip = true },
       },
+
+      {
+        filter = {
+          event = 'msg_show',
+          kind = '',
+          find = '-- (terminal) --',
+        },
+        opts = { skip = true },
+      },
+
+      {
+        filter = {
+          event = 'msg_show',
+          kind = '',
+          find = '-- VISUAL LINE --',
+        },
+        opts = { skip = true },
+      },
+
       -- {
       --   filter = {
       --     event = 'msg_show',
