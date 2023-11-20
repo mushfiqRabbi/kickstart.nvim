@@ -9,6 +9,7 @@ return {
         light = 'latte',
         dark = 'mocha',
       },
+      -- transparent_background = true, -- disables setting the background color.
       dim_inactive = {
         enabled = true, -- dims the background color of inactive window
         shade = 'dark',
