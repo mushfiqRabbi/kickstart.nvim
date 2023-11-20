@@ -8,7 +8,7 @@ return {
   },
   config = function()
     require('barbecue').setup {
-      theme = 'catppuccin-macchiato', -- catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
+      theme = 'catppuccin-mocha', -- catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
     }
   end,
 }

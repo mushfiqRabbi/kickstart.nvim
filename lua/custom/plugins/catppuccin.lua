@@ -4,10 +4,10 @@ return {
   priority = 1000,
   config = function()
     require('catppuccin').setup {
-      flavour = 'macchiato', -- latte, frappe, macchiato, mocha
+      flavour = 'mocha', -- latte, frappe, macchiato, mocha
       background = { -- :h background
         light = 'latte',
-        dark = 'macchiato',
+        dark = 'mocha',
       },
       dim_inactive = {
         enabled = true, -- dims the background color of inactive window
@@ -24,6 +24,6 @@ return {
         which_key = true,
       },
     }
-    vim.cmd.colorscheme 'catppuccin-macchiato'
+    vim.cmd.colorscheme 'catppuccin-mocha'
   end,
 }

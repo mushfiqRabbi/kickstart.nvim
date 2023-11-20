@@ -2,11 +2,18 @@ return {
   'gen740/SmoothCursor.nvim',
   config = function()
     require('smoothcursor').setup {
+      type = 'matrix',
+      matrix = {
+        head = {
+          cursor = { '▷' },
+        },
+      },
       -- speed = 25,
       -- intervals = 35,
-      fancy = {
-        enable = true,
-      },
+      -- fancy = {
+      --   enable = true,
+      -- },
+      disable_float_win = true, -- Disable in floating windows
     }
     local autocmd = vim.api.nvim_create_autocmd
 
