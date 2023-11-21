@@ -416,14 +416,7 @@ require('lazy').setup({
       vim.o.timeoutlen = 300
     end,
     dependencies = {
-      {
-        'JoosepAlviste/nvim-ts-context-commentstring',
-        config = function()
-          require('ts_context_commentstring').setup {
-            enable_autocmd = false,
-          }
-        end,
-      },
+      'JoosepAlviste/nvim-ts-context-commentstring',
     },
     --opts = {
     --  pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
@@ -462,14 +455,7 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
-      {
-        'JoosepAlviste/nvim-ts-context-commentstring',
-        config = function()
-          require('ts_context_commentstring').setup {
-            enable_autocmd = false,
-          }
-        end,
-      },
+      'JoosepAlviste/nvim-ts-context-commentstring',
     },
     build = ':TSUpdate',
   },
