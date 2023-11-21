@@ -57,154 +57,16 @@ return {
       {
         filter = {
           event = 'msg_show',
-          kind = '',
-          find = 'written',
+          any = {
+            { find = '%d+L, %d+B' },
+            { find = '; after #%d+' },
+            { find = '; before #%d+' },
+            { find = '%d fewer lines' },
+            { find = '%d more lines' },
+          },
         },
         opts = { skip = true },
       },
-
-      {
-        filter = {
-          event = 'msg_show',
-          kind = 'echo',
-          find = 'written',
-        },
-        opts = { skip = true },
-      },
-
-      {
-        filter = {
-          event = 'msg_show',
-          kind = '',
-          find = 'fewer lines',
-        },
-        opts = { skip = true },
-      },
-
-      {
-        filter = {
-          event = 'msg_show',
-          kind = 'echo',
-          find = 'fewer lines',
-        },
-        opts = { skip = true },
-      },
-
-      {
-        filter = {
-          event = 'msg_show',
-          kind = '',
-          find = 'line less',
-        },
-        opts = { skip = true },
-      },
-
-      {
-        filter = {
-          event = 'msg_show',
-          kind = 'echo',
-          find = 'line less',
-        },
-        opts = { skip = true },
-      },
-
-      {
-        filter = {
-          event = 'msg_show',
-          kind = '',
-          find = 'more line',
-        },
-        opts = { skip = true },
-      },
-
-      {
-        filter = {
-          event = 'msg_show',
-          kind = 'echo',
-          find = 'more line',
-        },
-        opts = { skip = true },
-      },
-
-      {
-        filter = {
-          event = 'msg_show',
-          kind = '',
-          find = 'change',
-        },
-        opts = { skip = true },
-      },
-
-      {
-        filter = {
-          event = 'msg_show',
-          kind = 'echo',
-          find = 'change',
-        },
-        opts = { skip = true },
-      },
-
-      {
-        filter = {
-          event = 'msg_show',
-          kind = '',
-          find = '-- (terminal) --',
-        },
-        opts = { skip = true },
-      },
-
-      {
-        filter = {
-          event = 'msg_show',
-          kind = 'echo',
-          find = '-- (terminal) --',
-        },
-        opts = { skip = true },
-      },
-
-      {
-        filter = {
-          event = 'msg_show',
-          kind = '',
-          find = '-- VISUAL LINE --',
-        },
-        opts = { skip = true },
-      },
-
-      {
-        filter = {
-          event = 'msg_show',
-          kind = 'echo',
-          find = '-- VISUAL LINE --',
-        },
-        opts = { skip = true },
-      },
-
-      {
-        filter = {
-          event = 'msg_show',
-          kind = '',
-          find = '-- INSERT --',
-        },
-        opts = { skip = true },
-      },
-
-      {
-        filter = {
-          event = 'msg_show',
-          kind = 'echo',
-          find = '-- INSERT --',
-        },
-        opts = { skip = true },
-      },
-
-      -- {
-      --   filter = {
-      --     event = 'msg_show',
-      --     kind = 'search_count',
-      --   },
-      --   opts = { skip = true },
-      -- },
     },
   },
 }
