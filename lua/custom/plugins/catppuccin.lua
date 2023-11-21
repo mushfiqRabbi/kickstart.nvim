@@ -10,11 +10,11 @@ return {
         dark = 'mocha',
       },
       -- transparent_background = true, -- disables setting the background color.
-      -- dim_inactive = {
-      --   enabled = true, -- dims the background color of inactive window
-      --   shade = 'dark',
-      --   percentage = 0.001, -- percentage of the shade to apply to the inactive window
-      -- },
+      dim_inactive = {
+        enabled = true, -- dims the background color of inactive window
+        shade = 'dark',
+        percentage = 0.001, -- percentage of the shade to apply to the inactive window
+      },
       integrations = {
         fidget = true,
         -- hop = true,
