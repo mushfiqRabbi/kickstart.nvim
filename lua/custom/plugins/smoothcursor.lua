@@ -14,19 +14,19 @@ return {
       callback = function()
         local current_mode = vim.fn.mode()
         if current_mode == 'n' then
-          vim.api.nvim_set_hl(0, 'SmoothCursor', { fg = '#8aadf4' })
+          vim.api.nvim_set_hl(0, 'SmoothCursor', { fg = '#89b4fa' })
         elseif current_mode == 'v' then
-          vim.api.nvim_set_hl(0, 'SmoothCursor', { fg = '#c6a0f6' })
+          vim.api.nvim_set_hl(0, 'SmoothCursor', { fg = '#cba6f7' })
         elseif current_mode == 'V' then
-          vim.api.nvim_set_hl(0, 'SmoothCursor', { fg = '#c6a0f6' })
+          vim.api.nvim_set_hl(0, 'SmoothCursor', { fg = '#cba6f7' })
         elseif current_mode == '\22' then
-          vim.api.nvim_set_hl(0, 'SmoothCursor', { fg = '#c6a0f6' })
+          vim.api.nvim_set_hl(0, 'SmoothCursor', { fg = '#cba6f7' })
         elseif current_mode == 'i' then
-          vim.api.nvim_set_hl(0, 'SmoothCursor', { fg = '#a6da95' })
+          vim.api.nvim_set_hl(0, 'SmoothCursor', { fg = '#a6e3a1' })
         elseif current_mode == 'R' then
-          vim.api.nvim_set_hl(0, 'SmoothCursor', { fg = '#ed8796' })
+          vim.api.nvim_set_hl(0, 'SmoothCursor', { fg = '#f38ba8' })
         elseif current_mode == 'c' then
-          vim.api.nvim_set_hl(0, 'SmoothCursor', { fg = '#f5a97f' })
+          vim.api.nvim_set_hl(0, 'SmoothCursor', { fg = '#fab387' })
         end
       end,
     })
