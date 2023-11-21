@@ -16,5 +16,11 @@ return {
     vim.keymap.set({ 'n', 'v' }, '<leader>mm', function()
       require('harpoon.ui').toggle_quick_menu()
     end, { noremap = true, desc = '[M]ark [M]enu' })
+
+    vim.api.nvim_create_autocmd('VimLeavePre', {
+      callback = function()
+        require('harpoon.mark').clear_all()
+      end,
+    })
   end,
 }

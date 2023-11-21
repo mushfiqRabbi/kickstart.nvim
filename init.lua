@@ -816,6 +816,7 @@ pcall(require('telescope').load_extension, 'projects')
 -- pcall(require('telescope').load_extension, 'ascii')
 pcall(require('telescope').load_extension 'undo')
 -- pcall(require('telescope').load_extension 'neoclip')
+pcall(require('telescope').load_extension 'harpoon')
 
 -- See `:help telescope.builtin`
 vim.keymap.set('n', '<leader>fo', "<cmd>lua require('telescope.builtin').oldfiles()<cr>", { desc = '[F]ind recently [O]pened files' })
@@ -836,6 +837,11 @@ vim.keymap.set('n', '<leader>sr', '<cmd>lua require("spectre").open()<CR>', {
 })
 vim.keymap.set('n', '<leader>SR', '<cmd>lua require("spectre").open_file_search()<CR>', {
   desc = '[S]earch and [R]eplace in current file',
+})
+vim.keymap.set('n', '<leader>fm', '<esc><cmd>Telescope harpoon marks<CR>', {
+  desc = '[F]ind [M]arked files',
+  noremap = true,
+  silent = true,
 })
 -- vim.keymap.set('n', '<leader>sr', '<cmd>Spectre<cr>', { desc = '[S]earch and [R]eplace' })
 -- vim.keymap.set('n', '<leader>sw', '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', {
