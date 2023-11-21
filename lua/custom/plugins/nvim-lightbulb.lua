@@ -4,13 +4,11 @@ return {
     require('nvim-lightbulb').setup {
       autocmd = {
         enabled = true,
-        -- updatetime = -1,
-        -- events = {
-        --   'CursorMoved',
-        --   'CursorMovedI',
-        -- },
       },
-      priority = 100,
+      number = {
+        enabled = true,
+      },
     }
+    vim.cmd 'hi LightBulbNumber cterm=italic,bold gui=italic,bold guifg=#94e2d5'
   end,
 }

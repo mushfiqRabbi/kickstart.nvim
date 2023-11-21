@@ -306,12 +306,12 @@ require('lazy').setup({
     config = function()
       require('lualine').setup {
         options = {
-          ignore_focus = { 'NvimTree' },
-          extensions = { 'nvim-tree' },
-          icons_enabled = true,
-          component_separators = { left = '', right = '' },
+          -- ignore_focus = { 'NvimTree' },
+          -- extensions = { 'nvim-tree' },
+          -- icons_enabled = true,
+          -- component_separators = { left = '', right = '' },
           -- component_separators = { left = '|', right = '|' },
-          section_separators = { left = '', right = '' },
+          -- section_separators = { left = '', right = '' },
           -- section_separators = { left = '|', right = '|' },
 
           -- theme = 'onedark',

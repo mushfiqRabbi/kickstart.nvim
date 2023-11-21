@@ -1,32 +1,36 @@
 return {
   'folke/noice.nvim',
+  dependencies = {
+    'MunifTanjim/nui.nvim',
+    {
+      'rcarriga/nvim-notify',
+      config = function()
+        require('notify').setup {
+          on_open = function(win)
+            vim.api.nvim_win_set_config(win, { focusable = false, zindex = 100 })
+          end,
+        }
+      end,
+    },
+  },
   event = 'VeryLazy',
   opts = {
-    -- add any options here
     popupmenu = {
       backend = 'cmp',
     },
-    -- notify = {
-    --   enabled = false,
-    -- },
     lsp = {
       progress = {
         enabled = false,
       },
       signature = {
         enabled = false,
-        -- auto_open = {
-        --   enabled = false,
-        -- },
       },
-      -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
       override = {
         ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
         ['vim.lsp.util.stylize_markdown'] = true,
         ['cmp.entry.get_documentation'] = true,
       },
     },
-    -- you can enable a preset for easier configuration
     presets = {
       bottom_search = true, -- use a classic bottom cmdline for search
       command_palette = false, -- position the cmdline and popupmenu together
@@ -48,11 +52,6 @@ return {
       hover = {
         zindex = 60,
       },
-      -- mini = {
-      --   win_options = {
-      --     winblend = 100,
-      --   },
-      -- },
     },
     routes = {
       {
@@ -67,7 +66,25 @@ return {
       {
         filter = {
           event = 'msg_show',
+          kind = 'echo',
+          find = 'written',
+        },
+        opts = { skip = true },
+      },
+
+      {
+        filter = {
+          event = 'msg_show',
           kind = '',
+          find = 'fewer lines',
+        },
+        opts = { skip = true },
+      },
+
+      {
+        filter = {
+          event = 'msg_show',
+          kind = 'echo',
           find = 'fewer lines',
         },
         opts = { skip = true },
@@ -86,7 +103,7 @@ return {
         filter = {
           event = 'msg_show',
           kind = 'echo',
-          find = 'more line',
+          find = 'line less',
         },
         opts = { skip = true },
       },
@@ -95,6 +112,15 @@ return {
         filter = {
           event = 'msg_show',
           kind = '',
+          find = 'more line',
+        },
+        opts = { skip = true },
+      },
+
+      {
+        filter = {
+          event = 'msg_show',
+          kind = 'echo',
           find = 'more line',
         },
         opts = { skip = true },
@@ -130,8 +156,44 @@ return {
       {
         filter = {
           event = 'msg_show',
+          kind = 'echo',
+          find = '-- (terminal) --',
+        },
+        opts = { skip = true },
+      },
+
+      {
+        filter = {
+          event = 'msg_show',
           kind = '',
           find = '-- VISUAL LINE --',
+        },
+        opts = { skip = true },
+      },
+
+      {
+        filter = {
+          event = 'msg_show',
+          kind = 'echo',
+          find = '-- VISUAL LINE --',
+        },
+        opts = { skip = true },
+      },
+
+      {
+        filter = {
+          event = 'msg_show',
+          kind = '',
+          find = '-- INSERT --',
+        },
+        opts = { skip = true },
+      },
+
+      {
+        filter = {
+          event = 'msg_show',
+          kind = 'echo',
+          find = '-- INSERT --',
         },
         opts = { skip = true },
       },
@@ -143,23 +205,6 @@ return {
       --   },
       --   opts = { skip = true },
       -- },
-    },
-  },
-  dependencies = {
-    -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-    'MunifTanjim/nui.nvim',
-    -- OPTIONAL:
-    --   `nvim-notify` is only needed, if you want to use the notification view.
-    --   If not available, we use `mini` as the fallback
-    {
-      'rcarriga/nvim-notify',
-      config = function()
-        require('notify').setup {
-          on_open = function(win)
-            vim.api.nvim_win_set_config(win, { focusable = false, zindex = 100 })
-          end,
-        }
-      end,
     },
   },
 }

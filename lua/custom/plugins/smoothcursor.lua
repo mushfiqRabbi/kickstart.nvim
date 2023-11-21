@@ -2,14 +2,7 @@ return {
   'gen740/SmoothCursor.nvim',
   config = function()
     require('smoothcursor').setup {
-      -- type = 'matrix',
-      -- matrix = {
-      --   head = {
-      --     cursor = { '▷' },
-      --   },
-      -- },
-      -- speed = 25,
-      -- intervals = 35,
+      priority = 1,
       fancy = {
         enable = true,
       },
