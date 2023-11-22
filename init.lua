@@ -310,9 +310,9 @@ require("lazy").setup({
           -- extensions = { 'nvim-tree' },
           -- icons_enabled = true,
           -- component_separators = { left = '', right = '' },
-          -- component_separators = { left = '|', right = '|' },
+          component_separators = { left = "|", right = "|" },
           -- section_separators = { left = '', right = '' },
-          -- section_separators = { left = '|', right = '|' },
+          section_separators = { left = "|", right = "|" },
 
           -- theme = 'onedark',
           -- theme = 'tokyonight',
