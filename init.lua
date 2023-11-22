@@ -1157,9 +1157,9 @@ mason_lspconfig.setup_handlers({
 })
 
 vim.diagnostic.config({
-  virtual_text = {
-    prefix = "●",
-  },
+  -- virtual_text = {
+  --   prefix = "●",
+  -- },
   float = {
     border = "rounded",
   },
