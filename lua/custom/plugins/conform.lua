@@ -9,7 +9,7 @@ return {
       javascriptreact = { "prettierd" },
       typescript = { "prettierd" },
       typescriptreact = { "prettierd" },
-      json = { "prettierd" },
+      json = { "jq" },
       zsh = { "beautysh" },
 
       ["*"] = { "codespell" },
