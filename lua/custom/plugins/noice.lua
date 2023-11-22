@@ -50,7 +50,7 @@ return {
         },
       },
       hover = {
-        zindex = 60,
+        zindex = 100,
       },
     },
     routes = {

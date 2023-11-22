@@ -1,4 +1,6 @@
-tags
-test.sh
-.luarc.json
-nvim
+.github/
+doc/
+.stylua.toml
+LICENSE.md
+README.md
+lazy-lock.json
