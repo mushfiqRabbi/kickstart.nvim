@@ -1,28 +1,30 @@
 return {
-  'stevearc/conform.nvim',
-  opts = {},
-  config = function()
-    require('conform').setup {
-      formatters_by_ft = {
-        lua = { 'stylua' },
-        javascript = { 'prettierd' },
-        javascriptreact = { 'prettierd' },
-        typescript = { 'prettierd' },
-        typescriptreact = { 'prettierd' },
-        json = { 'prettierd' },
-        zsh = { 'beautysh' },
+  "stevearc/conform.nvim",
+  event = { "BufWritePre" },
+  cmd = { "ConformInfo" },
+  opts = {
+    formatters_by_ft = {
+      lua = { "stylua" },
+      javascript = { "prettierd" },
+      javascriptreact = { "prettierd" },
+      typescript = { "prettierd" },
+      typescriptreact = { "prettierd" },
+      json = { "prettierd" },
+      zsh = { "beautysh" },
 
-        ['*'] = { 'codespell' },
-        ['_'] = { 'trim_whitespace' },
-      },
+      ["*"] = { "codespell" },
+      ["_"] = { "trim_whitespace" },
+    },
 
-      format_on_save = {
-        lsp_fallback = true,
-        timeout_ms = 500,
+    format_on_save = { timeout_ms = 500, lsp_fallback = true },
+
+    formatters = {
+      stylua = {
+        prepend_args = { "--indent-type=Spaces", "--indent-width=2" },
       },
-      format_after_save = {
-        lsp_fallback = true,
-      },
-    }
+    },
+  },
+  init = function()
+    vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
   end,
 }
