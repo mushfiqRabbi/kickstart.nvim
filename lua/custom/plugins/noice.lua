@@ -65,7 +65,7 @@ return {
             { find = "%d more lines" },
             { find = "-- .terminal. --" },
             { find = "-- VISUAL LINE --" },
-            { find = "--  INSERT --" },
+            { find = "-- INSERT --" },
           },
         },
         opts = { skip = true },

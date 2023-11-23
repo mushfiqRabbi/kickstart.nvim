@@ -8,13 +8,14 @@ return {
   config = function()
     require("mason-null-ls").setup({
       ensure_installed = {
-        "stylua",
-        "prettier",
-        "cspell",
-        "codespell",
         "beautysh",
-        "marksman",
+        "codespell",
+        "cspell",
+        "eslint_d",
         "jq",
+        "marksman",
+        "prettierd",
+        "stylua",
       },
     })
   end,
