@@ -48,10 +48,12 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
+
 vim.opt.tabstop = 2
 vim.opt.smartindent = true
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
+
 -- vim.g['rooter_cd_cmd'] = 'lcd'
 vim.opt.scrolloff = 7
 vim.o.cursorline = true
