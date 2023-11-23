@@ -895,12 +895,6 @@ vim.defer_fn(function()
   require("nvim-treesitter.configs").setup({
     -- Add languages to be installed here that you want installed for treesitter
     ensure_installed = {
-      "c",
-      "bash",
-      "query",
-      "vim",
-      "vimdoc",
-      "lua",
       "javascript",
       "typescript",
       "tsx",
