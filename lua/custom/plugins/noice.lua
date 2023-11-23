@@ -1,22 +1,22 @@
 return {
-  'folke/noice.nvim',
+  "folke/noice.nvim",
   dependencies = {
-    'MunifTanjim/nui.nvim',
+    "MunifTanjim/nui.nvim",
     {
-      'rcarriga/nvim-notify',
+      "rcarriga/nvim-notify",
       config = function()
-        require('notify').setup {
+        require("notify").setup({
           on_open = function(win)
             vim.api.nvim_win_set_config(win, { focusable = false, zindex = 100 })
           end,
-        }
+        })
       end,
     },
   },
-  event = 'VeryLazy',
+  event = "VeryLazy",
   opts = {
     popupmenu = {
-      backend = 'cmp',
+      backend = "cmp",
     },
     lsp = {
       progress = {
@@ -26,9 +26,9 @@ return {
         enabled = false,
       },
       override = {
-        ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
-        ['vim.lsp.util.stylize_markdown'] = true,
-        ['cmp.entry.get_documentation'] = true,
+        ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+        ["vim.lsp.util.stylize_markdown"] = true,
+        ["cmp.entry.get_documentation"] = true,
       },
     },
     presets = {
@@ -42,11 +42,11 @@ return {
       cmdline_popup = {
         position = {
           row = 5,
-          col = '50%',
+          col = "50%",
         },
         size = {
           width = 60,
-          height = 'auto',
+          height = "auto",
         },
       },
       hover = {
@@ -56,16 +56,16 @@ return {
     routes = {
       {
         filter = {
-          event = 'msg_show',
+          event = "msg_show",
           any = {
-            { find = '%d+L, %d+B' },
-            { find = '; after #%d+' },
-            { find = '; before #%d+' },
-            { find = '%d fewer lines' },
-            { find = '%d more lines' },
-            { find = '-- .terminal. --' },
-            { find = '-- VISUAL LINE --' },
-            { find = '--  INSERT --' },
+            { find = "%d+L, %d+B" },
+            { find = "; after #%d+" },
+            { find = "; before #%d+" },
+            { find = "%d fewer lines" },
+            { find = "%d more lines" },
+            { find = "-- .terminal. --" },
+            { find = "-- VISUAL LINE --" },
+            { find = "--  INSERT --" },
           },
         },
         opts = { skip = true },
