@@ -25,7 +25,11 @@ return {
         if ev.event == "BufEnter" then
           vim.cmd(string.format("resize %d", vim.o.lines * 0.4))
         elseif ev.event == "BufLeave" then
-          vim.cmd(string.format("resize %d", vim.o.lines * 0.2))
+          if vim.api.nvim_win_get_config(0).relative == "" then
+            vim.cmd(string.format("resize %d", vim.o.lines * 0.2))
+          else
+            return
+          end
         end
       end,
     })
