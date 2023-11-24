@@ -16,7 +16,12 @@ return {
 
         -- Diagnostics
         null_ls.builtins.diagnostics.alex,
-        null_ls.builtins.diagnostics.codespell,
+        null_ls.builtins.diagnostics.codespell.with({
+          disabled_filetypes = { "oil" },
+          diagnostics_postprocess = function(diagnostic)
+            diagnostic.severity = vim.diagnostic.severity["INFO"]
+          end,
+        }),
         null_ls.builtins.diagnostics.cspell.with({
           disabled_filetypes = { "lua", "sh", "oil", "markdown" },
           diagnostics_postprocess = function(diagnostic)

@@ -31,6 +31,27 @@ return {
           end,
           mode = { "n", "v", "i" },
         },
+        ["<C-\\>"] = {
+          callback = function()
+            if vim.api.nvim_get_mode().mode == "i" then
+              vim.cmd("stopinsert")
+            end
+            local dir = oil.get_current_dir()
+            local root_dir = vim.fn.FindRootDirectory(dir)
+            if root_dir == "" then
+              vim.cmd(string.format("ToggleTerm dir=%s", dir))
+              -- if vim.api.nvim_get_mode().mode == "n" then
+              vim.cmd.normal("i")
+              -- end
+            else
+              vim.cmd(string.format("ToggleTerm dir=%s", root_dir))
+              -- if vim.api.nvim_get_mode().mode == "n" then
+              vim.cmd.normal("i")
+              -- end
+            end
+          end,
+          mode = { "n", "v", "i" },
+        },
       },
 
       cleanup_delay_ms = 0,
