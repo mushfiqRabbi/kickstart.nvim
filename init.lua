@@ -181,9 +181,9 @@ require("lazy").setup({
               done_icon = "",
               progress_icon = { pattern = "dots_pulse", period = 0.5 },
             },
-            ignore = {
-              "null-ls",
-            },
+            -- ignore = {
+            --   "null-ls",
+            -- },
           },
           notification = {
             window = {

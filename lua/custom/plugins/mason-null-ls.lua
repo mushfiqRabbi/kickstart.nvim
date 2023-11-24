@@ -8,19 +8,21 @@ return {
   config = function()
     require("mason-null-ls").setup({
       ensure_installed = {
+        "alex",
         "beautysh",
         "codespell",
         "cspell",
         "eslint_d",
         "jq",
         "jsonlint",
-        "luacheck",
+        -- "luacheck",
         "markdownlint",
         "marksman",
         "prettierd",
         "remark-cli",
         "rustywind",
-        "shellcheck",
+        "selene",
+        -- "shellcheck",
         "stylelint",
         "stylua",
         -- "typos",
