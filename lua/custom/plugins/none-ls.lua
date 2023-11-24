@@ -15,6 +15,9 @@ return {
         -- Diagnostics
         null_ls.builtins.diagnostics.alex,
         null_ls.builtins.diagnostics.codespell.with({
+          cwd = function()
+            return vim.fn.FindRootDirectory()
+          end,
           disabled_filetypes = { "oil" },
           diagnostics_postprocess = function(diagnostic)
             diagnostic.severity = vim.diagnostic.severity["INFO"]
@@ -30,7 +33,11 @@ return {
         null_ls.builtins.diagnostics.eslint_d,
         null_ls.builtins.diagnostics.jsonlint,
         null_ls.builtins.diagnostics.markdownlint,
-        null_ls.builtins.diagnostics.selene,
+        null_ls.builtins.diagnostics.selene.with({
+          cwd = function()
+            return vim.fn.FindRootDirectory()
+          end,
+        }),
         -- null_ls.builtins.diagnostics.shellcheck,
         null_ls.builtins.diagnostics.stylelint,
         null_ls.builtins.diagnostics.vint,
