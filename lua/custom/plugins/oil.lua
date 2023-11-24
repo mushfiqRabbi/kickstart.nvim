@@ -56,15 +56,15 @@ return {
       end),
     })
 
-    vim.api.nvim_create_autocmd({ "BufEnter", "BufLeave" }, {
-      pattern = "oil:///*",
-      callback = function(ev)
-        if ev.event == "BufEnter" then
-          vim.cmd(string.format("vertical resize %d", vim.o.columns * 0.3))
-        elseif ev.event == "BufLeave" then
-          vim.cmd(string.format("vertical resize %d", vim.o.columns * 0.2))
-        end
-      end,
-    })
+    -- vim.api.nvim_create_autocmd({ "BufEnter", "BufLeave" }, {
+    --   pattern = "oil:///*",
+    --   callback = function(ev)
+    --     if ev.event == "BufEnter" then
+    --       vim.cmd(string.format("vertical resize %d", vim.o.columns * 0.3))
+    --     elseif ev.event == "BufLeave" then
+    --       vim.cmd(string.format("vertical resize %d", vim.o.columns * 0.2))
+    --     end
+    --   end,
+    -- })
   end,
 }

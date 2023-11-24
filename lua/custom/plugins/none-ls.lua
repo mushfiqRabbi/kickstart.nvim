@@ -11,8 +11,11 @@ return {
           disabled_filetypes = { "lua", "sh", "oil", "markdown" },
         }),
         null_ls.builtins.code_actions.eslint_d,
+        null_ls.builtins.code_actions.shellcheck,
+        -- null_ls.builtins.code_actions.xo,
 
         -- Diagnostics
+        null_ls.builtins.diagnostics.alex,
         null_ls.builtins.diagnostics.codespell,
         null_ls.builtins.diagnostics.cspell.with({
           disabled_filetypes = { "lua", "sh", "oil", "markdown" },
@@ -22,6 +25,15 @@ return {
         }),
         null_ls.builtins.diagnostics.dotenv_linter,
         null_ls.builtins.diagnostics.eslint_d,
+        null_ls.builtins.diagnostics.jsonlint,
+        null_ls.builtins.diagnostics.luacheck,
+        null_ls.builtins.diagnostics.markdownlint,
+        null_ls.builtins.diagnostics.shellcheck,
+        null_ls.builtins.diagnostics.stylelint,
+        -- null_ls.builtins.diagnostics.typos,
+        null_ls.builtins.diagnostics.vint,
+        -- null_ls.builtins.diagnostics.xo,
+        null_ls.builtins.diagnostics.zsh,
 
         -- Formatting
         -- null_ls.builtins.formatting.beautysh,
