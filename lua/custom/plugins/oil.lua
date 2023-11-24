@@ -24,8 +24,9 @@ return {
         },
         ["<C-g>"] = {
           callback = function()
-            if util.get_preview_win() then
-              vim.api.nvim_win_close(util.get_preview_win(), true)
+            local preview = util.get_preview_win()
+            if preview then
+              vim.api.nvim_win_close(preview, true)
             end
             oil.close()
           end,

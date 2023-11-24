@@ -994,7 +994,7 @@ vim.keymap.set("n", "<leader>df", vim.diagnostic.open_float, { desc = "[D]iagnos
 
 -- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.
-local on_attach = function(client, bufnr)
+local on_attach = function(_, bufnr)
   -- NOTE: Remember that lua is a real programming language, and as such it is possible
   -- to define small helper and utility functions so you don't have to repeat yourself
   -- many times.
@@ -1357,7 +1357,7 @@ cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 
 vim.api.nvim_create_autocmd("User", {
   pattern = "TelescopePreviewerLoaded",
-  callback = function(args)
+  callback = function()
     -- if args.data.filetype ~= 'help' then
     --   vim.wo.number = true
     -- elseif args.data.bufname:match '*.csv' then
