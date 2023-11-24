@@ -12,7 +12,7 @@ return {
         javascriptreact = { "prettierd", "rustywind" },
         json = { { "jq", "prettierd" } },
         lua = { "stylua" },
-        markdown = { { "remark", "prettierd" } },
+        markdown = { "prettierd" },
         sh = { "beautysh" },
         typescript = { "prettierd", "rustywind" },
         typescriptreact = { "prettierd", "rustywind" },
