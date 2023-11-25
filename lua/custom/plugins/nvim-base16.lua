@@ -1,6 +1,6 @@
 return {
-  -- 'rrethy/nvim-base16',
+  -- "rrethy/nvim-base16",
   -- config = function()
-  --   vim.cmd 'colorscheme base16-catppuccin-macchiato'
+  --   vim.cmd("colorscheme base16-catppuccin-mocha")
   -- end,
 }
