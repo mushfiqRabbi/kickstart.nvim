@@ -1,18 +1,10 @@
 return {
   "folke/trouble.nvim",
   dependencies = { "nvim-tree/nvim-web-devicons" },
+  opts = {
+    height = 20,
+  },
   config = function()
-    require("trouble").setup({
-      height = 20,
-      action_keys = {
-        jump = {
-          "<cr>",
-          "<tab>",
-          "<2-LeftMouse>",
-          "<C-w>w",
-        },
-      },
-    })
     vim.keymap.set("n", "<leader>dd", function()
       require("trouble").toggle("document_diagnostics")
     end, { desc = "[D]iagnostic [D]ocument" })
