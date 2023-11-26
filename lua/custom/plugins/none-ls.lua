@@ -20,6 +20,10 @@ return {
           -- cwd = get_root,
           disabled_filetypes = { "oil", "dotenv" },
           runtime_condition = function(params)
+            local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(params.bufnr), ":t")
+            if filename.match(filename, "%.?env[%.%w_.-]*") then
+              return false
+            end
             local root = get_root(params)
             return not string.match(
               vim.fn.system({ "fd", "-H", "-F", "-tf", "-1", "--max-depth=1", ".no-cspell", root }),
