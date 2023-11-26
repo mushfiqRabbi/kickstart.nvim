@@ -16,7 +16,9 @@ return {
       end,
       sources = {
         -- Code Actions
-        null_ls.builtins.code_actions.cspell,
+        null_ls.builtins.code_actions.cspell.with({
+          -- cwd = get_root,
+        }),
 
         -- Diagnostics
         null_ls.builtins.diagnostics.codespell.with({
@@ -27,7 +29,7 @@ return {
           end,
         }),
         null_ls.builtins.diagnostics.cspell.with({
-          cwd = get_root,
+          -- cwd = get_root,
           disabled_filetypes = { "oil" },
           diagnostics_postprocess = function(diagnostic)
             diagnostic.severity = vim.diagnostic.severity["INFO"]
