@@ -16,6 +16,7 @@ return {
         "jsonlint",
         "prettierd",
         "rustywind",
+        "selene",
         "stylelint",
         "stylua",
         "vint",

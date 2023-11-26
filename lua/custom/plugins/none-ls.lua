@@ -69,6 +69,7 @@ return {
         }),
         null_ls.builtins.diagnostics.dotenv_linter,
         null_ls.builtins.diagnostics.jsonlint,
+        null_ls.builtins.diagnostics.selene,
         null_ls.builtins.diagnostics.stylelint,
         null_ls.builtins.diagnostics.vint,
         null_ls.builtins.diagnostics.zsh,
