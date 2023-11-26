@@ -10,6 +10,7 @@ return {
       ensure_installed = {
         "alex",
         "beautysh",
+        "cspell",
         "codespell",
         "jq",
         "jsonlint",
@@ -21,6 +22,9 @@ return {
         "stylelint",
         "stylua",
         "vint",
+      },
+      handlers = {
+        function() end,
       },
     })
   end,
