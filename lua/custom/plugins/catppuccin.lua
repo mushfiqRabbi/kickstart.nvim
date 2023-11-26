@@ -17,11 +17,10 @@ return {
       },
       integrations = {
         fidget = true,
-        -- hop = true,
+        lsp_trouble = true,
         mason = true,
         noice = true,
         notify = true,
-        lsp_trouble = true,
         which_key = true,
       },
     })
