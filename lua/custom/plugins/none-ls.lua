@@ -18,6 +18,7 @@ return {
         -- Code Actions
         null_ls.builtins.code_actions.cspell.with({
           -- cwd = get_root,
+          disabled_filetypes = { "oil", "dotenv" },
           runtime_condition = function(params)
             local root = get_root(params)
             return not string.match(
@@ -46,7 +47,7 @@ return {
         }),
         null_ls.builtins.diagnostics.cspell.with({
           -- cwd = get_root,
-          disabled_filetypes = { "oil" },
+          disabled_filetypes = { "oil", "dotenv" },
           diagnostics_postprocess = function(diagnostic)
             diagnostic.severity = vim.diagnostic.severity["INFO"]
           end,
