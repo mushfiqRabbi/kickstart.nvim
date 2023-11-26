@@ -8,17 +8,13 @@ return {
   config = function()
     require("mason-null-ls").setup({
       ensure_installed = {
-        "alex",
         "beautysh",
         "cspell",
         "codespell",
         "jq",
         "jsonlint",
-        "markdownlint",
-        "marksman",
         "prettierd",
         "rustywind",
-        "selene",
         "stylelint",
         "stylua",
         "vint",
