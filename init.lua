@@ -612,6 +612,26 @@ require("telescope").setup({
     preview = {
       filesize_limit = 0.1, -- MB
     },
+    borderchars = {
+      "─",
+      "│",
+      "─",
+      "│",
+      "┌",
+      "┐",
+      "┘",
+      "└",
+    },
+    -- borderchars = {
+    --   "─",
+    --   "│",
+    --   "─",
+    --   "│",
+    --   "┌ ",
+    --   "┐",
+    --   "┘",
+    --   "└",
+    -- },
     -- preview = {
     --   mime_hook = function(filepath, bufnr, opts)
     --     if is_image(filepath) then
@@ -1137,7 +1157,7 @@ vim.diagnostic.config({
   --   prefix = "●",
   -- },
   float = {
-    border = "rounded",
+    border = "single",
   },
 })
 
@@ -1187,8 +1207,30 @@ cmp.setup({
     completeopt = "menu,menuone,noinsert",
   },
   window = {
-    completion = cmp.config.window.bordered(),
-    documentation = cmp.config.window.bordered(),
+    completion = {
+      border = {
+        "┌",
+        "─",
+        "┐",
+        "│",
+        "┘",
+        "─",
+        "└",
+        "│",
+      },
+    },
+    documentation = {
+      border = {
+        "┌",
+        "─",
+        "┐",
+        "│",
+        "┘",
+        "─",
+        "└",
+        "│",
+      },
+    },
   },
   mapping = cmp.mapping.preset.insert({
     -- ['<C-n>'] = cmp.mapping.select_next_item(),

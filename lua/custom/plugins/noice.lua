@@ -7,7 +7,11 @@ return {
       config = function()
         require("notify").setup({
           on_open = function(win)
-            vim.api.nvim_win_set_config(win, { focusable = false, zindex = 100 })
+            vim.api.nvim_win_set_config(win, {
+              focusable = false,
+              zindex = 100,
+              border = "single",
+            })
           end,
         })
       end,
@@ -39,6 +43,11 @@ return {
       lsp_doc_border = true, -- add a border to hover docs and signature help
     },
     views = {
+      popup = {
+        border = {
+          style = "single",
+        },
+      },
       cmdline_popup = {
         position = {
           row = 5,
@@ -48,9 +57,25 @@ return {
           width = 60,
           height = "auto",
         },
+        border = {
+          style = "single",
+        },
+      },
+      confirm = {
+        border = {
+          style = "single",
+        },
       },
       hover = {
         zindex = 100,
+        border = {
+          style = "single",
+        },
+      },
+      popupmenu = {
+        border = {
+          style = "single",
+        },
       },
     },
     routes = {
