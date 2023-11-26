@@ -1011,7 +1011,7 @@ local on_attach = function(_, bufnr)
 
   nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
   -- nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
-  nmap("<leader>ca", ":CodeActionMenu<CR>", "[C]ode [A]ction")
+  -- nmap("<leader>ca", ":CodeActionMenu<CR>", "[C]ode [A]ction")
 
   nmap("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
   nmap("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
@@ -1089,7 +1089,7 @@ local servers = {
 
   tailwindcss = {},
 
-  -- eslint = {},
+  eslint = {},
 
   jsonls = {},
 }
@@ -1431,6 +1431,8 @@ vim.cmd("hi DiagnosticUnderlineInfo cterm=undercurl gui=undercurl guisp=#91d7e3"
 -- vim.cmd 'set listchars=leadmultispace:ᐧ'
 vim.o.list = true
 vim.o.listchars = "leadmultispace:·"
+
+vim.keymap.set("n", "<leader>ca", ":CodeActionMenu<CR>", { noremap = true, desc = "[C]ode [A]ction" })
 
 -- local get_pum = function()
 --   if math.floor(vim.o.lines * 0.45) < 15 then

@@ -11,8 +11,6 @@ return {
         "alex",
         "beautysh",
         "codespell",
-        "cspell",
-        "eslint_d",
         "jq",
         "jsonlint",
         "markdownlint",
