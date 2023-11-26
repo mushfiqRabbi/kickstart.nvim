@@ -1089,7 +1089,7 @@ local servers = {
 
   tailwindcss = {},
 
-  eslint = {},
+  -- eslint = {},
 
   jsonls = {},
 }

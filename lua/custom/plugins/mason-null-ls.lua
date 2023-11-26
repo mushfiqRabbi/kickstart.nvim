@@ -11,6 +11,7 @@ return {
         "beautysh",
         "cspell",
         "codespell",
+        "eslint_d",
         "jq",
         "jsonlint",
         "prettierd",

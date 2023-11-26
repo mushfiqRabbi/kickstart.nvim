@@ -18,6 +18,22 @@ return {
         -- Code Actions
         null_ls.builtins.code_actions.cspell.with({
           -- cwd = get_root,
+          runtime_condition = function(params)
+            local root = get_root(params)
+            return not string.match(
+              vim.fn.system({ "fd", "-H", "-F", "-tf", "-1", "--max-depth=1", ".no-cspell", root }),
+              ".*%.no%-cspell"
+            )
+          end,
+        }),
+        null_ls.builtins.code_actions.eslint_d.with({
+          runtime_condition = function(params)
+            local root = get_root(params)
+            return string.match(
+              vim.fn.system({ "fd", "-H", "-tf", "-1", "--max-depth=1", "\\.eslintrc.*", root }),
+              ".*%.eslintrc.*"
+            )
+          end,
         }),
 
         -- Diagnostics
@@ -37,8 +53,17 @@ return {
           runtime_condition = function(params)
             local root = get_root(params)
             return not string.match(
-              vim.fn.system({ "fd", "-H", "-F", "-tf", "-1", "--max-depth=1", "no-cspell", root }),
-              ".*no%-cspell"
+              vim.fn.system({ "fd", "-H", "-F", "-tf", "-1", "--max-depth=1", ".no-cspell", root }),
+              ".*%.no%-cspell"
+            )
+          end,
+        }),
+        null_ls.builtins.diagnostics.eslint_d.with({
+          runtime_condition = function(params)
+            local root = get_root(params)
+            return string.match(
+              vim.fn.system({ "fd", "-H", "-tf", "-1", "--max-depth=1", "\\.eslintrc.*", root }),
+              ".*%.eslintrc.*"
             )
           end,
         }),
