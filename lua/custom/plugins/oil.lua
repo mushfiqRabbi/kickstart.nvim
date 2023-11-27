@@ -8,7 +8,15 @@ return {
     local util = require("oil.util")
 
     oil.setup({
-
+      float = {
+        border = "single",
+      },
+      preview = {
+        border = "single",
+      },
+      progress = {
+        border = "single",
+      },
       keymaps = {
         ["<C-s>"] = false,
         ["<C-v>"] = "actions.select_vsplit",
