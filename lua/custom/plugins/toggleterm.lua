@@ -115,6 +115,11 @@ return {
         --         print 'exiting'
         --         print(term_count)
       end,
+      highlights = {
+        FloatBorder = {
+          guifg = "#89b4fa",
+        },
+      },
     })
     -- vim.api.nvim_create_autocmd('BufEnter', {
     --   pattern = 'term://*#toggleterm#*',
