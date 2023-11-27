@@ -1207,30 +1207,12 @@ cmp.setup({
     completeopt = "menu,menuone,noinsert",
   },
   window = {
-    completion = {
-      border = {
-        "┌",
-        "─",
-        "┐",
-        "│",
-        "┘",
-        "─",
-        "└",
-        "│",
-      },
-    },
-    documentation = {
-      border = {
-        "┌",
-        "─",
-        "┐",
-        "│",
-        "┘",
-        "─",
-        "└",
-        "│",
-      },
-    },
+    completion = cmp.config.window.bordered({
+      border = "single",
+    }),
+    documentation = cmp.config.window.bordered({
+      border = "single",
+    }),
   },
   mapping = cmp.mapping.preset.insert({
     -- ['<C-n>'] = cmp.mapping.select_next_item(),
