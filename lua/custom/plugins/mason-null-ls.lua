@@ -14,6 +14,7 @@ return {
         "eslint_d",
         "jq",
         "jsonlint",
+        "markuplint",
         "prettierd",
         "rustywind",
         "selene",
