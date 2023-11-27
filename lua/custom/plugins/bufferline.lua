@@ -15,7 +15,7 @@ return {
       highlights = {
         indicator_selected = {
           fg = "#f5a97f",
-          bg = "#24273a",
+          -- bg = "#24273a",
         },
       },
       options = {
