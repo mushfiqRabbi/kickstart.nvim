@@ -1469,6 +1469,13 @@ vim.cmd("hi DiagnosticUnderlineInfo cterm=undercurl gui=undercurl guisp=#91d7e3"
 vim.o.list = true
 vim.o.listchars = "leadmultispace:·"
 
+vim.keymap.set(
+  "n",
+  "<leader>oc",
+  "<cmd>:e /home/mushfiq/.config/nvim/init.lua<cr>",
+  { noremap = true, desc = "[O]pen [C]onfig" }
+)
+
 -- local get_pum = function()
 --   if math.floor(vim.o.lines * 0.45) < 15 then
 --     return 15
