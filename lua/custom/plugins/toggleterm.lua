@@ -120,6 +120,9 @@ return {
           guifg = "#89b4fa",
         },
       },
+      float_opts = {
+        winblend = 7,
+      },
     })
     -- vim.api.nvim_create_autocmd('BufEnter', {
     --   pattern = 'term://*#toggleterm#*',
