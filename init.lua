@@ -1463,10 +1463,10 @@ vim.keymap.set({ "n", "v" }, "<leader>dv", "<cmd>DiffviewOpen<cr>", { noremap = 
 vim.keymap.set({ "n", "v" }, "<leader>L", "<cmd>Lazy<cr>", { noremap = true, desc = "[L]azy" })
 vim.keymap.set({ "n", "v" }, "<leader>M", "<cmd>Mason<cr>", { noremap = true, desc = "[M]ason" })
 
-vim.cmd("hi DiagnosticUnderlineError cterm=undercurl gui=undercurl guisp=#ed8796")
-vim.cmd("hi DiagnosticUnderlineWarn cterm=undercurl gui=undercurl guisp=#eed49f")
-vim.cmd("hi DiagnosticUnderlineHint cterm=undercurl gui=undercurl guisp=#8bd5ca")
-vim.cmd("hi DiagnosticUnderlineInfo cterm=undercurl gui=undercurl guisp=#91d7e3")
+-- vim.cmd("hi DiagnosticUnderlineError cterm=undercurl gui=undercurl guisp=#ed8796")
+-- vim.cmd("hi DiagnosticUnderlineWarn cterm=undercurl gui=undercurl guisp=#eed49f")
+-- vim.cmd("hi DiagnosticUnderlineHint cterm=undercurl gui=undercurl guisp=#8bd5ca")
+-- vim.cmd("hi DiagnosticUnderlineInfo cterm=undercurl gui=undercurl guisp=#91d7e3")
 
 -- vim.cmd 'set list'
 -- vim.cmd 'set listchars=leadmultispace:ᐧ'
@@ -1494,6 +1494,21 @@ let g:clipboard = {
     \   'cache_enabled': 0,
     \ }
 ]])
+
+-- vim.cmd([[
+-- let g:clipboard = {
+--   \   'name': 'myClipboard',
+--   \   'copy': {
+--   \      '+': ['tmux', 'load-buffer', '-'],
+--   \      '*': ['tmux', 'load-buffer', '-'],
+--   \    },
+--   \   'paste': {
+--   \      '+': ['tmux', 'save-buffer', '-'],
+--   \      '*': ['tmux', 'save-buffer', '-'],
+--   \   },
+--   \   'cache_enabled': 1,
+--   \ }
+-- ]])
 
 -- local get_pum = function()
 --   if math.floor(vim.o.lines * 0.45) < 15 then

@@ -22,6 +22,21 @@ return {
         noice = true,
         notify = true,
         which_key = true,
+        native_lsp = {
+          enabled = true,
+          virtual_text = {
+            errors = { "italic" },
+            hints = { "italic" },
+            warnings = { "italic" },
+            information = { "italic" },
+          },
+          underlines = {
+            errors = { "undercurl" },
+            hints = { "undercurl" },
+            warnings = { "undercurl" },
+            information = { "undercurl" },
+          },
+        },
       },
     })
     vim.cmd.colorscheme("catppuccin-mocha")
