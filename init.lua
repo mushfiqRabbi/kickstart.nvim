@@ -1480,6 +1480,21 @@ vim.keymap.set(
   { noremap = true, desc = "[O]pen [C]onfig" }
 )
 
+vim.cmd([[
+let g:clipboard = {
+    \   'name': 'WslClipboard',
+    \   'copy': {
+    \      '+': 'clip.exe',
+    \      '*': 'clip.exe',
+    \    },
+    \   'paste': {
+    \      '+': 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+    \      '*': 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+    \   },
+    \   'cache_enabled': 0,
+    \ }
+]])
+
 -- local get_pum = function()
 --   if math.floor(vim.o.lines * 0.45) < 15 then
 --     return 15
