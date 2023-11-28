@@ -1,11 +1,13 @@
 return {
-  'mawkler/modicator.nvim',
+  "mawkler/modicator.nvim",
   -- dependencies = 'navarasu/onedark.nvim', -- Add your colorscheme plugin here
   dependencies = {
-    'catppuccin/nvim',
-    name = 'catppuccin',
+    {
+      "catppuccin/nvim",
+      name = "catppuccin",
+    },
   }, -- Add your colorscheme plugin here
-  event = 'VeryLazy',
+  event = "VeryLazy",
   init = function()
     -- These are required for Modicator to work
     vim.o.cursorline = true
