@@ -1451,7 +1451,7 @@ vim.api.nvim_create_autocmd("CursorHold", {
 --   end,
 -- })
 
-vim.keymap.set("n", "<leader>U", function()
+vim.keymap.set({ "n", "v" }, "<leader>U", function()
   local url_under_cursor = vim.fn.expand("<cWORD>")
   if string.match(url_under_cursor, "[a-z]*://[^ >,;]*") then
     vim.fn.jobstart({ "wslview", url_under_cursor })
