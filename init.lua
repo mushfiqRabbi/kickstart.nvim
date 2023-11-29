@@ -653,7 +653,7 @@ require("telescope").setup({
     -- },
     layout_strategy = "horizontal",
     layout_config = {
-      width = 0.9,
+      width = 0.8,
       height = 0.95,
       preview_width = 0.65,
       prompt_position = "top",
