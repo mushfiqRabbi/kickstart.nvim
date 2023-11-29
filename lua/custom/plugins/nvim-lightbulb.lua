@@ -8,9 +8,6 @@ return {
       number = {
         enabled = true,
       },
-      ignore = {
-        ft = { "nvim-tree" },
-      },
     })
 
     vim.api.nvim_create_autocmd("CursorHold", {
