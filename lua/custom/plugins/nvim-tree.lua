@@ -126,7 +126,7 @@ return {
           enable = true,
           open_win_config = function()
             local HEIGHT_RATIO = 0.9
-            local WIDTH_RATIO = 0.3
+            local WIDTH_RATIO = 0.25
             local FULL_WIDTH_RATIO = 0.8
             return {
               border = "single",
