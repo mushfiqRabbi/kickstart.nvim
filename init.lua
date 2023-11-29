@@ -1484,6 +1484,7 @@ vim.keymap.set(
 )
 
 vim.o.winblend = 7
+vim.o.pumblend = 7
 
 -- vim.cmd([[
 -- let g:clipboard = {

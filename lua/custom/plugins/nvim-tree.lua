@@ -101,25 +101,17 @@ return {
       },
       sync_root_with_cwd = true,
       renderer = {
-        full_name = true,
-        highlight_git = true,
-        highlight_diagnostics = true,
-        highlight_opened_files = "name",
-        highlight_modified = "name",
-        highlight_bookmarks = "name",
         indent_markers = {
           enable = true,
         },
         icons = {
-          web_devicons = {
-            folder = {
-              enable = true,
+          glyphs = {
+            git = {
+
+              ignored = "",
             },
           },
         },
-      },
-      modified = {
-        enable = true,
       },
       view = {
         float = {
