@@ -87,11 +87,28 @@ return {
       },
       sync_root_with_cwd = true,
       renderer = {
+        full_name = true,
+        highlight_git = true,
+        highlight_diagnostics = true,
+        highlight_opened_files = "name",
+        highlight_modified = "name",
+        highlight_bookmarks = "name",
         indent_markers = {
           enable = true,
         },
+        icons = {
+          web_devicons = {
+            folder = {
+              enable = true,
+            },
+          },
+        },
+      },
+      modified = {
+        enable = true,
       },
       view = {
+        relativenumber = true,
         float = {
           enable = true,
           open_win_config = function()
@@ -191,5 +208,12 @@ return {
     --     print(vim.api.nvim_buf_get_name(0))
     --   end,
     -- })
+
+    local api = require("nvim-tree.api")
+    local FloatPreview = require("float-preview")
+    local close_wrap = FloatPreview.close_wrap
+    vim.keymap.set({ "n", "v", "i" }, "<C-g>", function()
+      close_wrap(api.tree.toggle())
+    end, { noremap = true, silent = true, desc = "[] Explore files/folders" })
   end,
 }
