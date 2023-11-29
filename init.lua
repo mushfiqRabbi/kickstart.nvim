@@ -605,6 +605,7 @@ local trouble = require("trouble.providers.telescope")
 
 require("telescope").setup({
   defaults = {
+    winblend = 7,
     wrap_results = true,
     skip_empty_lines = true,
     dynamic_preview_title = true,
@@ -1481,6 +1482,8 @@ vim.keymap.set(
   "<cmd>:e /home/mushfiq/.config/nvim/init.lua<cr>",
   { noremap = true, desc = "[O]pen [C]onfig" }
 )
+
+vim.o.winblend = 7
 
 -- vim.cmd([[
 -- let g:clipboard = {

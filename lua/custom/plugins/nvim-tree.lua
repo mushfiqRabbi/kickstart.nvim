@@ -19,8 +19,22 @@ return {
       FloatPreview.attach_nvimtree(bufnr)
       local close_wrap = FloatPreview.close_wrap
 
+      local toggle_term = function()
+        local node = api.tree.get_node_under_cursor()
+        local root_dir = vim.fn.FindRootDirectory(node.absolute_path)
+        if root_dir ~= "" then
+          vim.cmd(string.format("ToggleTerm dir=%s", root_dir))
+        elseif root_dir == "" and node.type == "file" then
+          vim.cmd(string.format("ToggleTerm dir=%s", vim.fn.fnamemodify(node.absolute_path, ":h")))
+        else
+          vim.cmd(string.format("ToggleTerm dir=%s", node.absolute_path))
+        end
+      end
+
       vim.keymap.set("n", "<C-]>", close_wrap(api.tree.change_root_to_node), opts("CD"))
+      vim.keymap.set("n", "<C-\\>", close_wrap(toggle_term), opts("Toggle Term"))
       vim.keymap.set("n", "<C-e>", close_wrap(api.node.open.replace_tree_buffer), opts("Open: In Place"))
+      vim.keymap.set("n", "<C-g>", close_wrap(api.tree.close), opts("Close"))
       vim.keymap.set("n", "<C-k>", close_wrap(api.node.show_info_popup), opts("Info"))
       vim.keymap.set("n", "<C-r>", close_wrap(api.fs.rename_sub), opts("Rename: Omit Filename"))
       vim.keymap.set("n", "<C-t>", close_wrap(api.node.open.tab), opts("Open: New Tab"))
@@ -108,27 +122,19 @@ return {
         enable = true,
       },
       view = {
-        relativenumber = true,
         float = {
           enable = true,
           open_win_config = function()
-            local HEIGHT_RATIO = 0.9 -- You can change this
-            local WIDTH_RATIO = 0.3 -- You can change this too
-            local screen_w = vim.opt.columns:get()
-            local screen_h = vim.opt.lines:get() - vim.opt.cmdheight:get()
-            local window_w = screen_w * WIDTH_RATIO
-            local window_h = screen_h * HEIGHT_RATIO
-            local window_w_int = math.floor(window_w)
-            local window_h_int = math.floor(window_h)
-            local center_x = math.floor((screen_w - window_w) / 8)
-            local center_y = math.floor((vim.opt.lines:get() - window_h) / 2) - vim.opt.cmdheight:get()
+            local HEIGHT_RATIO = 0.9
+            local WIDTH_RATIO = 0.3
+            local FULL_WIDTH_RATIO = 0.8
             return {
               border = "single",
               relative = "editor",
-              row = center_y,
-              col = center_x,
-              width = window_w_int,
-              height = window_h_int,
+              row = math.floor((vim.o.lines - (vim.o.lines * HEIGHT_RATIO)) / 2),
+              col = math.floor((vim.o.columns - (vim.o.columns * FULL_WIDTH_RATIO)) / 2),
+              width = math.floor(vim.o.columns * WIDTH_RATIO),
+              height = math.floor(vim.o.lines * HEIGHT_RATIO),
             }
           end,
         },
@@ -209,11 +215,11 @@ return {
     --   end,
     -- })
 
-    local api = require("nvim-tree.api")
-    local FloatPreview = require("float-preview")
-    local close_wrap = FloatPreview.close_wrap
+    local tree = require("nvim-tree.api").tree
     vim.keymap.set({ "n", "v", "i" }, "<C-g>", function()
-      close_wrap(api.tree.toggle())
+      if not tree.is_visible() then
+        tree.toggle()
+      end
     end, { noremap = true, silent = true, desc = "[] Explore files/folders" })
   end,
 }

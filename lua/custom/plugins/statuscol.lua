@@ -10,17 +10,14 @@ return {
         {
           text = { "%s" },
           click = "v:lua.ScSa",
-          condition = { builtin.notempty },
         },
         {
           text = { builtin.lnumfunc, " " },
           click = "v:lua.ScLa",
-          condition = { builtin.notempty },
         },
         {
           text = { builtin.foldfunc, "  " },
           click = "v:lua.ScFa",
-          condition = { builtin.notempty },
         },
       },
     })
