@@ -121,8 +121,8 @@ return {
         },
       },
       float_opts = {
-        width = math.floor(vim.o.columns * 0.7),
-        height = math.floor(vim.o.lines * 0.8),
+        width = math.floor(vim.o.columns * 0.75),
+        height = math.floor(vim.o.lines * 0.75),
         winblend = 7,
       },
     })
