@@ -1473,8 +1473,8 @@ vim.keymap.set({ "n", "v" }, "<leader>M", "<cmd>Mason<cr>", { noremap = true, de
 
 -- vim.cmd 'set list'
 -- vim.cmd 'set listchars=leadmultispace:ᐧ'
-vim.o.list = true
-vim.o.listchars = "leadmultispace:·"
+-- vim.o.list = true
+-- vim.o.listchars = "leadmultispace:·"
 
 vim.keymap.set(
   "n",

@@ -89,31 +89,11 @@ return {
 
     require("nvim-tree").setup({
       on_attach = my_on_attach,
-      diagnostics = {
-        enable = true,
-        show_on_dirs = true,
-        icons = {
-          error = "",
-          warning = "",
-          hint = "",
-          info = "",
-        },
-      },
-      sync_root_with_cwd = true,
-      renderer = {
-        indent_markers = {
-          enable = true,
-        },
-        icons = {
-          glyphs = {
-            git = {
 
-              ignored = "",
-            },
-          },
-        },
-      },
+      sync_root_with_cwd = true,
       view = {
+        centralize_selection = true,
+        signcolumn = "auto",
         float = {
           enable = true,
           open_win_config = function()
@@ -130,33 +110,44 @@ return {
             }
           end,
         },
-        -- width = function()
-        --   return math.floor(vim.opt.columns:get() * WIDTH_RATIO)
-        -- end,
-        -- width = function()
-        --   local resposive_width = math.floor(vim.o.columns * 0.15)
-        --   if resposive_width < 25 then
-        --     return 25
-        --   else
-        --     return resposive_width
-        --   end
-        -- end,
-        centralize_selection = true,
+      },
+      renderer = {
+        highlight_git = true,
+        highlight_diagnostics = true,
+        highlight_opened_files = "name",
+        highlight_modified = "name",
+        highlight_bookmarks = "name",
+        highlight_clipboard = "name",
+        indent_markers = {
+          enable = true,
+        },
+        icons = {
+          glyphs = {
+            git = {
+              ignored = "",
+            },
+          },
+        },
       },
       update_focused_file = {
         enable = true,
         update_root = true,
       },
+      diagnostics = {
+        enable = true,
+        show_on_dirs = true,
+        icons = {
+          error = "",
+          warning = "",
+          hint = "",
+          info = "",
+        },
+      },
+      modified = {
+        enable = true,
+      },
       filters = {
-        custom = {
-          "^.git$",
-          "^.github$",
-          "^.vscode$",
-        },
-        exclude = {
-          ".env",
-          ".env.local",
-        },
+        git_ignored = false,
       },
     })
 
@@ -210,7 +201,7 @@ return {
     local tree = require("nvim-tree.api").tree
     vim.keymap.set({ "n", "v", "i" }, "<C-g>", function()
       if not tree.is_visible() then
-        tree.toggle()
+        tree.open()
       end
     end, { noremap = true, silent = true, desc = "[] Explore files/folders" })
   end,
