@@ -675,16 +675,27 @@ require("telescope").setup({
         -- ['<C-c>'] = require('telescope.actions').close,
         ["<C-g>"] = function(prompt_bufnr)
           local selection = require("telescope.actions.state").get_selected_entry()
-          local dir
-          if not selection.path then
-            dir = selection.value
+          if not selection.path and not selection.value then
+            return
+          elseif not selection.path and not selection.filename then
+            require("telescope.actions").close(prompt_bufnr)
+            require("nvim-tree.api").tree.open({ path = selection.value })
+            require("nvim-tree.api").node.navigate.parent()
           else
-            dir = vim.fn.fnamemodify(selection.path, ":p:h")
+            local root_dir = vim.fn.FindRootDirectory(selection.path)
+            if root_dir == "" then
+              root_dir = vim.fn.fnamemodify(selection.path, ":h")
+            end
+            require("telescope.actions").close(prompt_bufnr)
+            require("nvim-tree.api").tree.open({ path = root_dir })
+            require("nvim-tree.api").tree.find_file({
+              buf = selection.path,
+            })
           end
-          require("telescope.actions").close(prompt_bufnr)
+          -- require("telescope.actions").close(prompt_bufnr)
           -- Depending on what you want put `cd`, `lcd`, `tcd`
           -- vim.cmd(string.format("Oil %s", dir))
-          require("nvim-tree.api").tree.toggle({ path = dir })
+          -- require("nvim-tree.api").tree.open({ path = dir })
           -- vim.cmd(string.format('lua MiniFiles.open(%s)', dir))
           -- MiniFiles.open(dir, false)
         end,
@@ -702,17 +713,22 @@ require("telescope").setup({
         -- end,
         ["<C-\\>"] = function(prompt_bufnr)
           local selection = require("telescope.actions.state").get_selected_entry()
-          local dir
-          if not selection.path then
-            dir = selection.value
+          local path
+          if not selection.path and not selection.value then
+            return
+          elseif not selection.path and not selection.filename then
+            path = selection.value
           else
-            dir = vim.fn.fnamemodify(selection.path, ":p:h")
+            path = selection.path
+          end
+          -- print(path)
+          -- print(vim.fn.FindRootDirectory(path))
+          local dir = vim.fn.FindRootDirectory(path)
+          if dir == "" then
+            dir = vim.fn.fnamemodify(path, ":h")
           end
           require("telescope.actions").close(prompt_bufnr)
-          -- print(dir)
-          -- print(vim.fn.FindRootDirectory(dir))
-          local root_dir = vim.fn.FindRootDirectory(dir)
-          vim.cmd(string.format("ToggleTerm dir=%s", root_dir))
+          vim.cmd(string.format("ToggleTerm dir=%s", dir))
         end,
       },
       i = {
@@ -722,16 +738,27 @@ require("telescope").setup({
         -- ['<C-d>'] = false,
         ["<C-g>"] = function(prompt_bufnr)
           local selection = require("telescope.actions.state").get_selected_entry()
-          local dir
-          if not selection.path then
-            dir = selection.value
+          if not selection.path and not selection.value then
+            return
+          elseif not selection.path and not selection.filename then
+            require("telescope.actions").close(prompt_bufnr)
+            require("nvim-tree.api").tree.open({ path = selection.value })
+            require("nvim-tree.api").node.navigate.parent()
           else
-            dir = vim.fn.fnamemodify(selection.path, ":p:h")
+            local root_dir = vim.fn.FindRootDirectory(selection.path)
+            if root_dir == "" then
+              root_dir = vim.fn.fnamemodify(selection.path, ":h")
+            end
+            require("telescope.actions").close(prompt_bufnr)
+            require("nvim-tree.api").tree.open({ path = root_dir })
+            require("nvim-tree.api").tree.find_file({
+              buf = selection.path,
+            })
           end
-          require("telescope.actions").close(prompt_bufnr)
+          -- require("telescope.actions").close(prompt_bufnr)
           -- Depending on what you want put `cd`, `lcd`, `tcd`
           -- vim.cmd(string.format("Oil %s", dir))
-          require("nvim-tree.api").tree.toggle({ path = dir })
+          -- require("nvim-tree.api").tree.open({ path = dir })
           -- MiniFiles.open(dir, false)
         end,
         -- ['<C-w>'] = function(prompt_bufnr)
@@ -743,17 +770,22 @@ require("telescope").setup({
         -- end,
         ["<C-\\>"] = function(prompt_bufnr)
           local selection = require("telescope.actions.state").get_selected_entry()
-          local dir
-          if not selection.path then
-            dir = selection.value
+          local path
+          if not selection.path and not selection.value then
+            return
+          elseif not selection.path and not selection.filename then
+            path = selection.value
           else
-            dir = vim.fn.fnamemodify(selection.path, ":p:h")
+            path = selection.path
+          end
+          -- print(path)
+          -- print(vim.fn.FindRootDirectory(path))
+          local dir = vim.fn.FindRootDirectory(path)
+          if dir == "" then
+            dir = vim.fn.fnamemodify(path, ":h")
           end
           require("telescope.actions").close(prompt_bufnr)
-          -- print(dir)
-          -- print(vim.fn.FindRootDirectory(dir))
-          local root_dir = vim.fn.FindRootDirectory(dir)
-          vim.cmd(string.format("ToggleTerm dir=%s", root_dir))
+          vim.cmd(string.format("ToggleTerm dir=%s", dir))
           vim.cmd.normal("i")
         end,
       },
