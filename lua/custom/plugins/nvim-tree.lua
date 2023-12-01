@@ -31,10 +31,9 @@ return {
         end
       end
 
+      -- DEFAULT MAPPINGS
       vim.keymap.set("n", "<C-]>", close_wrap(api.tree.change_root_to_node), opts("CD"))
-      vim.keymap.set("n", "<C-\\>", close_wrap(toggle_term), opts("Toggle Term"))
       vim.keymap.set("n", "<C-e>", close_wrap(api.node.open.replace_tree_buffer), opts("Open: In Place"))
-      vim.keymap.set("n", "<C-g>", close_wrap(api.tree.close), opts("Close"))
       vim.keymap.set("n", "<C-k>", close_wrap(api.node.show_info_popup), opts("Info"))
       vim.keymap.set("n", "<C-r>", close_wrap(api.fs.rename_sub), opts("Rename: Omit Filename"))
       vim.keymap.set("n", "<C-t>", close_wrap(api.node.open.tab), opts("Open: New Tab"))
@@ -48,10 +47,12 @@ return {
       vim.keymap.set("n", ".", close_wrap(api.node.run.cmd), opts("Run Command"))
       vim.keymap.set("n", "-", close_wrap(api.tree.change_root_to_parent), opts("Up"))
       vim.keymap.set("n", "a", close_wrap(api.fs.create), opts("Create"))
+      vim.keymap.set("n", "bd", close_wrap(api.marks.bulk.delete), opts("Delete Bookmarked"))
+      vim.keymap.set("n", "bt", close_wrap(api.marks.bulk.trash), opts("Trash Bookmarked"))
       vim.keymap.set("n", "bmv", close_wrap(api.marks.bulk.move), opts("Move Bookmarked"))
-      vim.keymap.set("n", "B", close_wrap(api.tree.toggle_no_buffer_filter), opts("Toggle No Buffer"))
+      vim.keymap.set("n", "B", close_wrap(api.tree.toggle_no_buffer_filter), opts("Toggle Filter: No Buffer"))
       vim.keymap.set("n", "c", close_wrap(api.fs.copy.node), opts("Copy"))
-      vim.keymap.set("n", "C", close_wrap(api.tree.toggle_git_clean_filter), opts("Toggle Git Clean"))
+      vim.keymap.set("n", "C", close_wrap(api.tree.toggle_git_clean_filter), opts("Toggle Filter: Git Clean"))
       vim.keymap.set("n", "[c", close_wrap(api.node.navigate.git.prev), opts("Prev Git"))
       vim.keymap.set("n", "]c", close_wrap(api.node.navigate.git.next), opts("Next Git"))
       vim.keymap.set("n", "d", close_wrap(api.fs.remove), opts("Delete"))
@@ -64,11 +65,12 @@ return {
       vim.keymap.set("n", "f", close_wrap(api.live_filter.start), opts("Filter"))
       vim.keymap.set("n", "g?", close_wrap(api.tree.toggle_help), opts("Help"))
       vim.keymap.set("n", "gy", close_wrap(api.fs.copy.absolute_path), opts("Copy Absolute Path"))
-      vim.keymap.set("n", "H", close_wrap(api.tree.toggle_hidden_filter), opts("Toggle Dotfiles"))
-      vim.keymap.set("n", "I", close_wrap(api.tree.toggle_gitignore_filter), opts("Toggle Git Ignore"))
+      vim.keymap.set("n", "H", close_wrap(api.tree.toggle_hidden_filter), opts("Toggle Filter: Dotfiles"))
+      vim.keymap.set("n", "I", close_wrap(api.tree.toggle_gitignore_filter), opts("Toggle Filter: Git Ignore"))
       vim.keymap.set("n", "J", close_wrap(api.node.navigate.sibling.last), opts("Last Sibling"))
       vim.keymap.set("n", "K", close_wrap(api.node.navigate.sibling.first), opts("First Sibling"))
       vim.keymap.set("n", "m", close_wrap(api.marks.toggle), opts("Toggle Bookmark"))
+      vim.keymap.set("n", "mc", close_wrap(api.marks.clear), opts("Clear All Bookmarks"))
       vim.keymap.set("n", "o", close_wrap(api.node.open.edit), opts("Open"))
       vim.keymap.set("n", "O", close_wrap(api.node.open.no_window_picker), opts("Open: No Window Picker"))
       vim.keymap.set("n", "p", close_wrap(api.fs.paste), opts("Paste"))
@@ -78,13 +80,18 @@ return {
       vim.keymap.set("n", "R", close_wrap(api.tree.reload), opts("Refresh"))
       vim.keymap.set("n", "s", close_wrap(api.node.run.system), opts("Run System"))
       vim.keymap.set("n", "S", close_wrap(api.tree.search_node), opts("Search"))
-      vim.keymap.set("n", "U", close_wrap(api.tree.toggle_custom_filter), opts("Toggle Hidden"))
+      vim.keymap.set("n", "u", close_wrap(api.fs.rename_full), opts("Rename: Full Path"))
+      vim.keymap.set("n", "U", close_wrap(api.tree.toggle_custom_filter), opts("Toggle Filter: Hidden"))
       vim.keymap.set("n", "W", close_wrap(api.tree.collapse_all), opts("Collapse"))
       vim.keymap.set("n", "x", close_wrap(api.fs.cut), opts("Cut"))
       vim.keymap.set("n", "y", close_wrap(api.fs.copy.filename), opts("Copy Name"))
       vim.keymap.set("n", "Y", close_wrap(api.fs.copy.relative_path), opts("Copy Relative Path"))
       vim.keymap.set("n", "<2-LeftMouse>", close_wrap(api.node.open.edit), opts("Open"))
       vim.keymap.set("n", "<2-RightMouse>", close_wrap(api.tree.change_root_to_node), opts("CD"))
+
+      -- CUSTOM MAPPINGS
+      vim.keymap.set("n", "<C-\\>", close_wrap(toggle_term), opts("Toggle Term"))
+      vim.keymap.set("n", "<C-g>", close_wrap(api.tree.close), opts("Close"))
     end
 
     require("nvim-tree").setup({
