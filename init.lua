@@ -1221,8 +1221,8 @@ vim.diagnostic.config({
 -- See `:help cmp`
 local cmp = require("cmp")
 local luasnip = require("luasnip")
--- require('luasnip.loaders.from_vscode').lazy_load()
--- luasnip.config.setup {}
+require("luasnip.loaders.from_vscode").lazy_load()
+luasnip.config.setup({})
 
 -- local get_mw = function()
 --   if math.floor(vim.o.columns * 0.1) < 20 then
