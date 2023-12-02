@@ -460,7 +460,13 @@ require("lazy").setup({
   --
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
   { import = "custom.plugins" },
-}, {})
+}, {
+  ui = {
+    size = { width = 0.7, height = 0.85 },
+    border = "single",
+    title = " LAZY ",
+  },
+})
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
@@ -1135,7 +1141,12 @@ end
 
 -- mason-lspconfig requires that these setup functions are called in this order
 -- before setting up the servers.
-require("mason").setup()
+require("mason").setup({
+  ui = {
+    border = "single",
+    width = 0.7,
+  },
+})
 require("mason-lspconfig").setup()
 
 -- Enable the following language servers
@@ -1505,8 +1516,8 @@ vim.keymap.set({ "n", "v" }, "<leader>M", "<cmd>Mason<cr>", { noremap = true, de
 
 -- vim.cmd 'set list'
 -- vim.cmd 'set listchars=leadmultispace:ᐧ'
--- vim.o.list = true
--- vim.o.listchars = "leadmultispace:·"
+vim.o.list = true
+vim.o.listchars = "leadmultispace:·"
 
 vim.keymap.set(
   "n",
