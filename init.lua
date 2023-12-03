@@ -200,7 +200,7 @@ require("lazy").setup({
           },
           notification = {
             window = {
-              winblend = 75,
+              -- winblend = 75,
               x_padding = 2,
             },
           },
@@ -611,7 +611,7 @@ local trouble = require("trouble.providers.telescope")
 
 require("telescope").setup({
   defaults = {
-    winblend = 7,
+    -- winblend = 7,
     wrap_results = true,
     skip_empty_lines = true,
     dynamic_preview_title = true,
@@ -1526,8 +1526,8 @@ vim.keymap.set(
   { noremap = true, desc = "[O]pen [C]onfig" }
 )
 
-vim.o.winblend = 7
-vim.o.pumblend = 7
+-- vim.o.winblend = 7
+-- vim.o.pumblend = 7
 
 -- vim.cmd([[
 -- let g:clipboard = {

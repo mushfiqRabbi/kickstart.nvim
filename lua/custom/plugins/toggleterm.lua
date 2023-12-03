@@ -127,7 +127,7 @@ return {
         height = function()
           return math.floor(vim.o.lines * 0.8)
         end,
-        winblend = 7,
+        -- winblend = 7,
       },
     })
     -- vim.api.nvim_create_autocmd('BufEnter', {
