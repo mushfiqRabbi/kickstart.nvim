@@ -76,7 +76,13 @@ return {
             )
           end,
         }),
-        null_ls.builtins.diagnostics.dotenv_linter,
+        null_ls.builtins.diagnostics.dotenv_linter.with({
+          diagnostics_postprocess = function(diagnostic)
+            if diagnostic.message:find("should go before") then
+              diagnostic.severity = vim.diagnostic.severity["HINT"]
+            end
+          end,
+        }),
         null_ls.builtins.diagnostics.jsonlint,
         null_ls.builtins.diagnostics.markuplint,
         null_ls.builtins.diagnostics.selene,
