@@ -11,6 +11,7 @@ return {
     end
     local null_ls = require("null-ls")
     require("null-ls").setup({
+      border = "single",
       on_attach = function()
         vim.keymap.set("n", "<leader>ca", ":CodeActionMenu<CR>", { desc = "[C]ode [A]ction Menu" })
       end,

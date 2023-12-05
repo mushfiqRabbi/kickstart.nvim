@@ -1526,6 +1526,8 @@ vim.keymap.set(
   { noremap = true, desc = "[O]pen [C]onfig" }
 )
 
+require("lspconfig.ui.windows").default_options.border = "single"
+
 -- vim.o.winblend = 7
 -- vim.o.pumblend = 7
 
