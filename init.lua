@@ -972,6 +972,7 @@ vim.defer_fn(function()
       "bash",
       "c",
       "http",
+      "html",
       "javascript",
       "json",
       "lua",
