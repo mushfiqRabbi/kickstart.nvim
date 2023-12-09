@@ -1497,7 +1497,7 @@ vim.api.nvim_create_autocmd("CursorHold", {
             return string.format(" --> %s [%d:%d]", diagnostic.source, diagnostic.lnum, diagnostic.col)
           end,
 
-          title = " DIAGNOSTICS ",
+          title = "DIAGNOSTICS",
           focusable = false,
           close_events = { "CursorMoved", "CursorMovedI", "BufHidden", "InsertCharPre", "WinLeave" },
         })

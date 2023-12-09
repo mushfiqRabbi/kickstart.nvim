@@ -2,14 +2,12 @@ return {
   "kosayoda/nvim-lightbulb",
   config = function()
     require("nvim-lightbulb").setup({
+      hide_in_unfocused_buffer = false,
       number = {
         enabled = true,
       },
       autocmd = {
         enabled = true,
-      },
-      ignore = {
-        ft = { "NvimTree", "nvimtree" },
       },
     })
 
