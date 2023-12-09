@@ -1496,10 +1496,11 @@ vim.api.nvim_create_autocmd("CursorHold", {
             return string.format("%s", diagnostic.message)
           end,
           suffix = function(diagnostic)
-            return string.format(" --> %s [%d:%d]", diagnostic.source, diagnostic.lnum, diagnostic.col)
+            return string.format(" --> %s [%d:%d]", diagnostic.source, (diagnostic.lnum + 1), diagnostic.col)
           end,
 
-          title = "DIAGNOSTICS",
+          title = " diagnostics ",
+          title_pos = "right",
           focusable = false,
           close_events = { "CursorMoved", "CursorMovedI", "BufHidden", "InsertCharPre", "WinLeave" },
         })
@@ -1527,6 +1528,7 @@ vim.keymap.set({ "n", "v" }, "<leader>M", "<cmd>Mason<cr>", { noremap = true, de
 -- vim.cmd("hi DiagnosticUnderlineWarn cterm=undercurl gui=undercurl guisp=#eed49f")
 -- vim.cmd("hi DiagnosticUnderlineHint cterm=undercurl gui=undercurl guisp=#8bd5ca")
 -- vim.cmd("hi DiagnosticUnderlineInfo cterm=undercurl gui=undercurl guisp=#91d7e3")
+vim.cmd("hi FloatTitle gui=bold,italic guifg=#89b4fa")
 
 -- vim.cmd 'set list'
 -- vim.cmd 'set listchars=leadmultispace:ᐧ'
