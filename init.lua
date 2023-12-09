@@ -1488,7 +1488,14 @@ vim.api.nvim_create_autocmd("CursorHold", {
     if vim.lsp.buf.server_ready() then
       local r, _ = unpack(vim.api.nvim_win_get_cursor(0))
       if next(vim.diagnostic.get(0, { lnum = r - 1 })) ~= nil then
-        vim.diagnostic.open_float({ source = true }, {
+        vim.diagnostic.open_float({
+          format = function(diagnostic)
+            return string.format("%s", diagnostic.message)
+          end,
+          suffix = function(diagnostic)
+            return string.format(" --> %s [%d:%d]", diagnostic.source, diagnostic.lnum, diagnostic.col)
+          end,
+
           focusable = false,
           close_events = { "CursorMoved", "CursorMovedI", "BufHidden", "InsertCharPre", "WinLeave" },
         })
