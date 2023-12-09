@@ -1528,7 +1528,7 @@ vim.keymap.set({ "n", "v" }, "<leader>M", "<cmd>Mason<cr>", { noremap = true, de
 -- vim.cmd("hi DiagnosticUnderlineWarn cterm=undercurl gui=undercurl guisp=#eed49f")
 -- vim.cmd("hi DiagnosticUnderlineHint cterm=undercurl gui=undercurl guisp=#8bd5ca")
 -- vim.cmd("hi DiagnosticUnderlineInfo cterm=undercurl gui=undercurl guisp=#91d7e3")
-vim.cmd("hi FloatTitle gui=bold,italic guifg=#89b4fa")
+vim.cmd("hi FloatTitle gui=bold guifg=#89b4fa")
 
 -- vim.cmd 'set list'
 -- vim.cmd 'set listchars=leadmultispace:ᐧ'
