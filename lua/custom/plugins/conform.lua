@@ -8,7 +8,7 @@ return {
       formatters_by_ft = {
         bash = { "beautysh" },
         css = { { "stylelint", "prettierd" } },
-        -- html = { "prettierd" },
+        html = { "prettierd" },
         javascript = { "prettierd", "rustywind" },
         javascriptreact = { "prettierd", "rustywind" },
         json = { { "jq", "prettierd" } },

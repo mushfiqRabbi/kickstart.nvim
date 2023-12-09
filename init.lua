@@ -1167,11 +1167,13 @@ local servers = {
 
   lua_ls = {},
 
-  emmet_ls = {},
+  -- emmet_ls = {},
 
-  emmet_language_server = {
-    filetypes = { "css", "eruby", "htmldjango", "javascriptreact", "less", "pug", "sass", "scss", "typescriptreact" },
-  },
+  -- emmet_language_server = {
+  --   filetypes = { "css", "eruby", "htmldjango", "javascriptreact", "less", "pug", "sass", "scss", "typescriptreact" },
+  -- },
+
+  emmet_language_server = {},
 
   tailwindcss = {},
 
