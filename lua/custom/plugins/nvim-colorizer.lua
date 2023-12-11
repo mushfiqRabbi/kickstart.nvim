@@ -9,5 +9,11 @@ return {
         "typescriptreact",
       },
     })
+    vim.keymap.set(
+      "n",
+      "<leader>tc",
+      ":ColorizerToggle<CR>",
+      { desc = "[T]oggle [C]olorizer", noremap = true, silent = true }
+    )
   end,
 }
