@@ -11,7 +11,7 @@ return {
         "beautysh",
         "cspell",
         "codespell",
-        "eslint_d",
+        -- "eslint_d",
         "jq",
         "jsonlint",
         "markuplint",

@@ -32,15 +32,15 @@ return {
             )
           end,
         }),
-        null_ls.builtins.code_actions.eslint_d.with({
-          runtime_condition = function(params)
-            local root = get_root(params)
-            return string.match(
-              vim.fn.system({ "fd", "-H", "-tf", "-1", "--max-depth=1", "\\.eslintrc.*", root }),
-              ".*%.eslintrc.*"
-            )
-          end,
-        }),
+        -- null_ls.builtins.code_actions.eslint_d.with({
+        --   runtime_condition = function(params)
+        --     local root = get_root(params)
+        --     return string.match(
+        --       vim.fn.system({ "fd", "-H", "-tf", "-1", "--max-depth=1", "\\.eslintrc.*", root }),
+        --       ".*%.eslintrc.*"
+        --     )
+        --   end,
+        -- }),
 
         -- Diagnostics
         null_ls.builtins.diagnostics.codespell.with({
@@ -68,15 +68,15 @@ return {
             )
           end,
         }),
-        null_ls.builtins.diagnostics.eslint_d.with({
-          runtime_condition = function(params)
-            local root = get_root(params)
-            return string.match(
-              vim.fn.system({ "fd", "-H", "-tf", "-1", "--max-depth=1", "\\.eslintrc.*", root }),
-              ".*%.eslintrc.*"
-            )
-          end,
-        }),
+        -- null_ls.builtins.diagnostics.eslint_d.with({
+        --   runtime_condition = function(params)
+        --     local root = get_root(params)
+        --     return string.match(
+        --       vim.fn.system({ "fd", "-H", "-tf", "-1", "--max-depth=1", "\\.eslintrc.*", root }),
+        --       ".*%.eslintrc.*"
+        --     )
+        --   end,
+        -- }),
         null_ls.builtins.diagnostics.dotenv_linter,
         null_ls.builtins.diagnostics.jsonlint,
         null_ls.builtins.diagnostics.markuplint,
