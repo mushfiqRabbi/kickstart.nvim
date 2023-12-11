@@ -15,7 +15,7 @@ return {
         "jq",
         "jsonlint",
         "markuplint",
-        -- "prettierd",
+        "prettierd",
         "prettier",
         "rustywind",
         "selene",
