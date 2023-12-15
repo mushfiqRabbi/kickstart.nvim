@@ -42,6 +42,7 @@ P.S. You can delete this when you're done too. It's your config now :)
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
 -- local auto_diag_float
 vim.g["python3_host_prog"] = "/home/mushfiq/.pyenv/versions/py3nvim/bin/python"
+vim.g["node_host_prog"] = "/home/mushfiq/.nvm/versions/node/v20.10.0/bin/neovim-node-host"
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 vim.opt.splitright = true
@@ -296,10 +297,10 @@ require("lazy").setup({
     config = function()
       require("lualine").setup({
         options = {
-          -- component_separators = { left = '', right = '' },
-          -- section_separators = { left = '', right = '' },
-          component_separators = "│",
-          section_separators = "",
+          component_separators = { left = "", right = "" },
+          section_separators = { left = "", right = "" },
+          -- component_separators = "│",
+          -- section_separators = "",
 
           -- theme = 'onedark',
           -- theme = 'tokyonight',
