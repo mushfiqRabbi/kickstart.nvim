@@ -27,7 +27,7 @@ return {
         diagnostics_indicator = function(count, level)
           local icon = level:match("error") and " "
             or level:match("warn") and " "
-            or level:match("hint") and " "
+            or level:match("hint") and " "
             or " "
           return " " .. icon .. count
         end,
@@ -59,7 +59,7 @@ return {
             end
 
             if hint ~= 0 then
-              table.insert(result, { text = "  " .. hint, fg = "#8bd5ca" })
+              table.insert(result, { text = "  " .. hint, fg = "#8bd5ca" })
             end
 
             if info ~= 0 then

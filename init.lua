@@ -1465,13 +1465,13 @@ local signs = {
   --   JetBrains friendly icons
   -- Error = ' ',
   -- Warn = ' ',
-  Hint = " ",
+  -- Hint = " ",
   -- Info = ' ',
 
   -- CaskaydiaCove friendly icons
   Error = " ",
   Warn = " ",
-  -- Hint = ' ',
+  Hint = " ",
   Info = " ",
 }
 for type, icon in pairs(signs) do
