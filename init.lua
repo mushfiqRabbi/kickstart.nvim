@@ -1181,6 +1181,8 @@ local servers = {
   eslint = {},
 
   jsonls = {},
+
+  yamlls = {},
 }
 
 -- Setup neovim lua configuration
