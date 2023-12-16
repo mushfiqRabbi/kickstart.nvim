@@ -43,13 +43,13 @@ return {
         -- }),
 
         -- Diagnostics
-        -- null_ls.builtins.diagnostics.codespell.with({
-        --   cwd = get_root,
-        --   disabled_filetypes = { "oil" },
-        --   diagnostics_postprocess = function(diagnostic)
-        --     diagnostic.severity = vim.diagnostic.severity["INFO"]
-        --   end,
-        -- }),
+        null_ls.builtins.diagnostics.codespell.with({
+          cwd = get_root,
+          disabled_filetypes = { "oil" },
+          diagnostics_postprocess = function(diagnostic)
+            diagnostic.severity = vim.diagnostic.severity["INFO"]
+          end,
+        }),
         null_ls.builtins.diagnostics.cspell.with({
           -- cwd = get_root,
           disabled_filetypes = { "oil", "dotenv" },

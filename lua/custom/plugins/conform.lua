@@ -19,7 +19,7 @@ return {
         typescriptreact = { { "prettierd", "prettier" }, "rustywind" },
         zsh = { "beautysh" },
 
-        -- ["*"] = { "codespell" },
+        ["*"] = { "codespell" },
         ["_"] = { "trim_whitespace" },
       },
 
