@@ -42,7 +42,7 @@ P.S. You can delete this when you're done too. It's your config now :)
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
 -- local auto_diag_float
 vim.g["python3_host_prog"] = "/home/mushfiq/.pyenv/versions/py3nvim/bin/python"
-vim.g["node_host_prog"] = "/home/mushfiq/.nvm/versions/node/v18.19.0/bin/neovim-node-host"
+vim.g["node_host_prog"] = "/home/mushfiq/.nvm/versions/node/v20.10.0/bin/neovim-node-host"
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 vim.opt.splitright = true
@@ -201,7 +201,7 @@ require("lazy").setup({
           },
           notification = {
             window = {
-              -- winblend = 75,
+              winblend = 75,
               x_padding = 2,
             },
           },
@@ -612,7 +612,7 @@ local trouble = require("trouble.providers.telescope")
 
 require("telescope").setup({
   defaults = {
-    -- winblend = 7,
+    winblend = 7,
     wrap_results = true,
     skip_empty_lines = true,
     dynamic_preview_title = true,
@@ -1545,7 +1545,7 @@ vim.keymap.set(
 
 require("lspconfig.ui.windows").default_options.border = "single"
 
--- vim.o.winblend = 7
+vim.o.winblend = 7
 -- vim.o.pumblend = 7
 
 -- vim.cmd([[

@@ -10,7 +10,7 @@ return {
       ensure_installed = {
         "beautysh",
         "cspell",
-        "codespell",
+        -- "codespell",
         -- "eslint_d",
         "jq",
         "jsonlint",

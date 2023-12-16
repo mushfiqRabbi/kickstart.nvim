@@ -19,7 +19,7 @@ return {
         -- Code Actions
         null_ls.builtins.code_actions.cspell.with({
           -- cwd = get_root,
-          disabled_filetypes = { "oil", "dotenv" },
+          disabled_filetypes = { "oil", "dotenv", "nvim-tree", "NvimTree", "nvimtree" },
           runtime_condition = function(params)
             local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(params.bufnr), ":t")
             if filename.match(filename, "%.?env[%.%w_.-]*") then
@@ -43,13 +43,13 @@ return {
         -- }),
 
         -- Diagnostics
-        null_ls.builtins.diagnostics.codespell.with({
-          cwd = get_root,
-          disabled_filetypes = { "oil" },
-          diagnostics_postprocess = function(diagnostic)
-            diagnostic.severity = vim.diagnostic.severity["INFO"]
-          end,
-        }),
+        -- null_ls.builtins.diagnostics.codespell.with({
+        --   cwd = get_root,
+        --   disabled_filetypes = { "oil" },
+        --   diagnostics_postprocess = function(diagnostic)
+        --     diagnostic.severity = vim.diagnostic.severity["INFO"]
+        --   end,
+        -- }),
         null_ls.builtins.diagnostics.cspell.with({
           -- cwd = get_root,
           disabled_filetypes = { "oil", "dotenv" },
