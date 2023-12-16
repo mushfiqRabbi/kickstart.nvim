@@ -1513,12 +1513,12 @@ vim.api.nvim_create_autocmd("CursorHold", {
 --   end,
 -- })
 
-vim.keymap.set({ "n", "v" }, "<leader>U", function()
-  local url_under_cursor = vim.fn.expand("<cWORD>")
-  if string.match(url_under_cursor, "[a-z]*://[^ >,;]*") then
-    vim.fn.jobstart({ "wslview", url_under_cursor })
-  end
-end, { noremap = true, desc = "Go to [U]rl under cursor" })
+-- vim.keymap.set({ "n", "v" }, "<leader>U", function()
+--   local url_under_cursor = vim.fn.expand("<cWORD>")
+--   if string.match(url_under_cursor, "[a-z]*://[^ >,;]*") then
+--     vim.fn.jobstart({ "wslview", url_under_cursor })
+--   end
+-- end, { noremap = true, desc = "Go to [U]rl under cursor" })
 
 vim.keymap.set({ "n", "v" }, "<C-q>t", "<cmd>tabclose<cr>", { noremap = true, desc = "[Q]uit [T]ab" })
 vim.keymap.set({ "n", "v" }, "<leader>dv", "<cmd>DiffviewOpen<cr>", { noremap = true, desc = "[D]iff [V]iew" })
