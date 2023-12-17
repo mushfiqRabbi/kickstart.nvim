@@ -7,8 +7,10 @@ return {
     if not status_ok then
       return
     end
-    url_open.setup({})
+    url_open.setup({
+      deep_pattern = true,
+    })
 
-    vim.keymap.set("n", "gx", "<esc>:URLOpenUnderCursor<cr>")
+    vim.keymap.set({ "n", "v" }, "gx", "<esc>:URLOpenUnderCursor<cr>")
   end,
 }
