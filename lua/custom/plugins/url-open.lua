@@ -11,6 +11,6 @@ return {
       deep_pattern = true,
     })
 
-    vim.keymap.set({ "n", "v" }, "gx", "<esc>:URLOpenUnderCursor<cr>")
+    vim.keymap.set("n", "gx", "<esc>:URLOpenUnderCursor<cr>")
   end,
 }
