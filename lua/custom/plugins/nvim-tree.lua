@@ -146,7 +146,7 @@ return {
         icons = {
           error = "",
           warning = "",
-          hint = "",
+          hint = "",
           info = "",
         },
       },
