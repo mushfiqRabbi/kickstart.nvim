@@ -20,9 +20,9 @@ return {
       },
       options = {
         --   always_show_bufferline = false,
-        indicator = {
-          style = "underline",
-        },
+        -- indicator = {
+        --   style = "underline",
+        -- },
         diagnostics = "nvim_lsp",
         diagnostics_indicator = function(count, level)
           local icon = level:match("error") and " "
@@ -68,7 +68,7 @@ return {
             return result
           end,
         },
-        separator_style = "slant",
+        separator_style = "slope",
       },
     })
     vim.keymap.set({ "n", "i", "v" }, "<C-l>", "<cmd>BufferLineCycleNext<cr>", { noremap = true, silent = true })
