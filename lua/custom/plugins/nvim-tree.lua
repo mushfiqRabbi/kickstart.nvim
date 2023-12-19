@@ -33,7 +33,7 @@ return {
 
       -- DEFAULT MAPPINGS
       vim.keymap.set("n", "<C-]>", close_wrap(api.tree.change_root_to_node), opts("CD"))
-      vim.keymap.set("n", "<C-e>", close_wrap(api.node.open.replace_tree_buffer), opts("Open: In Place"))
+      -- vim.keymap.set("n", "<C-e>", close_wrap(api.node.open.replace_tree_buffer), opts("Open: In Place"))
       vim.keymap.set("n", "<C-k>", close_wrap(api.node.show_info_popup), opts("Info"))
       vim.keymap.set("n", "<C-r>", close_wrap(api.fs.rename_sub), opts("Rename: Omit Filename"))
       vim.keymap.set("n", "<C-t>", close_wrap(api.node.open.tab), opts("Open: New Tab"))
@@ -90,8 +90,8 @@ return {
       vim.keymap.set("n", "<2-RightMouse>", close_wrap(api.tree.change_root_to_node), opts("CD"))
 
       -- CUSTOM MAPPINGS
-      vim.keymap.set("n", "<C-\\>", close_wrap(toggle_term), opts("Toggle Term"))
-      vim.keymap.set("n", "<C-g>", close_wrap(api.tree.close), opts("Close"))
+      vim.keymap.set("n", "<C-t>", close_wrap(toggle_term), opts("Toggle Term"))
+      vim.keymap.set("n", "<C-e>", close_wrap(api.tree.close), opts("Close"))
     end
 
     require("nvim-tree").setup({
@@ -206,8 +206,14 @@ return {
     -- })
 
     local tree = require("nvim-tree.api").tree
-    vim.keymap.set({ "n", "v", "i" }, "<C-g>", function()
+    vim.keymap.set({ "n", "v" }, "<C-e>", function()
       if not tree.is_visible() then
+        tree.open()
+      end
+    end, { noremap = true, silent = true, desc = "[] Explore files/folders" })
+    vim.keymap.set("i", "<C-e>", function()
+      if not tree.is_visible() then
+        vim.cmd("stopinsert")
         tree.open()
       end
     end, { noremap = true, silent = true, desc = "[] Explore files/folders" })

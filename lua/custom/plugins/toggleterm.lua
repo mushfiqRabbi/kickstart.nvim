@@ -40,7 +40,7 @@ return {
       end,
       persist_mode = false,
       persist_size = false,
-      open_mapping = [[<c-\>]],
+      open_mapping = [[<c-t>]],
       on_create = function(term)
         if term.direction == "float" then
           return

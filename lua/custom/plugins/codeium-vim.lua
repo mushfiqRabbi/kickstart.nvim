@@ -3,10 +3,10 @@ return {
   event = "BufEnter",
   config = function()
     vim.g.codeium_disable_bindings = 1
-    vim.keymap.set("i", "<C-cr>", function()
+    vim.keymap.set("i", "<C-g>", function()
       -- vim.keymap.set('i', '<tab>', function()
       return vim.fn["codeium#Accept"]()
-    end, { expr = true })
+    end, { noremap = true, expr = true })
     -- vim.keymap.set('i', '<c-;>', function()
     --   return vim.fn['codeium#CycleCompletions'](1)
     -- end, { expr = true })
